@@ -7,6 +7,6 @@
 <body>
 <h1>Welcome to AppCar</h1>
 <br>
-<a href="/persons">Order List</a>
+<a href="/orders">Order List</a>
 </body>
 </html>

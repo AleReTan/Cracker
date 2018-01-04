@@ -6,14 +6,24 @@
 </head>
 <body>
 
-<form name="person" action="/addPerson" method="post">
-    <p>Name</p>
-    <input title="Name" type="text" name="name">
-    <p>Email</p>
-    <input title="Email" type="text" name="email">
-    <p>Age</p>
-    <input title="Age" type="text" name="age">
-    <input type="submit" value="OK">
+<form name="order" action="/addOrder" method="post">
+    <p>Имя</p>
+    <input title="Имя" type="text" name="firstName">
+    <p>Фамилия</p>
+    <input title="Фамилия" type="text" name="lastName">
+    <p>Адрес</p>
+    <input title="Адрес" type="text" name="address">
+    <p>Телефон</p>
+    <input title="Телефон" type="text" name="mobPhone">
+    <p>Марка автомобиля</p>
+    <input title="Марка автомобиля" type="text" name="modelCar">
+    <p>Цвет</p>
+    <input title="Цвет" type="text" name="color">
+    <p>Номер автомобиля</p>
+    <input title="Номер автомобиля" type="text" name="numberAuto">
+    <p>E-mail</p>
+    <input title="E-mail" type="text" name="email">
+    <input type="submit" value="Создать">
 </form>
 
 </body>
