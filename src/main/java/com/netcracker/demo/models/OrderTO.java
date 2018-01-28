@@ -1,10 +1,12 @@
 package com.netcracker.demo.models;
 
 
-import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
-public class Order {
+
+public class OrderTO {
+
 
     private long id;
 
@@ -22,13 +24,23 @@ public class Order {
 
     private String numberAuto;
 
-    private String email;
+    private String drivers;
 
-    public Order() {
+    private LocalDate timeOrder;
+    private LocalDate timeOutOrder;
+
+    private String rate;
+
+    private double costOrder;
+
+
+
+    public OrderTO() {
         id = 0;
     }
 
-    public Order(long id, String firstName, String lastName, String address, String mobPhone, String modelCar, String color, String numberAuto, String email) {
+
+    public OrderTO(long id, String firstName, String lastName, String address, String mobPhone, String modelCar, String color, String numberAuto, String drivers, LocalDate timeOrder, LocalDate timeOutOrder, String rate, double costOrder) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,8 +49,13 @@ public class Order {
         this.modelCar = modelCar;
         this.color = color;
         this.numberAuto = numberAuto;
-        this.email = email;
+        this.drivers = drivers;
+        this.timeOrder = timeOrder;
+        this.timeOutOrder = timeOutOrder;
+        this.rate = rate;
+        this.costOrder = costOrder;
     }
+
 
     public long getId() {
         return id;
@@ -104,20 +121,34 @@ public class Order {
         this.numberAuto = numberAuto;
     }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getDrivers() { return drivers; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setDrivers(String drivers) { this.drivers = drivers; }
+
+    public LocalDate getTimeOrder() { return timeOrder; }
+
+    public void setTimeOrder(LocalDate timeOrder) { this.timeOrder = timeOrder; }
+
+    public LocalDate getTimeOutOrder() { return timeOutOrder; }
+
+    public void setTimeOutOrder(LocalDate timeOutOrder) { this.timeOutOrder = timeOutOrder; }
+
+    public String getRate() { return rate; }
+
+    public void setRate(String rate) { this.rate = rate; }
+
+    public double getCostOrder() { return costOrder; }
+
+    public void setCostOrder(double costOrder) { this.costOrder = costOrder; }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Order)) return false;
-        Order order = (Order) o;
+        if (!(o instanceof OrderTO)) return false;
+        OrderTO order = (OrderTO) o;
         return id == order.id &&
+                rate == order.rate &&
+                Double.compare(order.costOrder, costOrder) == 0 &&
                 Objects.equals(firstName, order.firstName) &&
                 Objects.equals(lastName, order.lastName) &&
                 Objects.equals(address, order.address) &&
@@ -125,17 +156,19 @@ public class Order {
                 Objects.equals(modelCar, order.modelCar) &&
                 Objects.equals(color, order.color) &&
                 Objects.equals(numberAuto, order.numberAuto) &&
-                Objects.equals(email, order.email);
+                Objects.equals(drivers, order.drivers) &&
+                Objects.equals(timeOrder, order.timeOrder) &&
+                Objects.equals(timeOutOrder, order.timeOutOrder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, mobPhone, modelCar, color, numberAuto, email);
+        return Objects.hash(id, firstName, lastName, address, mobPhone, modelCar, color, numberAuto, drivers, timeOrder, timeOutOrder, rate, costOrder);
     }
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "OrderTO{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -144,7 +177,11 @@ public class Order {
                 ", modelCar='" + modelCar + '\'' +
                 ", color='" + color + '\'' +
                 ", numberAuto='" + numberAuto + '\'' +
-                ", email='" + email + '\'' +
+                ", drivers='" + drivers + '\'' +
+                ", timeOrder=" + timeOrder +
+                ", timeOutOrder=" + timeOutOrder +
+                ", rate=" + rate +
+                ", costOrder=" + costOrder +
                 '}';
     }
 

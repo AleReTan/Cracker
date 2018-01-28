@@ -24,28 +24,23 @@
 <table>
     <tr>
         <th>Id</th>
-        <th>Имя</th>
-        <th>фамилия</th>
         <th>Адрес</th>
-        <th>Телефон</th>
-        <th>Автомобиль</th>
-        <th>Цвет</th>
-        <th>Номер автомобиля</th>
-        <th>Email</th>
-        <th></th>
+        <th>Водитель</th>
+        <th>Время заказа</th>
+        <th>Тариф</th>
+        <th>Стоимость</th>
+        <th>Info</th>
+
     </tr>
 <#list orders as order>
     <tr>
-        <td><a href="/orders/${order.id}">${order.id}</a></td>
-        <td>${order.firstName}</td>
-        <td>${order.lastName}</td>
+        <td>${order.id}</td>
         <td>${order.address}</td>
-        <td>${order.mobPhone}</td>
-        <td>${order.modelCar}</td>
-        <td>${order.color}</td>
-        <td>${order.numberAuto}</td>
-        <td>${order.email}</td>
-
+        <td>${order.drivers}</td>
+        <td>${order.timeOrder}</td>
+        <td>${order.rate}</td>
+        <td>${order.costOrder}</td>
+        <td><a href="/orders/${order.id}">info</a></td>
     </tr>
 </#list>
 </table>

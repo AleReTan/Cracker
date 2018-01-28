@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create person page</title>
+    <title>Создание нового заказа</title>
+
 </head>
 <body>
 
@@ -21,8 +22,14 @@
     <input title="Цвет" type="text" name="color">
     <p>Номер автомобиля</p>
     <input title="Номер автомобиля" type="text" name="numberAuto">
-    <p>E-mail</p>
-    <input title="E-mail" type="text" name="email">
+    <p>Водитель</p>
+    <input title="Водитель" type="text" name="drivers">
+    <p>Тариф</p>
+    <select name = "rate" required>
+        <option value="Базовый">Базовый</option>
+        <option value="Расширенный">Расширенный</option></select>
+    <p>Стоимость</p>
+    <input title="Стоимость" type="text" name="costOrder">
     <input type="submit" value="Создать">
 </form>
 

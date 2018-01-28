@@ -1,11 +1,12 @@
 package com.netcracker.demo.service;
 
 
-import com.netcracker.demo.models.Order;
+import com.netcracker.demo.models.OrderTO;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,18 +17,18 @@ public class OrderServiceImpl implements OrderService {
 
     private static final AtomicLong counter = new AtomicLong();
 
-    private static List<Order> orders;
+    private static List<OrderTO> orders;
 
     static{
         orders = populateDummyOrders();
     }
 
-    public List<Order> findAllOrders() {
+    public List<OrderTO> findAllOrders() {
         return orders;
     }
 
-    public Order findById(long id) {
-        for(Order order : orders){
+    public OrderTO findById(long id) {
+        for(OrderTO order : orders){
             if(order.getId() == id){
                 return order;
             }
@@ -35,8 +36,8 @@ public class OrderServiceImpl implements OrderService {
         return null;
     }
 
-    public Order findByLastName(String name) {
-        for(Order order : orders){
+    public OrderTO findByLastName(String name) {
+        for(OrderTO order : orders){
             if(order.getLastName().equalsIgnoreCase(name)){
                 return order;
             }
@@ -44,30 +45,30 @@ public class OrderServiceImpl implements OrderService {
         return null;
     }
 
-    public void saveOrder(Order order) {
-        final String uri = "http://localhost:8082/ot/c";
+    public void saveOrder(OrderTO order) {
+        final String uri = "http://localhost:12945/rest/order";
         order.setId(counter.incrementAndGet());
         orders.add(order);
         RestTemplate restTemplate = new RestTemplate();
-        Order result = restTemplate.postForObject( uri, order, Order.class);
+        restTemplate.postForObject( uri, order, OrderTO.class);
     }
 
-    public void updateOrder(Order order) {
+    public void updateOrder(OrderTO order) {
         int index = orders.indexOf(order);
        orders.set(index, order);
     }
 
     public void deleteOrderById(long id) {
 
-        for (Iterator<Order> iterator = orders.iterator(); iterator.hasNext(); ) {
-            Order order = iterator.next();
+        for (Iterator<OrderTO> iterator = orders.iterator(); iterator.hasNext(); ) {
+            OrderTO order = iterator.next();
             if (order.getId() == id) {
                 iterator.remove();
             }
         }
     }
 
-    public boolean isOrderExist(Order order) {
+    public boolean isOrderExist(OrderTO order) {
         return findByLastName(order.getLastName())!=null;
     }
 
@@ -75,9 +76,9 @@ public class OrderServiceImpl implements OrderService {
         orders.clear();
     }
 
-    private static List<Order> populateDummyOrders(){
-        List<Order> orders =new ArrayList<Order>();
-        orders.add(new Order(counter.incrementAndGet(),"Sam","Valeev", "Perevertkina, 35", "89909090923", "Mercedes", "blue", "A567AA136", "getsdd@gmail.com"));
+    private static List<OrderTO> populateDummyOrders(){
+        List<OrderTO> orders =new ArrayList<OrderTO>();
+        orders.add(new OrderTO(counter.incrementAndGet(),"Sam","Valeev", "Perevertkina, 35", "89909090923", "Mercedes", "blue", "A567AA136", "Иванов", LocalDate.parse("2016-08-16"), LocalDate.parse("2016-08-17"),"Базовый",  2500.0));
         return orders;
     }
 

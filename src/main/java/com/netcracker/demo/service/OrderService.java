@@ -1,26 +1,26 @@
 package com.netcracker.demo.service;
 
 
-import com.netcracker.demo.models.Order;
+import com.netcracker.demo.models.OrderTO;
 
 
 import java.util.List;
 
 public interface OrderService {
 
-    Order findById(long id);
+    OrderTO findById(long id);
 
-    Order findByLastName(String name);
+    OrderTO findByLastName(String name);
 
-    void saveOrder(Order order);
+    void saveOrder(OrderTO order);
 
-    void updateOrder(Order order);
+    void updateOrder(OrderTO order);
     void deleteOrderById(long id);
 
-    List<Order> findAllOrders();
+    List<OrderTO> findAllOrders();
 
     void deleteAllOrders();
 
-    boolean isOrderExist(Order order);
+    boolean isOrderExist(OrderTO order);
 
 }
