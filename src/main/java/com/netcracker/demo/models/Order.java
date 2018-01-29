@@ -22,8 +22,6 @@ public class Order {
 
     private String numberAuto;
 
-    private String email;
-
     public Order() {
         id = 0;
     }
@@ -37,7 +35,6 @@ public class Order {
         this.modelCar = modelCar;
         this.color = color;
         this.numberAuto = numberAuto;
-        this.email = email;
     }
 
     public long getId() {
@@ -104,14 +101,6 @@ public class Order {
         this.numberAuto = numberAuto;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -124,13 +113,12 @@ public class Order {
                 Objects.equals(mobPhone, order.mobPhone) &&
                 Objects.equals(modelCar, order.modelCar) &&
                 Objects.equals(color, order.color) &&
-                Objects.equals(numberAuto, order.numberAuto) &&
-                Objects.equals(email, order.email);
+                Objects.equals(numberAuto, order.numberAuto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, mobPhone, modelCar, color, numberAuto, email);
+        return Objects.hash(id, firstName, lastName, address, mobPhone, modelCar, color, numberAuto);
     }
 
     @Override
@@ -144,7 +132,6 @@ public class Order {
                 ", modelCar='" + modelCar + '\'' +
                 ", color='" + color + '\'' +
                 ", numberAuto='" + numberAuto + '\'' +
-                ", email='" + email + '\'' +
                 '}';
     }
 
