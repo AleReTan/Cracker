@@ -23,18 +23,17 @@
 <h1>Drivers list</h1>
 <table>
     <tr>
-        <th>Id</th>
+        <th>Номер телефона</th>
         <th>Имя</th>
         <th>Фамилия</th>
-        <th>Номер телефона</th>
-        <th>Айди машины</th>
+        <th>Машина</th>
     </tr>
+
 <#list drivers as driver>
     <tr>
-        <td>${driver.id}</td>
+        <td><a href="/drivers/${driver.id}">${driver.phoneNumber}</a></td>
         <td>${driver.firstName}</td>
         <td>${driver.lastName}</td>
-        <td>${driver.phoneNumber}</td>
         <td>${driver.carId}</td>
     </tr>
 </#list>

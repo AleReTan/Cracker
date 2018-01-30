@@ -9,27 +9,31 @@
 <table>
     <tr>
         <th>ID</th>
-        <td>${diver.id}</td>
+        <td>${driver.id}</td>
     </tr>
     <tr>
         <th>Имя</th>
-        <td>${diver.firstName}</td>
+        <td>${driver.firstName}</td>
     </tr>
     <tr>
         <th>Фамилия</th>
-        <td>${diver.lastName}</td>
+        <td>${driver.lastName}</td>
     </tr>
     <tr>
         <th>Телефон</th>
-        <td>${diver.mobPhone}</td>
+        <td>${driver.phoneNumber}</td>
     </tr>
     <tr>
         <th>Автомобиль</th>
-        <td>${diver.carId}</td>
+        <td><select name="Set up car" required>
+            <#list cars as car>
+                <option value="${car.id}" <#if driver.carId == car.id>selected</#if> > ${car.model} ${car.number}</option>
+            </#list>
+        </select></td>
     </tr>
 </table>
 <br>
-<a href="/divers">Back</a>
-
+<a href="/drivers">Back</a>
+<a href="/drivers/${driver.id}">Save</a>
 </body>
 </html>

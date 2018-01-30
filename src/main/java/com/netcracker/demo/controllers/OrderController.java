@@ -58,13 +58,11 @@ public class OrderController {
 
         order.setTimeOrder(LocalDate.now());
         orderService.saveOrder(order);
-        System.out.println(orderService.findByLastName("Я").toString());
         return "redirect:/orders";
     }
 
-    @RequestMapping( value = {"/orders/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/orders/{id}"}, method = RequestMethod.GET)
     public String getById(@PathVariable("id") long id, Model model){
-
         model.addAttribute("order", orderService.findById(id));
         return "showUser";
     }

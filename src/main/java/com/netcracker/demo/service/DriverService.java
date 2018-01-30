@@ -10,9 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service("driverService")
-public class DriverService implements MyService<DriverEntityTO>{
+public class DriverService implements MyService<DriverEntityTO> {
     RestTemplate restTemplate = new RestTemplate();
-    static final String URL = "http://localhost:8082/";
+    static final String URL = "http://localhost:8082/drivers";
 
     @Override
     public void save(DriverEntityTO object) {
@@ -21,7 +21,7 @@ public class DriverService implements MyService<DriverEntityTO>{
 
     @Override
     public void update(DriverEntityTO object) {
-
+        restTemplate.patchForObject(URL + "/" + object.getId(), object, DriverEntityTO.class);
     }
 
     @Override
@@ -37,11 +37,12 @@ public class DriverService implements MyService<DriverEntityTO>{
     @Override
     public List<DriverEntityTO> findAll() {
         ResponseEntity<DriverEntityTO[]> response = restTemplate.getForEntity(
-                URL + "drivers", DriverEntityTO[].class);
+                URL, DriverEntityTO[].class);
         return Arrays.asList(response.getBody());
     }
 
-    public DriverEntityTO findById(long id){
-        return null;
+    public DriverEntityTO findById(long id) {
+        ResponseEntity<DriverEntityTO> response = restTemplate.getForEntity(URL + "/" + id, DriverEntityTO.class);
+        return response.getBody();
     }
 }
