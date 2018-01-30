@@ -4,6 +4,7 @@ import com.netcracker.demo.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ public class DriverRestController {
 
     @RequestMapping(value = "/drivers", method = RequestMethod.GET)
     public String getOrders(Model model/*,@RequestBody List<DriverEntityTO> drivers*/) {
-        model.addAttribute("drivers", driverService.getAllDrivers());
+        model.addAttribute("drivers", driverService.findAll());
         return "drivers";
     }
 
@@ -38,11 +39,10 @@ public class DriverRestController {
 
     }
 
-    //TODO getObjectById не реализован, пока не знаю как
-//    @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)
-//    public DriverEntityTO getOrder(@PathVariable("id") long id, Model model) {
-//        model.addAttribute("order", driverService.findById(id));
-//        return "showDriver";
-//
-//    }
+    @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)
+    public String getOrder(@PathVariable("id") long id, Model model) {
+        model.addAttribute("driver", driverService.findById(id));
+        return "driver";
+
+    }
 }
