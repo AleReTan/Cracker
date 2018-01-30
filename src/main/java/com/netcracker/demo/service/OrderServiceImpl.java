@@ -50,6 +50,7 @@ public class OrderServiceImpl implements OrderService {
         order.setId(counter.incrementAndGet());
         orders.add(order);
         RestTemplate restTemplate = new RestTemplate();
+
         restTemplate.postForObject( uri, order, OrderTO.class);
     }
 
@@ -77,7 +78,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private static List<OrderTO> populateDummyOrders(){
-        List<OrderTO> orders =new ArrayList<OrderTO>();
+        List<OrderTO> orders = new ArrayList<OrderTO>();
         orders.add(new OrderTO(counter.incrementAndGet(),"Sam","Valeev", "Perevertkina, 35", "89909090923", "Mercedes", "blue", "A567AA136", "Иванов", LocalDate.parse("2016-08-16"), LocalDate.parse("2016-08-17"),"Базовый",  2500.0));
         return orders;
     }
