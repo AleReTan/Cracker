@@ -31,7 +31,7 @@ public class DriverService implements MyService<DriverEntityTO> {
 
     @Override
     public void delete(DriverEntityTO object) {
-
+        restTemplate.delete(URL + "/" + object.getId(), object, DriverEntityTO.class);
     }
 
     @Override

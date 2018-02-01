@@ -25,7 +25,7 @@
     </tr>
     <tr>
         <th>Автомобиль</th>
-        <td><select name="Set up car" required>
+        <td><select name="car" required form="updateDriver">
             <#list cars as car>
                 <option value="${car.id}" <#if driver.carId == car.id>selected</#if> > ${car.model} ${car.number}</option>
             </#list>
@@ -34,6 +34,9 @@
 </table>
 <br>
 <a href="/drivers">Back</a>
-<a href="/drivers/${driver.id}">Save</a>
+<form id="updateDriver" action="/drivers/${driver.id}/update" method="post">
+
+    <input type="submit" value="Сохранить" />
+</form>
 </body>
 </html>

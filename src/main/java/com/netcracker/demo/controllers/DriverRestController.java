@@ -17,30 +17,32 @@ public class DriverRestController {
     CarService carService;
 
     @RequestMapping(value = "/drivers", method = RequestMethod.GET)
-    public String getOrders(Model model) {
+    public String getDrivers(Model model) {
         model.addAttribute("drivers", driverService.findAll());
         //здесь карс для того чтобы сравнить driver.carId=car.id и вывести car.model car.number
         model.addAttribute("cars", carService.findAll());
         return "drivers";
     }
 
-    @RequestMapping(value = "/drivers/{id}", method = RequestMethod.POST)
-    public void createOrder() {
+    @RequestMapping(value = "/drivers/{id}/create", method = RequestMethod.POST)
+    public void createDriver(@ModelAttribute DriverEntityTO driver) {
 
     }
-//хз пока че да как
-    @RequestMapping(value = "/drivers/{id}", method = RequestMethod.PATCH)
-    public void updateOrder(@ModelAttribute DriverEntityTO driver) {
+
+    @RequestMapping(value = "/drivers/{id}/update", method = RequestMethod.POST)
+    public void updateDriver(@ModelAttribute("driver") DriverEntityTO driver) {
+        System.out.println(driver.toString());
         driverService.update(driver);
     }
 
-    @RequestMapping(value = "/drivers/{id}", method = RequestMethod.DELETE)
-    public void deleteOrder() {
+
+    @RequestMapping(value = "/drivers/{id}/delete", method = RequestMethod.POST)
+    public void deleteDriver() {
 
     }
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)
-    public String getOrder(@PathVariable("id") long id, Model model) {
+    public String getDriver(@PathVariable("id") long id, Model model) {
         model.addAttribute("driver", driverService.findById(id));
         model.addAttribute("cars", carService.findAll());
         return "driver";
