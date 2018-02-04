@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
-<head> Admin page</head>
+<html lang="ru">
+<head> </head>
 <body>
 <h1>Admin page</h1>
-<a href="/allOrders">All orders</a>
-<a href="/allDrivers">All drivers </a>
+<a href="admin/users" >All users</a>
+<h2> </h2>
+<!--<a href="</allDrivers">All drivers </a>-->
 </body>
 </html>
