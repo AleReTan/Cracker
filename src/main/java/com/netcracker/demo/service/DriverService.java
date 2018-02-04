@@ -3,6 +3,7 @@ package com.netcracker.demo.service;
 
 import com.netcracker.demo.models.DriverEntityTO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service("driverService")
 public class DriverService implements MyService<DriverEntityTO> {
-    RestTemplate restTemplate = new RestTemplate();
+    RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
     static final String URL = "http://localhost:8082/drivers";
 
     @Override
@@ -21,7 +22,7 @@ public class DriverService implements MyService<DriverEntityTO> {
 
     @Override
     public void update(DriverEntityTO object) {
-        restTemplate.patchForObject(URL + "/" + object.getId(), object, DriverEntityTO.class);
+        restTemplate.patchForObject(URL, object, DriverEntityTO.class);
     }
 
     @Override

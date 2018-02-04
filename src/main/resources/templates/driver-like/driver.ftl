@@ -25,7 +25,7 @@
     </tr>
     <tr>
         <th>Автомобиль</th>
-        <td><select name="car" required form="updateDriver">
+        <td><select name="carId" required form="updateDriver">
             <#list cars as car>
                 <option value="${car.id}" <#if driver.carId == car.id>selected</#if> > ${car.model} ${car.number}</option>
             </#list>
@@ -34,8 +34,14 @@
 </table>
 <br>
 <a href="/drivers">Back</a>
-<form id="updateDriver" action="/drivers/${driver.id}/update" method="post">
-
+<form id="updateDriver" action="/drivers/${driver.id}" method="post">
+    <input type="hidden" name="_method" value="patch"/>
+    <input type="hidden" name = "name" value="${driver.name}">
+    <input type="hidden" name = "typeId" value="${driver.typeId}">
+    <input type="hidden" name = "firstName" value="${driver.firstName}">
+    <input type="hidden" name = "lastName" value="${driver.lastName}">
+    <input type="hidden" name = "phoneNumber" value="${driver.phoneNumber}">
+   <!-- <input type="hidden" name = "carId" value="car"> -->
     <input type="submit" value="Сохранить" />
 </form>
 </body>

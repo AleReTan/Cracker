@@ -34,7 +34,11 @@
         <td><a href="/drivers/${driver.id}">${driver.phoneNumber}</a></td>
         <td>${driver.firstName}</td>
         <td>${driver.lastName}</td>
-        <td>${driver.carId}</td>
+        <td><#list cars as car>
+            <!--иф вложить в <a href по carId если хотим ссылаться на машину -->
+            <#if driver.carId == car.id> ${car.model} ${car.number}</#if>
+        </#list></td>
+
     </tr>
 </#list>
 </table>

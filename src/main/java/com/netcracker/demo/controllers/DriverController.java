@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 @Controller
-public class DriverRestController {
+public class DriverController {
 
     @Autowired
     DriverService driverService;
@@ -21,22 +21,22 @@ public class DriverRestController {
         model.addAttribute("drivers", driverService.findAll());
         //здесь карс для того чтобы сравнить driver.carId=car.id и вывести car.model car.number
         model.addAttribute("cars", carService.findAll());
-        return "drivers";
+        return "/driver-like/drivers";
     }
 
-    @RequestMapping(value = "/drivers/{id}/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/drivers/{id}", method = RequestMethod.POST)
     public void createDriver(@ModelAttribute DriverEntityTO driver) {
 
     }
 
-    @RequestMapping(value = "/drivers/{id}/update", method = RequestMethod.POST)
-    public void updateDriver(@ModelAttribute("driver") DriverEntityTO driver) {
-        System.out.println(driver.toString());
+    @RequestMapping(value = "/drivers/{id}", method = RequestMethod.PATCH)
+    public String updateDriver(@ModelAttribute DriverEntityTO driver) {
         driverService.update(driver);
+        return "redirect:/drivers";
     }
 
 
-    @RequestMapping(value = "/drivers/{id}/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/drivers/{id}", method = RequestMethod.DELETE)
     public void deleteDriver() {
 
     }
@@ -45,7 +45,7 @@ public class DriverRestController {
     public String getDriver(@PathVariable("id") long id, Model model) {
         model.addAttribute("driver", driverService.findById(id));
         model.addAttribute("cars", carService.findAll());
-        return "driver";
+        return "/driver-like/driver";
 
     }
 }
