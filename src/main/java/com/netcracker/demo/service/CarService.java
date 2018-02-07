@@ -1,11 +1,12 @@
 package com.netcracker.demo.service;
 
 import com.netcracker.demo.models.CarEntityTO;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 @Service("carService")
@@ -37,13 +38,27 @@ public class CarService implements MyService<CarEntityTO> {
 
     @Override
     public List<CarEntityTO> findAll() {
-        ResponseEntity<CarEntityTO[]> response = restTemplate.getForEntity(
-                URL, CarEntityTO[].class);
+        HttpHeaders headers = new HttpHeaders();
+        String originalInput = "Irina:1234";
+        String token = "Basic " + Base64.getEncoder().encodeToString(originalInput.getBytes());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        ResponseEntity<CarEntityTO[]> response = restTemplate.exchange(
+                URL, HttpMethod.GET, entity, CarEntityTO[].class);
         return Arrays.asList(response.getBody());
     }
 
     public CarEntityTO findById(long id) {
-        ResponseEntity<CarEntityTO> response = restTemplate.getForEntity(URL + "/" + id, CarEntityTO.class);
+        HttpHeaders headers = new HttpHeaders();
+        String originalInput = "Irina:1234";
+        String token = "Basic " + Base64.getEncoder().encodeToString(originalInput.getBytes());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add(HttpHeaders.AUTHORIZATION, token);
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        ResponseEntity<CarEntityTO> response = restTemplate.exchange(
+                URL + "/" + id, HttpMethod.GET, entity, CarEntityTO.class);
         return response.getBody();
     }
 }

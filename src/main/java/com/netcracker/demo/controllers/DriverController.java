@@ -18,15 +18,24 @@ public class DriverController {
 
     @RequestMapping(value = "/drivers", method = RequestMethod.GET)
     public String getDrivers(Model model) {
+        System.out.println("Зашли");
         model.addAttribute("drivers", driverService.findAll());
+        System.out.println("После получения водителей");
         //здесь карс для того чтобы сравнить driver.carId=car.id и вывести car.model car.number
         model.addAttribute("cars", carService.findAll());
+        System.out.println("Выходим");
         return "/driver-like/drivers";
     }
 
-    @RequestMapping(value = "/drivers/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/drivers/newDriver", method = RequestMethod.POST)
     public void createDriver(@ModelAttribute DriverEntityTO driver) {
+        System.out.println(driver);
+        driverService.save(driver);
+    }
 
+    @RequestMapping(value = {"/drivers/newDriver"}, method = RequestMethod.GET)
+    public String createDriverPage() {
+        return "/driver-like/createDriver";
     }
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.PATCH)

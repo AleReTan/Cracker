@@ -64,7 +64,7 @@ public class UserRestController {
 
     // Код, для фронт части для кодирования токена
     /*String originalInput = "login:pass";
-    String token = "Base " + Base64.getEncoder().encodeToString(originalInput.getBytes());*/
+    String token = "Basic " + Base64.getEncoder().encodeToString(originalInput.getBytes());*/
 
    /* @RequestMapping(value = {"/addOrder"}, method = RequestMethod.PUT)
     public OrderTO createOrder(@RequestBody OrderTO order)
