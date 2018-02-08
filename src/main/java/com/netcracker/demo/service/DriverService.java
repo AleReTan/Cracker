@@ -15,26 +15,19 @@ import java.util.List;
 
 @Service("driverService")
 public class DriverService implements MyService<DriverEntityTO> {
-//    ClientHttpRequestFactory requestFactory = new
-//            HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
-//    RestTemplate restTemplate = new RestTemplate(requestFactory);
     RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault()));
     static final String URL = "http://localhost:8082/drivers";
 
     @Override
     public void save(DriverEntityTO object) {
-        HttpHeaders headers = new HttpHeaders();
-        String originalInput = "Irina:1234";
-        String token = "Basic " + Base64.getEncoder().encodeToString(originalInput.getBytes());
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<DriverEntityTO> entity = new HttpEntity<DriverEntityTO>(object,headers);
-        restTemplate.postForObject(URL,entity,DriverEntityTO.class);
+        HttpEntity<DriverEntityTO> entity = new HttpEntity<DriverEntityTO>(object, addHeaders());
+        restTemplate.postForObject(URL, entity, DriverEntityTO.class);
     }
 
     @Override
     public void update(DriverEntityTO object) {
-        restTemplate.patchForObject(URL, object, DriverEntityTO.class);
+        HttpEntity<DriverEntityTO> entity = new HttpEntity<DriverEntityTO>(object, addHeaders());
+        restTemplate.patchForObject(URL, entity, DriverEntityTO.class);
     }
 
     @Override
@@ -44,36 +37,38 @@ public class DriverService implements MyService<DriverEntityTO> {
 
     @Override
     public void delete(DriverEntityTO object) {
-        restTemplate.delete(URL + "/" + object.getId(), object, DriverEntityTO.class);
+
+    }
+
+    public void delete(long id) {
+
+        HttpEntity<String> entity = new HttpEntity<>(addHeaders());
+        //restTemplate.delete(URL + "/" + id); //не работает, хз почему
+        ResponseEntity<String> response = restTemplate.exchange(URL + "/" + id, HttpMethod.DELETE, entity, String.class);
     }
 
     @Override
     public List<DriverEntityTO> findAll() {
-        HttpHeaders headers = new HttpHeaders();
-        String originalInput = "Irina:1234";
-        String token = "Basic " + Base64.getEncoder().encodeToString(originalInput.getBytes());
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add(HttpHeaders.AUTHORIZATION, token);
-
-//        ResponseEntity<DriverEntityTO[]> response = restTemplate.getForEntity(
-//                URL, DriverEntityTO[].class);
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
-
+        HttpEntity<String> entity = new HttpEntity<String>(addHeaders());
         ResponseEntity<DriverEntityTO[]> response = restTemplate.exchange(
                 URL, HttpMethod.GET, entity, DriverEntityTO[].class);
         return Arrays.asList(response.getBody());
     }
 
     public DriverEntityTO findById(long id) {
+        HttpEntity<String> entity = new HttpEntity<String>(addHeaders());
+        ResponseEntity<DriverEntityTO> response = restTemplate.exchange(
+                URL + "/" + id, HttpMethod.GET, entity, DriverEntityTO.class);
+        return response.getBody();
+    }
+
+    @SuppressWarnings("Duplicates")
+    private HttpHeaders addHeaders() {
         HttpHeaders headers = new HttpHeaders();
         String originalInput = "Irina:1234";
         String token = "Basic " + Base64.getEncoder().encodeToString(originalInput.getBytes());
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add(HttpHeaders.AUTHORIZATION, token);
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
-        ResponseEntity<DriverEntityTO> response = restTemplate.exchange(
-                URL + "/" + id, HttpMethod.GET, entity, DriverEntityTO.class);
-        //ResponseEntity<DriverEntityTO> response = restTemplate.getForEntity(URL + "/" + id, DriverEntityTO.class);
-        return response.getBody();
+        return headers;
     }
 }

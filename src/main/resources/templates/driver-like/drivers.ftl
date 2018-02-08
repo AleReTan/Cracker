@@ -42,5 +42,6 @@
     </tr>
 </#list>
 </table>
+<a href="/drivers/create">Create driver</a>
 </body>
 </html>

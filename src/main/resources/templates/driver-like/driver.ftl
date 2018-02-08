@@ -44,5 +44,9 @@
    <!-- <input type="hidden" name = "carId" value="car"> -->
     <input type="submit" value="Сохранить" />
 </form>
+<form id="deleteDriver" action="/drivers/${driver.id}" method="post">
+    <input type="hidden" name="_method" value="delete"/>
+    <input type="submit" value="Удалить" />
+</form>
 </body>
 </html>

@@ -18,22 +18,19 @@ public class DriverController {
 
     @RequestMapping(value = "/drivers", method = RequestMethod.GET)
     public String getDrivers(Model model) {
-        System.out.println("Зашли");
-        model.addAttribute("drivers", driverService.findAll());
-        System.out.println("После получения водителей");
+        model.addAttribute("drivers", driverService.findAll());;
         //здесь карс для того чтобы сравнить driver.carId=car.id и вывести car.model car.number
         model.addAttribute("cars", carService.findAll());
-        System.out.println("Выходим");
         return "/driver-like/drivers";
     }
 
-    @RequestMapping(value = "/drivers/newDriver", method = RequestMethod.POST)
-    public void createDriver(@ModelAttribute DriverEntityTO driver) {
-        System.out.println(driver);
+    @RequestMapping(value = "/drivers/create", method = RequestMethod.POST)
+    public String createDriver(@ModelAttribute DriverEntityTO driver) {
         driverService.save(driver);
+        return "redirect:/drivers";
     }
 
-    @RequestMapping(value = {"/drivers/newDriver"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/drivers/create"}, method = RequestMethod.GET)
     public String createDriverPage() {
         return "/driver-like/createDriver";
     }
@@ -46,8 +43,9 @@ public class DriverController {
 
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.DELETE)
-    public void deleteDriver() {
-
+    public String deleteDriver(@PathVariable("id") long id) {
+        driverService.delete(id);
+        return "redirect:/drivers";
     }
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)

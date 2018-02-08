@@ -6,7 +6,7 @@
 
 </head>
 <body>
-<form name="driver" action="/drivers/newDriver" method="post">
+<form name="driver" action="/drivers/create" method="post">
     <p>Название</p>
     <input title="Название" type="text" name="name">
     <p>Имя</p>
@@ -15,9 +15,8 @@
     <input title="Фамилия" type="text" name="lastName">
     <p>Телефон</p>
     <input title="Телефон" type="text" name="phoneNumber">
-    <p>айди автомобиля</p>
+    <p>Айди автомобиля</p><!--Мб допилить с подгрузкой всех машин или выпилить вообще, чтобы изначально 0 был-->
     <input title="айди автомобиля" type="text" name="carId">
-
     <input type="hidden" name = "typeId" value="8">
     <input type="submit" value="Создать">
 </form>
