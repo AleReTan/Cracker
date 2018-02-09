@@ -23,7 +23,7 @@ public class CarService implements MyService<CarEntityTO> {
     @Override
     public void save(CarEntityTO car) {
         HttpEntity<CarEntityTO> entity = new HttpEntity<CarEntityTO>(car, addHeaders());
-        restTemplate.postForObject( URL + "/addCar", entity, CarEntityTO.class);
+        restTemplate.postForObject(URL + "/addCar", entity, CarEntityTO.class);
     }
 
     @Override
@@ -53,14 +53,17 @@ public class CarService implements MyService<CarEntityTO> {
 
     @Override
     public List<CarEntityTO> findAll() {
-        ResponseEntity<CarEntityTO[]> response = restTemplate.getForEntity(
-                URL, CarEntityTO[].class);
+        HttpEntity<String> entity = new HttpEntity<String>(addHeaders());
+        ResponseEntity<CarEntityTO[]> response = restTemplate.exchange(
+                URL, HttpMethod.GET, entity, CarEntityTO[].class);
         return Arrays.asList(response.getBody());
     }
 
 
     public CarEntityTO findById(long id) {
-        ResponseEntity<CarEntityTO> response = restTemplate.getForEntity(URL + "/" + id, CarEntityTO.class);
+        HttpEntity<String> entity = new HttpEntity<String>(addHeaders());
+        ResponseEntity<CarEntityTO> response = restTemplate.exchange(
+                URL + "/" + id, HttpMethod.GET, entity, CarEntityTO.class);
         return response.getBody();
     }
 
