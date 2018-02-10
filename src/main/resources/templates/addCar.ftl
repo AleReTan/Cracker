@@ -9,10 +9,8 @@
 <form name="cars" action="/cars/addCar" method="post">
     <p>Название</p>
     <input title="Название" type="text" name="name">
-    <p>ID типа</p>
-    <input title="ID типа" type="text" name="typeId">
     <p>Номер автомобиля</p>
-    <input title="Номер автомобиля" type="text" name="number">
+    <input title="Номер автомобиля" type="text" name="number" value='example'>
     <p>Модель</p>
     <input title="Модель" type="text" name="model">
     <p>Цвет</p>

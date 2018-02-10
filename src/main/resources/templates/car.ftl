@@ -16,10 +16,6 @@
         <td>${car.name}</td>
     </tr>
     <tr>
-        <th>Вид</th>
-        <td>${car.typeId}</td>
-    </tr>
-    <tr>
         <th>Номер</th>
         <td> <input title="Номер" type="text" name="number" value=${car.number}> </td>
     </tr>
@@ -41,24 +37,20 @@
 <form id="updateCars" action="/cars/${car.id}" method="post">
     <input type="hidden" name="_method" value="patch"/>
     <input type="hidden" name = "name" value="${car.name}">
-    <input type="hidden" name = "typeId" value="${car.typeId}">
     <input type="hidden" name = "number" value="${car.number}">
     <input type="hidden" name = "model" value="${car.model}">
     <input type="hidden" name = "color" value="${car.color}">
     <input type="hidden" name = "type" value="${car.type}">
-
     <input type="submit" value="Сохранить" />
 </form>
 <h2> </h2>
 <form id="deleteCars" action="/cars/${car.id}" method="post">
     <input type="hidden" name="_method" value="delete"/>
     <input type="hidden" name = "name" value="${car.name}">
-    <input type="hidden" name = "typeId" value="${car.typeId}">
     <input type="hidden" name = "number" value="${car.number}">
     <input type="hidden" name = "model" value="${car.model}">
     <input type="hidden" name = "color" value="${car.color}">
     <input type="hidden" name = "type" value="${car.type}">
-    <!-- <input type="hidden" name = "carId" value="car"> -->
     <input type="submit" value="Удалить" />
 </form>
 <h2> </h2>

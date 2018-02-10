@@ -40,7 +40,6 @@ public class CarController {
     public String updateCars(@ModelAttribute CarEntityTO car) {
         carService.update(car);
         return "redirect:/cars";
-
     }
 
     /**
