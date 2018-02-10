@@ -23,7 +23,7 @@ public class CarService implements MyService<CarEntityTO> {
     @Override
     public void save(CarEntityTO car) {
         HttpEntity<CarEntityTO> entity = new HttpEntity<CarEntityTO>(car, addHeaders());
-        restTemplate.postForObject( URL + "/addCar", entity, CarEntityTO.class);
+        restTemplate.postForObject( URL, entity, CarEntityTO.class);
     }
 
     @Override

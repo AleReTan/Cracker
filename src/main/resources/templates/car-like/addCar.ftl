@@ -10,7 +10,7 @@
     <p>Название</p>
     <input title="Название" type="text" name="name">
     <p>Номер автомобиля</p>
-    <input title="Номер автомобиля" type="text" name="number" value='example'>
+    <input title="Номер автомобиля" type="text" name="number">
     <p>Модель</p>
     <input title="Модель" type="text" name="model">
     <p>Цвет</p>
