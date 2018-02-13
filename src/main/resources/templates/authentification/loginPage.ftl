@@ -5,12 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-<form name="order" action="/addOrder" method="post">
+
+<form name="Authentificate" action="/auth" method="post">
+    <input type="text" name = "status" value="${status}">
     <p>Имя</p>
-    <input title="Имя" type="" name="firstName">
+    <input title="login" type="text" name="login">
     <p>Фамилия</p>
-    <input title="Фамилия" type="password" name="lastName">
-    <input type="submit" value="Создать">
+    <input title="password" type="password" name="password">
+    <input type="submit" value="Войти">
 </form>
 
 </body>

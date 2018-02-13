@@ -7,24 +7,19 @@
 <body>
  <h1> Список всех пользователей </h1>
 <form   action="/admin/users/createUser" method="Get">
-    <input id=""  type="submit" value="Добавить"/>
+    <input id="createUser"  type="submit" value="Добавить"/>
 </form>
  <!--Таблица пользователей-->
 <table border="1">
     <tr>
         <th>Логин</th>
         <th>Роль</th>
-        <th>Удалить</th>
 
     </tr>
 <#list allUsers as user>
     <tr>
         <th><a href="/admin/users/${user.login}" > ${user.login}</a> </th>
         <th>${user.role}</th>
-        <form   action="/admin/users/${user.login}" method="post">
-            <input id=""  type="submit" value="Добавить"/>
-        </form>
-       <!-- <th><a href="admin/users//users/deleteUser/${user.login}" > Удалить</a> </th>-->
     </tr>
 </#list>
 
