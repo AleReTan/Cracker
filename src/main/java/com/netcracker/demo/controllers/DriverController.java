@@ -1,5 +1,6 @@
 package com.netcracker.demo.controllers;
 
+import com.netcracker.demo.models.CarEntityTO;
 import com.netcracker.demo.models.DriverEntityTO;
 import com.netcracker.demo.service.CarService;
 import com.netcracker.demo.service.DriverService;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+
+import java.util.Arrays;
 
 @Controller
 public class DriverController {
@@ -20,7 +23,7 @@ public class DriverController {
     public String getDrivers(Model model) {
         model.addAttribute("drivers", driverService.findAll());;
         //здесь карс для того чтобы сравнить driver.carId=car.id и вывести car.model car.number
-        model.addAttribute("cars", carService.findAll());
+        model.addAttribute("cars", /*Arrays.asList(new CarEntityTO()));// */carService.findAll());
         return "/driver-like/drivers";
     }
 

@@ -51,6 +51,11 @@ public class UserController {
         return  "redirect:/admin/users";
     }
 
+    @RequestMapping(value = "/users/{login}", method = RequestMethod.POST)
+    public String deleteDriver(@PathVariable("login") String login) {
+        userService.delete(login);
+        return "redirect:/admin/users";
+    }
 
     @RequestMapping(value = "/users/deleteUser", method = RequestMethod.POST)
     public void deleteUser(@RequestBody UserEntityTO u) {

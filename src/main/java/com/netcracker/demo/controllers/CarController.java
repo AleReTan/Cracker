@@ -19,13 +19,13 @@ public class CarController {
     @RequestMapping(value = "/cars", method = RequestMethod.GET)
     public String getCars(Model model) {
         model.addAttribute("cars", carService.findAll());
-        return "cars";
+        return "/car-like/cars";
     }
 
 
     @RequestMapping(value = {"/cars/addCar"}, method = RequestMethod.GET)
     public String createUserPage() {
-        return "addCar";
+        return "/car-like/addCar";
     }
 
     @RequestMapping(value = {"/cars/addCar"}, method = RequestMethod.POST)
@@ -40,7 +40,6 @@ public class CarController {
     public String updateCars(@ModelAttribute CarEntityTO car) {
         carService.update(car);
         return "redirect:/cars";
-
     }
 
     /**
@@ -58,6 +57,6 @@ public class CarController {
     @RequestMapping(value = "/cars/{id}", method = RequestMethod.GET)
     public String getCars(@PathVariable("id") long id, Model model) {
         model.addAttribute("car", carService.findById(id));
-        return "car";
+        return "/car-like/car";
     }
 }

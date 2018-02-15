@@ -19,5 +19,8 @@
         <td>${userData.role}</td>
     </tr>
 </table>
-
+<form id="deleteUser" action="/admin/users/${userData.login}" method="post">
+    <input id="dlt" type="submit" value="Удалить" />
+</form>
+</body>
 </html>
