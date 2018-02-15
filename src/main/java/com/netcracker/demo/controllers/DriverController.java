@@ -21,9 +21,8 @@ public class DriverController {
 
     @RequestMapping(value = "/drivers", method = RequestMethod.GET)
     public String getDrivers(Model model) {
-        model.addAttribute("drivers", driverService.findAll());;
-        //здесь карс для того чтобы сравнить driver.carId=car.id и вывести car.model car.number
-        model.addAttribute("cars", /*Arrays.asList(new CarEntityTO()));// */carService.findAll());
+        model.addAttribute("drivers", driverService.findAll());
+        model.addAttribute("cars", carService.findAll());
         return "/driver-like/drivers";
     }
 
