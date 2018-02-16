@@ -34,7 +34,6 @@ public class OrderTO {
     private double costOrder;
 
 
-
     public OrderTO() {
         id = 0;
     }
@@ -121,25 +120,45 @@ public class OrderTO {
         this.numberAuto = numberAuto;
     }
 
-    public String getDrivers() { return drivers; }
+    public String getDrivers() {
+        return drivers;
+    }
 
-    public void setDrivers(String drivers) { this.drivers = drivers; }
+    public void setDrivers(String drivers) {
+        this.drivers = drivers;
+    }
 
-    public LocalDate getTimeOrder() { return timeOrder; }
+    public LocalDate getTimeOrder() {
+        return timeOrder;
+    }
 
-    public void setTimeOrder(LocalDate timeOrder) { this.timeOrder = timeOrder; }
+    public void setTimeOrder(LocalDate timeOrder) {
+        this.timeOrder = timeOrder;
+    }
 
-    public LocalDate getTimeOutOrder() { return timeOutOrder; }
+    public LocalDate getTimeOutOrder() {
+        return timeOutOrder;
+    }
 
-    public void setTimeOutOrder(LocalDate timeOutOrder) { this.timeOutOrder = timeOutOrder; }
+    public void setTimeOutOrder(LocalDate timeOutOrder) {
+        this.timeOutOrder = timeOutOrder;
+    }
 
-    public String getRate() { return rate; }
+    public String getRate() {
+        return rate;
+    }
 
-    public void setRate(String rate) { this.rate = rate; }
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
 
-    public double getCostOrder() { return costOrder; }
+    public double getCostOrder() {
+        return costOrder;
+    }
 
-    public void setCostOrder(double costOrder) { this.costOrder = costOrder; }
+    public void setCostOrder(double costOrder) {
+        this.costOrder = costOrder;
+    }
 
     @Override
     public boolean equals(Object o) {

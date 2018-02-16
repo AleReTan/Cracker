@@ -1,5 +1,6 @@
 package com.netcracker.demo.controllers;
 
+import com.netcracker.demo.models.CarEntityTO;
 import com.netcracker.demo.models.DriverEntityTO;
 import com.netcracker.demo.service.CarService;
 import com.netcracker.demo.service.DriverService;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+
+import java.util.Arrays;
 
 @Controller
 public class DriverController {
@@ -19,14 +22,19 @@ public class DriverController {
     @RequestMapping(value = "/drivers", method = RequestMethod.GET)
     public String getDrivers(Model model) {
         model.addAttribute("drivers", driverService.findAll());
-        //здесь карс для того чтобы сравнить driver.carId=car.id и вывести car.model car.number
         model.addAttribute("cars", carService.findAll());
         return "/driver-like/drivers";
     }
 
-    @RequestMapping(value = "/drivers/{id}", method = RequestMethod.POST)
-    public void createDriver(@ModelAttribute DriverEntityTO driver) {
+    @RequestMapping(value = "/drivers/create", method = RequestMethod.POST)
+    public String createDriver(@ModelAttribute DriverEntityTO driver) {
+        driverService.save(driver);
+        return "redirect:/drivers";
+    }
 
+    @RequestMapping(value = {"/drivers/create"}, method = RequestMethod.GET)
+    public String createDriverPage() {
+        return "/driver-like/createDriver";
     }
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.PATCH)
@@ -37,8 +45,9 @@ public class DriverController {
 
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.DELETE)
-    public void deleteDriver() {
-
+    public String deleteDriver(@PathVariable("id") long id) {
+        driverService.delete(id);
+        return "redirect:/drivers";
     }
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)

@@ -56,7 +56,7 @@ public class UserEntityTO {
         return Objects.equals(getLogin(), that.getLogin()) &&
                 Objects.equals(getPassword(), that.getPassword()) &&
                 Objects.equals(getRole(), that.getRole());
-                    }
+    }
 
     @Override
     public int hashCode() {

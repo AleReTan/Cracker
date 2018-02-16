@@ -3,7 +3,7 @@ package com.netcracker.demo.models;
 import java.util.Objects;
 
 
-public class DriverEntityTO{
+public class DriverEntityTO {
 
     private long id;
 
