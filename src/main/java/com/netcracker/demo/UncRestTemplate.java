@@ -24,26 +24,22 @@ public class UncRestTemplate {
     public <T> ResponseEntity<T> exchange(String additionUrl,
                                           HttpMethod method,
                                           Class<T> responseType,
-                                          Object... uriVariables) throws RestClientException
-    {
+                                          Object... uriVariables) throws RestClientException {
         HttpEntity<String> entity = new HttpEntity<>(addHeaders());
         return restTemplate.exchange(BASE_URL + additionUrl, method, entity, responseType, uriVariables);
     }
 
 
-
     public <T> T postForObject(String additionUrl,
-                               T  requestBody,
-                               Class<T> responseType) throws RestClientException
-    {
+                               T requestBody,
+                               Class<T> responseType) throws RestClientException {
         HttpEntity<T> entity = new HttpEntity<>(requestBody, addHeaders());
         return restTemplate.postForObject(BASE_URL + additionUrl, entity, responseType);
     }
 
     public <T> T patchForObject(String additionUrl,
-                                T  requestBody,
-                                Class<T> responseType) throws RestClientException
-    {
+                                T requestBody,
+                                Class<T> responseType) throws RestClientException {
         HttpEntity<T> entity = new HttpEntity<>(requestBody, addHeaders());
         return restTemplate.patchForObject(BASE_URL + additionUrl, entity, responseType);
     }

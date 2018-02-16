@@ -23,7 +23,7 @@ public class OrderController {
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String listAllOrders(Model model) {
 
-       List<OrderTO> orders;
+        List<OrderTO> orders;
         // //= orderService.findAllOrders();
         model.addAttribute("orders", orderService.findAllOrders());
        /* if (orders.isEmpty()) {
@@ -32,21 +32,22 @@ public class OrderController {
         }
         return new ResponseEntity<List<OrderTO>>(orders, HttpStatus.OK);
     }*/
-       return "orders";
+        return "orders";
     }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(){
+    public String index() {
 
         return "index";
     }
 
 
     @RequestMapping(value = {"/addOrder"}, method = RequestMethod.PUT)
-    public OrderTO createOrder(@RequestBody OrderTO order)
-    {
+    public OrderTO createOrder(@RequestBody OrderTO order) {
         System.out.println(order.toString());
         return order;
     }
+
     @RequestMapping(value = {"/addOrder"}, method = RequestMethod.GET)
     public String createUserPage() {
         return "create";
@@ -54,7 +55,7 @@ public class OrderController {
 
 
     @RequestMapping(value = {"/addOrder"}, method = RequestMethod.POST)
-    public String addOrder(@ModelAttribute("orders") OrderTO order  ) throws Exception {
+    public String addOrder(@ModelAttribute("orders") OrderTO order) throws Exception {
 
         order.setTimeOrder(LocalDate.now());
         orderService.saveOrder(order);
@@ -62,7 +63,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = {"/orders/{id}"}, method = RequestMethod.GET)
-    public String getById(@PathVariable("id") long id, Model model){
+    public String getById(@PathVariable("id") long id, Model model) {
         model.addAttribute("order", orderService.findById(id));
         return "showUser";
     }

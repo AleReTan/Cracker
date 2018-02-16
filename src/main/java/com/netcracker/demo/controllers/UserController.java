@@ -16,15 +16,15 @@ import java.util.List;
 @RequestMapping(value = "/admin")
 public class UserController {
 
-    private  UserService userService;
+    private UserService userService;
 
     @Autowired
-    public UserController(UserService userService ) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String admin(){
+    public String admin() {
         return "/admin";
     }
 
@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/{login}", method = RequestMethod.GET)
-    public String getUserByLogin(@PathVariable("login") String login,Model model) {
+    public String getUserByLogin(@PathVariable("login") String login, Model model) {
         model.addAttribute("userData", userService.getUserByLogin(login));
         return "/user-like/user";
     }
@@ -48,7 +48,7 @@ public class UserController {
     @RequestMapping(value = "/users/createUser", method = RequestMethod.POST)
     public String createUsers(@ModelAttribute UserEntityTO u) {
         userService.save(u);
-        return  "redirect:/admin/users";
+        return "redirect:/admin/users";
     }
 
     @RequestMapping(value = "/users/{login}", method = RequestMethod.POST)

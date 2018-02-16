@@ -18,13 +18,13 @@ public class UserService implements MyService<UserEntityTO> {
 
     @Override
     public void save(UserEntityTO object) {
-        HttpEntity<UserEntityTO> entity = new HttpEntity<>(object,getHeaders(getToken("Irina","1234")));
-        restTemplate.postForObject(URL,entity,UserEntityTO.class);
+        HttpEntity<UserEntityTO> entity = new HttpEntity<>(object, getHeaders(getToken("Irina", "1234")));
+        restTemplate.postForObject(URL, entity, UserEntityTO.class);
     }
 
     @Override
     public void update(UserEntityTO object) {
-        HttpEntity<UserEntityTO> entity = new HttpEntity<>(getHeaders(getToken("Irina","1234")));
+        HttpEntity<UserEntityTO> entity = new HttpEntity<>(getHeaders(getToken("Irina", "1234")));
         ResponseEntity<UserEntityTO[]> response = restTemplate.exchange(
                 URL + "/" + object.getLogin(), HttpMethod.DELETE, entity, UserEntityTO[].class);
     }
@@ -41,27 +41,27 @@ public class UserService implements MyService<UserEntityTO> {
 
     @Override
     public List<UserEntityTO> findAll() {
-        HttpEntity<UserEntityTO> entity = new HttpEntity<>(getHeaders(getToken("Irina","1234")));
+        HttpEntity<UserEntityTO> entity = new HttpEntity<>(getHeaders(getToken("Irina", "1234")));
         ResponseEntity<UserEntityTO[]> response = restTemplate.exchange(
                 URL, HttpMethod.GET, entity, UserEntityTO[].class);
         return Arrays.asList(response.getBody());
     }
 
     public void delete(String login) {
-        HttpEntity<String> entity = new HttpEntity<>(getHeaders(getToken("Irina","1234")));
+        HttpEntity<String> entity = new HttpEntity<>(getHeaders(getToken("Irina", "1234")));
         ResponseEntity<String> response = restTemplate.exchange(
                 URL + "/" + login, HttpMethod.DELETE, entity, String.class);
     }
 
-    public UserEntityTO getUserByLogin(String login){
-        HttpEntity<UserEntityTO> entity = new HttpEntity<>(getHeaders(getToken("Irina","1234")));
-        ResponseEntity<UserEntityTO> response = restTemplate.exchange(URL +"/"+ login, HttpMethod.GET, entity, UserEntityTO.class);
+    public UserEntityTO getUserByLogin(String login) {
+        HttpEntity<UserEntityTO> entity = new HttpEntity<>(getHeaders(getToken("Irina", "1234")));
+        ResponseEntity<UserEntityTO> response = restTemplate.exchange(URL + "/" + login, HttpMethod.GET, entity, UserEntityTO.class);
         return response.getBody();
     }
 
 
     //Захардкожено
-    private HttpHeaders getHeaders(String token){
+    private HttpHeaders getHeaders(String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add(HttpHeaders.AUTHORIZATION, token);
@@ -69,7 +69,7 @@ public class UserService implements MyService<UserEntityTO> {
     }
 
     //Захардкожено
-    private String getToken(String login,String password){
+    private String getToken(String login, String password) {
         String originalInput = login + ":" + password;
         return "Basic " + Base64.getEncoder().encodeToString(originalInput.getBytes());
     }
@@ -113,9 +113,9 @@ public class UserService implements MyService<UserEntityTO> {
 
 
 
-/*
-* Осуществляет запрос к серверу с целью выявить аутентификацию пользователя.
-*/
+    /*
+     * Осуществляет запрос к серверу с целью выявить аутентификацию пользователя.
+     */
     /*public boolean Authenticate(String token){
         HttpEntity<String> entity = new HttpEntity<String>(getHeaders(token));
         ResponseEntity<String> response = restTemplate.exchange(AUTH_URL , HttpMethod.GET, entity, String.class);

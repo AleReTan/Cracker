@@ -29,10 +29,11 @@ public class CarController {
     }
 
     @RequestMapping(value = {"/cars/addCar"}, method = RequestMethod.POST)
-    public String addCar(@ModelAttribute CarEntityTO car  ) throws Exception {
+    public String addCar(@ModelAttribute CarEntityTO car) throws Exception {
         carService.save(car);
         return "redirect:/cars";
     }
+
     /**
      * Меняем поле какое-то и обновленнеая машина записывается на back
      */

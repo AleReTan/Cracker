@@ -3,23 +3,17 @@ package com.netcracker.demo.service;
 
 import com.netcracker.demo.UncRestTemplate;
 import com.netcracker.demo.models.DriverEntityTO;
-import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 
 @Service("driverService")
 public class DriverService implements MyService<DriverEntityTO> {
 
     static final String ADDITION_URL = "/drivers";
-
     @Autowired
     UncRestTemplate restTemplate;
 

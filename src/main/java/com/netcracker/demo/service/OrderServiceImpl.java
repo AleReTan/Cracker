@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
 
     private static List<OrderTO> orders;
 
-    static{
+    static {
         orders = populateDummyOrders();
     }
 
@@ -28,8 +28,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public OrderTO findById(long id) {
-        for(OrderTO order : orders){
-            if(order.getId() == id){
+        for (OrderTO order : orders) {
+            if (order.getId() == id) {
                 return order;
             }
         }
@@ -37,8 +37,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public OrderTO findByLastName(String name) {
-        for(OrderTO order : orders){
-            if(order.getLastName().equalsIgnoreCase(name)){
+        for (OrderTO order : orders) {
+            if (order.getLastName().equalsIgnoreCase(name)) {
                 return order;
             }
         }
@@ -51,12 +51,12 @@ public class OrderServiceImpl implements OrderService {
         orders.add(order);
         RestTemplate restTemplate = new RestTemplate();
 
-        restTemplate.postForObject( uri, order, OrderTO.class);
+        restTemplate.postForObject(uri, order, OrderTO.class);
     }
 
     public void updateOrder(OrderTO order) {
         int index = orders.indexOf(order);
-       orders.set(index, order);
+        orders.set(index, order);
     }
 
     public void deleteOrderById(long id) {
@@ -70,16 +70,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public boolean isOrderExist(OrderTO order) {
-        return findByLastName(order.getLastName())!=null;
+        return findByLastName(order.getLastName()) != null;
     }
 
-    public void deleteAllOrders(){
+    public void deleteAllOrders() {
         orders.clear();
     }
 
-    private static List<OrderTO> populateDummyOrders(){
+    private static List<OrderTO> populateDummyOrders() {
         List<OrderTO> orders = new ArrayList<OrderTO>();
-        orders.add(new OrderTO(counter.incrementAndGet(),"Sam","Valeev", "Perevertkina, 35", "89909090923", "Mercedes", "blue", "A567AA136", "Иванов", LocalDate.parse("2016-08-16"), LocalDate.parse("2016-08-17"),"Базовый",  2500.0));
+        orders.add(new OrderTO(counter.incrementAndGet(), "Sam", "Valeev", "Perevertkina, 35", "89909090923", "Mercedes", "blue", "A567AA136", "Иванов", LocalDate.parse("2016-08-16"), LocalDate.parse("2016-08-17"), "Базовый", 2500.0));
         return orders;
     }
 
