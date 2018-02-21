@@ -52,7 +52,9 @@ public class OrderController {
     public String addOrder(@ModelAttribute("orders") OrderTO order  ) throws Exception {
 
     //    order.setTimeOrder(LocalDate.now());
-        orderService.save(order);
+       // orderService.save(order);
+
+        System.out.println(order.toString());
         return "redirect:/orders";
     }
 
