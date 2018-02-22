@@ -10,50 +10,28 @@ public class OrderTO {
 
     private long id;
 
-    private String firstName;
+    private String name;
 
-    private String lastName;
+    private long typeId;
+
+    private String clientFirstName;
+
+    private String clientLastName;
+
+    private String clientPhoneNumber;
 
     private String address;
+    private long driverId;
 
-    private String mobPhone;
+    private String orderCost;
 
-    private String modelCar;
+    private String geoData;
 
-    private String color;
+    private String orderStartTime;
 
-    private String numberAuto;
+    private String orderEndTime;
 
-    private String drivers;
-
-    private LocalDate timeOrder;
-    private LocalDate timeOutOrder;
-
-    private String rate;
-
-    private double costOrder;
-
-
-    public OrderTO() {
-        id = 0;
-    }
-
-
-    public OrderTO(long id, String firstName, String lastName, String address, String mobPhone, String modelCar, String color, String numberAuto, String drivers, LocalDate timeOrder, LocalDate timeOutOrder, String rate, double costOrder) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.mobPhone = mobPhone;
-        this.modelCar = modelCar;
-        this.color = color;
-        this.numberAuto = numberAuto;
-        this.drivers = drivers;
-        this.timeOrder = timeOrder;
-        this.timeOutOrder = timeOutOrder;
-        this.rate = rate;
-        this.costOrder = costOrder;
-    }
+    private String statusOrder;
 
 
     public long getId() {
@@ -64,20 +42,44 @@ public class OrderTO {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public long getTypeId() {
+        return typeId;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setTypeId(long typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getClientFirstName() {
+        return clientFirstName;
+    }
+
+    public void setClientFirstName(String clientFirstName) {
+        this.clientFirstName = clientFirstName;
+    }
+
+    public String getClientLastName() {
+        return clientLastName;
+    }
+
+    public void setClientLastName(String clientLastName) {
+        this.clientLastName = clientLastName;
+    }
+
+    public String getClientPhoneNumber() {
+        return clientPhoneNumber;
+    }
+
+    public void setClientPhoneNumber(String clientPhoneNumber) {
+        this.clientPhoneNumber = clientPhoneNumber;
     }
 
     public String getAddress() {
@@ -88,119 +90,115 @@ public class OrderTO {
         this.address = address;
     }
 
-    public String getMobPhone() {
-        return mobPhone;
+    public long getDriverId() {
+        return driverId;
     }
 
-    public void setMobPhone(String mobPhone) {
-        this.mobPhone = mobPhone;
+    public void setDriverId(long driverId) {
+        this.driverId = driverId;
     }
 
-    public String getModelCar() {
-        return modelCar;
+    public String getOrderCost() {
+        return orderCost;
     }
 
-    public void setModelCar(String modelCar) {
-        this.modelCar = modelCar;
+    public void setOrderCost(String orderCost) {
+        this.orderCost = orderCost;
     }
 
-    public String getColor() {
-        return color;
+    public String getGeoData() {
+        return geoData;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setGeoData(String geoData) {
+        this.geoData = geoData;
     }
 
-    public String getNumberAuto() {
-        return numberAuto;
+    public String getOrderStartTime() {
+        return orderStartTime;
     }
 
-    public void setNumberAuto(String numberAuto) {
-        this.numberAuto = numberAuto;
+    public void setOrderStartTime(String orderStartTime) {
+        this.orderStartTime = orderStartTime;
     }
 
-    public String getDrivers() {
-        return drivers;
+    public String getOrderEndTime() {
+        return orderEndTime;
     }
 
-    public void setDrivers(String drivers) {
-        this.drivers = drivers;
+    public void setOrderEndTime(String orderEndTime) {
+        this.orderEndTime = orderEndTime;
     }
 
-    public LocalDate getTimeOrder() {
-        return timeOrder;
+    public String getStatusOrder() {
+        return statusOrder;
     }
 
-    public void setTimeOrder(LocalDate timeOrder) {
-        this.timeOrder = timeOrder;
+    public void setStatusOrder(String statusOrder) {
+        this.statusOrder = statusOrder;
     }
 
-    public LocalDate getTimeOutOrder() {
-        return timeOutOrder;
+    public OrderTO() {
     }
 
-    public void setTimeOutOrder(LocalDate timeOutOrder) {
-        this.timeOutOrder = timeOutOrder;
+    public OrderTO(long id, String name, long typeid, String clientFirstName, String clientLastName, String clientPhoneNumber, String address, long driverId, String orderCost, String geoData, String orderStartTime, String orderEndTime, String statusOrder) {
+        this.id = id;
+        this.name = name;
+        this.typeId = typeid;
+        this.clientFirstName = clientFirstName;
+        this.clientLastName = clientLastName;
+        this.clientPhoneNumber = clientPhoneNumber;
+        this.address = address;
+        this.driverId = driverId;
+        this.orderCost = orderCost;
+        this.geoData = geoData;
+        this.orderStartTime = orderStartTime;
+        this.orderEndTime = orderEndTime;
+        this.statusOrder = statusOrder;
     }
 
-    public String getRate() {
-        return rate;
-    }
-
-    public void setRate(String rate) {
-        this.rate = rate;
-    }
-
-    public double getCostOrder() {
-        return costOrder;
-    }
-
-    public void setCostOrder(double costOrder) {
-        this.costOrder = costOrder;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof OrderTO)) return false;
-        OrderTO order = (OrderTO) o;
-        return id == order.id &&
-                rate == order.rate &&
-                Double.compare(order.costOrder, costOrder) == 0 &&
-                Objects.equals(firstName, order.firstName) &&
-                Objects.equals(lastName, order.lastName) &&
-                Objects.equals(address, order.address) &&
-                Objects.equals(mobPhone, order.mobPhone) &&
-                Objects.equals(modelCar, order.modelCar) &&
-                Objects.equals(color, order.color) &&
-                Objects.equals(numberAuto, order.numberAuto) &&
-                Objects.equals(drivers, order.drivers) &&
-                Objects.equals(timeOrder, order.timeOrder) &&
-                Objects.equals(timeOutOrder, order.timeOutOrder);
+        OrderTO orderTO = (OrderTO) o;
+        return id == orderTO.id &&
+                typeId == orderTO.typeId &&
+                driverId == orderTO.driverId &&
+                Objects.equals(name, orderTO.name) &&
+                Objects.equals(clientFirstName, orderTO.clientFirstName) &&
+                Objects.equals(clientLastName, orderTO.clientLastName) &&
+                Objects.equals(clientPhoneNumber, orderTO.clientPhoneNumber) &&
+                Objects.equals(address, orderTO.address) &&
+                Objects.equals(orderCost, orderTO.orderCost) &&
+                Objects.equals(geoData, orderTO.geoData) &&
+                Objects.equals(orderStartTime, orderTO.orderStartTime) &&
+                Objects.equals(orderEndTime, orderTO.orderEndTime) &&
+                Objects.equals(statusOrder, orderTO.statusOrder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, mobPhone, modelCar, color, numberAuto, drivers, timeOrder, timeOutOrder, rate, costOrder);
+        return Objects.hash(id, name, typeId, clientFirstName, clientLastName, clientPhoneNumber, address, driverId, orderCost, geoData, orderStartTime, orderEndTime, statusOrder);
     }
 
     @Override
     public String toString() {
         return "OrderTO{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", name='" + name + '\'' +
+                ", typeId=" + typeId +
+                ", clientFirstName='" + clientFirstName + '\'' +
+                ", clientLastName='" + clientLastName + '\'' +
+                ", clientPhoneNumber='" + clientPhoneNumber + '\'' +
                 ", address='" + address + '\'' +
-                ", mobPhone='" + mobPhone + '\'' +
-                ", modelCar='" + modelCar + '\'' +
-                ", color='" + color + '\'' +
-                ", numberAuto='" + numberAuto + '\'' +
-                ", drivers='" + drivers + '\'' +
-                ", timeOrder=" + timeOrder +
-                ", timeOutOrder=" + timeOutOrder +
-                ", rate=" + rate +
-                ", costOrder=" + costOrder +
+                ", driverId=" + driverId +
+                ", orderCost='" + orderCost + '\'' +
+                ", geoData='" + geoData + '\'' +
+                ", orderStartTime='" + orderStartTime + '\'' +
+                ", orderEndTime='" + orderEndTime + '\'' +
+                ", statusOrder='" + statusOrder + '\'' +
                 '}';
     }
 

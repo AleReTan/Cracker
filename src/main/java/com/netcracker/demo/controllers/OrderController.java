@@ -2,6 +2,7 @@ package com.netcracker.demo.controllers;
 
 
 import com.netcracker.demo.models.OrderTO;
+import com.netcracker.demo.service.DriverService;
 import com.netcracker.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,51 +21,47 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    @Autowired
+    DriverService driverService;
+
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String listAllOrders(Model model) {
-
-        List<OrderTO> orders;
-        // //= orderService.findAllOrders();
-        model.addAttribute("orders", orderService.findAllOrders());
-       /* if (orders.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-
-        }
-        return new ResponseEntity<List<OrderTO>>(orders, HttpStatus.OK);
-    }*/
-        return "orders";
+        model.addAttribute("orders", orderService.findAll());
+       return "orders";
     }
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
+    public String index(){
 
         return "index";
     }
 
 
-    @RequestMapping(value = {"/addOrder"}, method = RequestMethod.PUT)
-    public OrderTO createOrder(@RequestBody OrderTO order) {
+    @RequestMapping(value = {"/createOrder"}, method = RequestMethod.PUT)
+    public OrderTO createOrder(@RequestBody OrderTO order)
+    {
         System.out.println(order.toString());
         return order;
     }
-
-    @RequestMapping(value = {"/addOrder"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/createOrder"}, method = RequestMethod.GET)
     public String createUserPage() {
-        return "create";
+        return "/createOrder";
     }
 
 
-    @RequestMapping(value = {"/addOrder"}, method = RequestMethod.POST)
-    public String addOrder(@ModelAttribute("orders") OrderTO order) throws Exception {
+    @RequestMapping(value = {"/createOrder"}, method = RequestMethod.POST)
+    public String addOrder(@ModelAttribute("orders") OrderTO order  ) throws Exception {
 
-        order.setTimeOrder(LocalDate.now());
-        orderService.saveOrder(order);
+    //    order.setTimeOrder(LocalDate.now());
+       // orderService.save(order);
+
+        System.out.println(order.toString());
         return "redirect:/orders";
     }
 
     @RequestMapping(value = {"/orders/{id}"}, method = RequestMethod.GET)
-    public String getById(@PathVariable("id") long id, Model model) {
+    public String getById(@PathVariable("id") long id, Model model){
         model.addAttribute("order", orderService.findById(id));
+        model.addAttribute("drivers", driverService.findAll());
         return "showUser";
     }
 }
