@@ -24,6 +24,10 @@
         <td>${driver.phoneNumber}</td>
     </tr>
     <tr>
+        <th>Геоданные</th>
+        <td>${(driver.driverGeoData)!"null"}</td>
+    </tr>
+    <tr>
         <th>Автомобиль</th>
         <td><select name="carId" required form="updateDriver">
             <#list cars as car>
@@ -41,7 +45,7 @@
     <input type="hidden" name = "firstName" value="${driver.firstName}">
     <input type="hidden" name = "lastName" value="${driver.lastName}">
     <input type="hidden" name = "phoneNumber" value="${driver.phoneNumber}">
-   <!-- <input type="hidden" name = "carId" value="car"> -->
+    <input type="hidden" name = "driverGeoData" value="${(driver.driverGeoData)!"0.0 0.0"}">
     <input type="submit" value="Сохранить" />
 </form>
 <form id="deleteDriver" action="/drivers/${driver.id}" method="post">

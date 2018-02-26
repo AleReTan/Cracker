@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 
 @Controller
@@ -47,13 +46,16 @@ public class OrderController {
         return "/createOrder";
     }
 
-
+    @RequestMapping(value = "/orders/{id}", method = RequestMethod.PATCH)
+    public String updateOrder(@ModelAttribute OrderTO order) {
+        orderService.update(order);
+        return "redirect:/orders";
+    }
     @RequestMapping(value = {"/createOrder"}, method = RequestMethod.POST)
     public String addOrder(@ModelAttribute("orders") OrderTO order  ) throws Exception {
 
-    //    order.setTimeOrder(LocalDate.now());
-       // orderService.save(order);
-
+        //order.setTimeOrder(LocalDate.now());
+        orderService.save(order);
         System.out.println(order.toString());
         return "redirect:/orders";
     }

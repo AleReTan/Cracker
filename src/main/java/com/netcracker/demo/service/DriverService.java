@@ -17,6 +17,7 @@ public class DriverService implements MyService<DriverEntityTO> {
     @Autowired
     UncRestTemplate restTemplate;
 
+
     @Override
     public void save(DriverEntityTO object) {
         restTemplate.postForObject(ADDITION_URL, object, DriverEntityTO.class);

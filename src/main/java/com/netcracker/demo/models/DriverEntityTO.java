@@ -17,18 +17,21 @@ public class DriverEntityTO {
 
     private String phoneNumber;
 
+    private String driverGeoData;
+
     private long carId;
 
     public DriverEntityTO() {
     }
 
-    public DriverEntityTO(long id, String name, long typeId, String firstName, String lastName, String phoneNumber, long carId) {
+    public DriverEntityTO(long id, String name, long typeId, String firstName, String lastName, String phoneNumber, String driverGeoData, long carId) {
         this.id = id;
         this.name = name;
         this.typeId = typeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.driverGeoData = driverGeoData;
         this.carId = carId;
     }
 
@@ -80,6 +83,14 @@ public class DriverEntityTO {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getDriverGeoData() {
+        return driverGeoData;
+    }
+
+    public void setDriverGeoData(String driverGeoData) {
+        this.driverGeoData = driverGeoData;
+    }
+
     public long getCarId() {
         return carId;
     }
@@ -99,13 +110,14 @@ public class DriverEntityTO {
                 Objects.equals(getName(), that.getName()) &&
                 Objects.equals(getFirstName(), that.getFirstName()) &&
                 Objects.equals(getLastName(), that.getLastName()) &&
-                Objects.equals(getPhoneNumber(), that.getPhoneNumber());
+                Objects.equals(getPhoneNumber(), that.getPhoneNumber()) &&
+                Objects.equals(getDriverGeoData(), that.getDriverGeoData());
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(getId(), getName(), getTypeId(), getFirstName(), getLastName(), getPhoneNumber(), getCarId());
+        return Objects.hash(getId(), getName(), getTypeId(), getFirstName(), getLastName(), getPhoneNumber(), getDriverGeoData(), getCarId());
     }
 
     @Override
@@ -117,6 +129,7 @@ public class DriverEntityTO {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", driverGeoData='" + driverGeoData + '\'' +
                 ", carId=" + carId;
     }
 }
