@@ -1,13 +1,12 @@
 package com.netcracker.demo.service;
 
 
-import com.netcracker.demo.UncRestTemplate;
+import com.netcracker.demo.utility.UncRestTemplate;
 import com.netcracker.demo.models.OrderTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 
 import java.util.Arrays;

@@ -45,7 +45,7 @@
     <input type="hidden" name = "firstName" value="${driver.firstName}">
     <input type="hidden" name = "lastName" value="${driver.lastName}">
     <input type="hidden" name = "phoneNumber" value="${driver.phoneNumber}">
-    <input type="hidden" name = "driverGeoData" value="${(driver.driverGeoData)!"0.0 0.0"}">
+    <input type="hidden" name = "driverGeoData" value="${(driver.driverGeoData)!"0.0,0.0"}">
     <input type="submit" value="Сохранить" />
 </form>
 <form id="deleteDriver" action="/drivers/${driver.id}" method="post">

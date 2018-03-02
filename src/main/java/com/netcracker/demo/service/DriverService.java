@@ -1,7 +1,6 @@
 package com.netcracker.demo.service;
 
-
-import com.netcracker.demo.UncRestTemplate;
+import com.netcracker.demo.utility.UncRestTemplate;
 import com.netcracker.demo.models.DriverEntityTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
