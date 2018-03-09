@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
         html,body, #map {
-            width: 70%; height: 70%; padding: 0; margin: 0;
+            width: 90%; height: 90%; padding: 0; margin: 0;
 
         }
     </style>
@@ -16,6 +16,7 @@
 
 </head>
 <body>
+
 <div id = "fotm">
     <form name="order" action="/createOrder" method="post">
         <p>Имя</p>
@@ -27,14 +28,18 @@
         <p>Адрес</p>
         <input title="Адрес" type="text" name="address">
         <p>Стоимость</p>
-        <input title="Стоимость" type="text" name="orderCost">
+        <input title="Стоимость" id="price" type="text" name="orderCost">
         <p>Геолокация</p>
         <input title="Геолокация" id="maps" type="text"  name="geoData" >
         <p>Статус заказа</p>
         <input title="Статус заказа" type="text" name="statusOrder">
+        <input type="hidden" id="driverId" name = "driver" value="${driver.typeId}">
         <input type="submit" value="Создать">
+
     </form>
+
 </div>
+<input type="button" id="chooseDriver" value="Подобрать водителя"/>
 <div id="map"></div>
 </body>
 </html>
