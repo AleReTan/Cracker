@@ -1,6 +1,7 @@
 package com.netcracker.demo.utility;
 
 
+import com.netcracker.demo.models.AuthThreadLocalTO;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -13,9 +14,9 @@ import java.util.Base64;
 @Component
 public class UncRestTemplate {
 
-    static final String BASE_URL = "http://localhost:8082";
+    public static final String BASE_URL = "http://localhost:8082";
 
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
     public UncRestTemplate() {
         this.restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault()));
@@ -50,10 +51,12 @@ public class UncRestTemplate {
 
     private HttpHeaders addHeaders() {
         HttpHeaders headers = new HttpHeaders();
-        String originalInput = "Irina:1234";//тут вызывается сервис владеющий данными о сессии
-        String token = "Basic " + Base64.getEncoder().encodeToString(originalInput.getBytes());
+       // String originalInput = "Irina:1234";//тут вызывается сервис владеющий данными о сессии
+       // String token = "Base " + Base64.getEncoder().encodeToString(originalInput.getBytes());
+        String token = AuthThreadLocalTO.getAuth();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add(HttpHeaders.AUTHORIZATION, token);
+        AuthThreadLocalTO.remove();
         return headers;
     }
 }
