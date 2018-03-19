@@ -18,7 +18,6 @@ public class JsonController {
     @ResponseBody
     public ObjectNode getJson( ) {
         ObjectNode objectNode = jsonService.getJson();
-        System.out.println(objectNode.toString());
         return objectNode;
     }
 }

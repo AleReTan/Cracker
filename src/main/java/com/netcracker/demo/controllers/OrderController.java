@@ -1,7 +1,7 @@
 package com.netcracker.demo.controllers;
 
 
-import com.netcracker.demo.models.OrderTO;
+import com.netcracker.demo.models.OrderEntityTO;
 import com.netcracker.demo.service.DriverService;
 import com.netcracker.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 
 @Controller
@@ -24,46 +22,44 @@ public class OrderController {
     DriverService driverService;
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public String listAllOrders(Model model) {
+    public String getOrders(Model model) {
         model.addAttribute("orders", orderService.findAll());
-       return "orders";
+        return "/order-like/orders";
     }
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(){
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
         return "index";
     }
 
-
-    @RequestMapping(value = {"/createOrder"}, method = RequestMethod.PUT)
-    public OrderTO createOrder(@RequestBody OrderTO order)
-    {
-        System.out.println(order.toString());
-        return order;
+    @RequestMapping(value = {"/orders/create"}, method = RequestMethod.POST)
+    public String createOrder(@RequestBody OrderEntityTO order) {
+        orderService.save(order);
+        return "redirect:/orders";
     }
-    @RequestMapping(value = {"/createOrder"}, method = RequestMethod.GET)
-    public String createUserPage() {
-        return "/createOrder";
+
+    @RequestMapping(value = {"/orders/create"}, method = RequestMethod.GET)
+    public String createOrderPage(Model model) {
+        model.addAttribute("drivers", driverService.findAll());//свободные водилы, прочекать че делать когда нет свободных
+        return "/order-like/createOrder";
     }
 
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.PATCH)
-    public String updateOrder(@ModelAttribute OrderTO order) {
+    public String updateOrder(@ModelAttribute OrderEntityTO order) {
         orderService.update(order);
         return "redirect:/orders";
     }
-    @RequestMapping(value = {"/createOrder"}, method = RequestMethod.POST)
-    public String addOrder(@ModelAttribute("orders") OrderTO order  ) throws Exception {
 
-        //order.setTimeOrder(LocalDate.now());
-        orderService.save(order);
-        System.out.println(order.toString());
+    @RequestMapping(value = "/orders/{id}", method = RequestMethod.DELETE)
+    public String deleteOrder(@PathVariable("id") long id) {
+        orderService.delete(id);
         return "redirect:/orders";
     }
 
     @RequestMapping(value = {"/orders/{id}"}, method = RequestMethod.GET)
-    public String getById(@PathVariable("id") long id, Model model){
+    public String getOrder(@PathVariable("id") long id, Model model) {
         model.addAttribute("order", orderService.findById(id));
         model.addAttribute("drivers", driverService.findAll());
-        return "showUser";
+        return "/order-like/order";
     }
 }

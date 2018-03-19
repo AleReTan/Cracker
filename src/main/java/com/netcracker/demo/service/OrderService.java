@@ -1,8 +1,8 @@
 package com.netcracker.demo.service;
 
 
+import com.netcracker.demo.models.OrderEntityTO;
 import com.netcracker.demo.utility.UncRestTemplate;
-import com.netcracker.demo.models.OrderTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -13,31 +13,29 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service("orderService")
-public class OrderService implements MyService<OrderTO> {
+public class OrderService implements MyService<OrderEntityTO> {
 
     static final String ADDITION_URL = "/orders";
     @Autowired
     UncRestTemplate restTemplate;
 
     @Override
-    public void save(OrderTO object) {
-        restTemplate.postForObject(ADDITION_URL + "/" + "createOrder", object, OrderTO.class);
+    public void save(OrderEntityTO object) {
+        restTemplate.postForObject(ADDITION_URL, object, OrderEntityTO.class);
     }
 
     @Override
-    public void update(OrderTO object) {
-        restTemplate.patchForObject(ADDITION_URL, object, OrderTO.class);
+    public void update(OrderEntityTO object) {
+        restTemplate.patchForObject(ADDITION_URL, object, OrderEntityTO.class);
     }
 
     @Override
-    public boolean isExist(OrderTO object) {
+    public boolean isExist(OrderEntityTO object) {
         return false;
     }
 
     @Override
-    public void delete(OrderTO object) {
-        //TODO: переделать без объекта, юзать метод ниже(он сделан с uncTemplate'ом
-        //restTemplate.delete(ADDITION_URL + "/" + object.getId(), object, OrderTO.class);
+    public void delete(OrderEntityTO object) {
     }
 
     public void delete(long id) {
@@ -45,15 +43,15 @@ public class OrderService implements MyService<OrderTO> {
     }
 
     @Override
-    public List<OrderTO> findAll() {
-        ResponseEntity<OrderTO[]> response = restTemplate.exchange(
-                ADDITION_URL, HttpMethod.GET, OrderTO[].class);
+    public List<OrderEntityTO> findAll() {
+        ResponseEntity<OrderEntityTO[]> response = restTemplate.exchange(
+                ADDITION_URL, HttpMethod.GET, OrderEntityTO[].class);
         return Arrays.asList(response.getBody());
     }
 
-    public OrderTO findById(long id) {
-        ResponseEntity<OrderTO> response = restTemplate.exchange(
-                ADDITION_URL + "/" + id, HttpMethod.GET, OrderTO.class);
+    public OrderEntityTO findById(long id) {
+        ResponseEntity<OrderEntityTO> response = restTemplate.exchange(
+                ADDITION_URL + "/" + id, HttpMethod.GET, OrderEntityTO.class);
         return response.getBody();
     }
 }

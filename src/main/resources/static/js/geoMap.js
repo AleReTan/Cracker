@@ -8,6 +8,13 @@ function init () {
         controls: []
     });
 
+    $.ajax({
+        url: "json"
+    }).done(function (data) {
+        var geoObjects = ymaps.geoQuery(data)
+            .addToMap(myMap);
+    });
+
     // Обработка события, возникающего при щелчке
     // левой кнопкой мыши в любой точке карты.
     // При возникновении такого события откроем балун.
@@ -25,7 +32,7 @@ function init () {
             });
 
             //$('#maps').value(coords, null);
-            $("#maps").val(coords[0].toPrecision(6) + "," + coords[1].toPrecision(6))
+            $("#geo").val(coords[0].toPrecision(6) + "," + coords[1].toPrecision(6))
         }
         else {
             myMap.balloon.close();
@@ -46,20 +53,18 @@ function init () {
     });
 
     document.getElementById('chooseDriver').onclick = function (){
-        var orderGeoArr = document.getElementById('maps').value.split(',');
+        var orderGeoArr = document.getElementById('geo').value.split(',');
         var orderGeo = [parseFloat(orderGeoArr[0]),parseFloat(orderGeoArr[1])];
-
+/*
         $.ajax({
             url: "json"
         }).done(findDriver);
 
         function findDriver(data) {
-
             geoObjects = ymaps.geoQuery(data)
-                .addToMap(myMap);
+                .addToMap(myMap);*/
             // Дождемся ответа от сервера и получим объект, ближайший к точке.
             geoObjects.then(function () {
-
                 var closestObject = geoObjects.getClosestTo(orderGeo);
                 console.log(closestObject);
                 // Если ответ пуст, то ближайший объект не найдется.
@@ -90,6 +95,9 @@ function init () {
 
             });
 
-        }
+        };
+   // };
+    document.getElementById('driverSelect').onchange = function () {
+        //ищем в коллекции geoObject выбранного водилу, он теперь клозестОбжект, дальше по накатанной
     };
 }
