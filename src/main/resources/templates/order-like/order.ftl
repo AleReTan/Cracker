@@ -33,7 +33,7 @@
     </tr>
     <tr>
         <th>Время заказа</th>
-        <td>${order.orderStartTime}</td>
+        <td>${(order.orderStartTime)!"sda"}</td>
     </tr>
     <tr>
         <th>Время окончания заказа</th>

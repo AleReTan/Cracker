@@ -14,7 +14,7 @@ public class JsonController {
     JsonService jsonService;
 
 
-    @RequestMapping(value = "/json", method = RequestMethod.GET)
+    @RequestMapping(value = "/allCarsJson", method = RequestMethod.GET)
     @ResponseBody
     public ObjectNode getJson( ) {
         ObjectNode objectNode = jsonService.getJson();

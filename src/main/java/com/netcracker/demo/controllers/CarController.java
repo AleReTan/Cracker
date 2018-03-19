@@ -25,7 +25,7 @@ public class CarController {
         return "redirect:/cars";
     }
 
-    @RequestMapping(value = {"/cars/create"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/cars/create", method = RequestMethod.GET)
     public String createUserPage() {
         return "/car-like/createCar";
     }

@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <script type="text/javascript" src="js/priceCalculation.js"></script>
+    <script type="text/javascript" src="js/showDrivers.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
@@ -38,7 +38,6 @@
 </#list>
 </table>
 <a href="/drivers/create">Create driver</a>
-<input type="button" id="uploadButton" value="подгрузить данные"/>
 <div id="map"></div>
 
 </body>

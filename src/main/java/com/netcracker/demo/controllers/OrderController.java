@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 
 @Controller
 @ComponentScan
@@ -32,13 +34,16 @@ public class OrderController {
         return "index";
     }
 
-    @RequestMapping(value = {"/orders/create"}, method = RequestMethod.POST)
-    public String createOrder(@RequestBody OrderEntityTO order) {
+    @RequestMapping(value = "/orders/create", method = RequestMethod.POST)
+    public String createOrder(@ModelAttribute OrderEntityTO order) {
+        order.setOrderStartTime(LocalDateTime.now().toString());
+        order.setOrderEndTime("Не закончен");
+        System.out.println(order);
         orderService.save(order);
         return "redirect:/orders";
     }
 
-    @RequestMapping(value = {"/orders/create"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/orders/create", method = RequestMethod.GET)
     public String createOrderPage(Model model) {
         model.addAttribute("drivers", driverService.findAll());//свободные водилы, прочекать че делать когда нет свободных
         return "/order-like/createOrder";
@@ -56,7 +61,7 @@ public class OrderController {
         return "redirect:/orders";
     }
 
-    @RequestMapping(value = {"/orders/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
     public String getOrder(@PathVariable("id") long id, Model model) {
         model.addAttribute("order", orderService.findById(id));
         model.addAttribute("drivers", driverService.findAll());

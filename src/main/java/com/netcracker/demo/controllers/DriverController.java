@@ -32,7 +32,7 @@ public class DriverController {
         return "redirect:/drivers";
     }
 
-    @RequestMapping(value = {"/drivers/create"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/drivers/create", method = RequestMethod.GET)
     public String createDriverPage(Model model) {
         model.addAttribute("cars", carService.findAll());//свободные машины, прочекать че делать когда нет свободных
         return "/driver-like/createDriver";
