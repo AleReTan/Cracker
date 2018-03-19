@@ -16,9 +16,6 @@ public class CarService implements MyService<CarEntityTO> {
     @Autowired
     UncRestTemplate restTemplate;
 
-    /*
-    Добавлние машин
-     */
     @Override
     public void save(CarEntityTO car) {
         restTemplate.postForObject(ADDITION_URL, car, CarEntityTO.class);
@@ -29,9 +26,6 @@ public class CarService implements MyService<CarEntityTO> {
         restTemplate.patchForObject(ADDITION_URL, car, CarEntityTO.class);
     }
 
-    /*
-    Если существует
-     */
     @Override
     public boolean isExist(CarEntityTO car) {
         return false;
@@ -39,11 +33,9 @@ public class CarService implements MyService<CarEntityTO> {
 
     @Override
     public void delete(CarEntityTO car) {
-        //restTemplate.delete(URL + "/" + car.getId(), car, CarEntityTO.class);
     }
 
     public void delete(long id) {
-        //restTemplate.delete(URL + "/" + id); //не работает, хз почему
         ResponseEntity<String> response = restTemplate.exchange(ADDITION_URL + "/" + id, HttpMethod.DELETE, String.class);
     }
 

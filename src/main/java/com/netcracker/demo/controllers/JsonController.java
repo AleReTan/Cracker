@@ -13,11 +13,17 @@ public class JsonController {
     @Autowired
     JsonService jsonService;
 
-
-    @RequestMapping(value = "/allCarsJson", method = RequestMethod.GET)
+    @RequestMapping(value = "/allDriversJson", method = RequestMethod.GET)
     @ResponseBody
-    public ObjectNode getJson( ) {
-        ObjectNode objectNode = jsonService.getJson();
+    public ObjectNode getAllDriversJson() {
+        ObjectNode objectNode = jsonService.getAllDriversJson();
+        return objectNode;
+    }
+
+    @RequestMapping(value = "/availableDriversJson", method = RequestMethod.GET)
+    @ResponseBody
+    public ObjectNode getAvailableDriversJson() {
+        ObjectNode objectNode = jsonService.getAvailableDriversJson();
         return objectNode;
     }
 }

@@ -52,4 +52,10 @@ public class DriverService implements MyService<DriverEntityTO> {
         return response.getBody();
     }
 
+    public List<DriverEntityTO> findAllAvailableDrivers() {
+        ResponseEntity<DriverEntityTO[]> response = restTemplate.exchange(
+                ADDITION_URL + "/" + "available", HttpMethod.GET, DriverEntityTO[].class);
+        return Arrays.asList(response.getBody());
+    }
+
 }

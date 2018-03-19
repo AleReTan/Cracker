@@ -14,14 +14,20 @@ import java.util.List;
 @Service("jsonService")
 public class JsonService {
 
-    static final String ADDITION_URL = "/allCarsJson";
     @Autowired
     UncRestTemplate restTemplate;
 
-    public ObjectNode getJson() {
+    public ObjectNode getAllDriversJson() {
         ResponseEntity<ObjectNode> response = restTemplate.exchange(
-                ADDITION_URL, HttpMethod.GET, ObjectNode.class);
+                "/" + "allDriversJson", HttpMethod.GET, ObjectNode.class);
         return response.getBody();
     }
+
+    public ObjectNode getAvailableDriversJson() {
+        ResponseEntity<ObjectNode> response = restTemplate.exchange(
+                "/" + "availableDriversJson", HttpMethod.GET, ObjectNode.class);
+        return response.getBody();
+    }
+
 
 }

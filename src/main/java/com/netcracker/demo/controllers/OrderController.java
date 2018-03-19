@@ -45,7 +45,7 @@ public class OrderController {
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.GET)
     public String createOrderPage(Model model) {
-        model.addAttribute("drivers", driverService.findAll());//свободные водилы, прочекать че делать когда нет свободных
+        model.addAttribute("drivers", driverService.findAllAvailableDrivers());//свободные водилы, прочекать че делать когда нет свободных
         return "/order-like/createOrder";
     }
 
