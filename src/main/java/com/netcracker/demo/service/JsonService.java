@@ -17,7 +17,7 @@ import java.util.List;
 @Service("jsonService")
 public class JsonService {
 
-    static final String ADDITION_URL = "/json";
+    static final String ADDITION_URL = "/allCarsJson";
     @Autowired
     UncRestTemplate restTemplate;
 

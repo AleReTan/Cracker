@@ -25,7 +25,7 @@
     </tr>
     <tr>
         <th>Геоданные</th>
-        <td>${(driver.driverGeoData)!"null"}</td>
+        <td>${(driver.driverGeoData)!"0.0,0.0"}</td>
     </tr>
     <tr>
         <th>Автомобиль</th>

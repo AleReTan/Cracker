@@ -17,12 +17,10 @@ public class JsonController {
     JsonService jsonService;
 
 
-    @RequestMapping(value = "/json", method = RequestMethod.GET)
+    @RequestMapping(value = "/allCarsJson", method = RequestMethod.GET)
     @ResponseBody
     public ObjectNode getJson(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         ObjectNode objectNode = jsonService.getJson(httpServletRequest,httpServletResponse);
-        System.out.println(objectNode.toString());
         return objectNode;
-        }
     }
-
+}

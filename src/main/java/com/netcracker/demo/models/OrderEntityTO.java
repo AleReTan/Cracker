@@ -1,11 +1,10 @@
 package com.netcracker.demo.models;
 
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 
-public class OrderTO {
+public class OrderEntityTO {
 
 
     private long id;
@@ -21,6 +20,7 @@ public class OrderTO {
     private String clientPhoneNumber;
 
     private String address;
+
     private long driverId;
 
     private String orderCost;
@@ -138,10 +138,10 @@ public class OrderTO {
         this.statusOrder = statusOrder;
     }
 
-    public OrderTO() {
+    public OrderEntityTO() {
     }
 
-    public OrderTO(long id, String name, long typeid, String clientFirstName, String clientLastName, String clientPhoneNumber, String address, long driverId, String orderCost, String geoData, String orderStartTime, String orderEndTime, String statusOrder) {
+    public OrderEntityTO(long id, String name, long typeid, String clientFirstName, String clientLastName, String clientPhoneNumber, String address, long driverId, String orderCost, String geoData, String orderStartTime, String orderEndTime, String statusOrder) {
         this.id = id;
         this.name = name;
         this.typeId = typeid;
@@ -161,21 +161,21 @@ public class OrderTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrderTO)) return false;
-        OrderTO orderTO = (OrderTO) o;
-        return id == orderTO.id &&
-                typeId == orderTO.typeId &&
-                driverId == orderTO.driverId &&
-                Objects.equals(name, orderTO.name) &&
-                Objects.equals(clientFirstName, orderTO.clientFirstName) &&
-                Objects.equals(clientLastName, orderTO.clientLastName) &&
-                Objects.equals(clientPhoneNumber, orderTO.clientPhoneNumber) &&
-                Objects.equals(address, orderTO.address) &&
-                Objects.equals(orderCost, orderTO.orderCost) &&
-                Objects.equals(geoData, orderTO.geoData) &&
-                Objects.equals(orderStartTime, orderTO.orderStartTime) &&
-                Objects.equals(orderEndTime, orderTO.orderEndTime) &&
-                Objects.equals(statusOrder, orderTO.statusOrder);
+        if (!(o instanceof OrderEntityTO)) return false;
+        OrderEntityTO orderEntityTO = (OrderEntityTO) o;
+        return id == orderEntityTO.id &&
+                typeId == orderEntityTO.typeId &&
+                driverId == orderEntityTO.driverId &&
+                Objects.equals(name, orderEntityTO.name) &&
+                Objects.equals(clientFirstName, orderEntityTO.clientFirstName) &&
+                Objects.equals(clientLastName, orderEntityTO.clientLastName) &&
+                Objects.equals(clientPhoneNumber, orderEntityTO.clientPhoneNumber) &&
+                Objects.equals(address, orderEntityTO.address) &&
+                Objects.equals(orderCost, orderEntityTO.orderCost) &&
+                Objects.equals(geoData, orderEntityTO.geoData) &&
+                Objects.equals(orderStartTime, orderEntityTO.orderStartTime) &&
+                Objects.equals(orderEndTime, orderEntityTO.orderEndTime) &&
+                Objects.equals(statusOrder, orderEntityTO.statusOrder);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class OrderTO {
 
     @Override
     public String toString() {
-        return "OrderTO{" +
+        return "OrderEntityTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", typeId=" + typeId +
