@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 public class JsonController {
     @Autowired
@@ -16,9 +19,10 @@ public class JsonController {
 
     @RequestMapping(value = "/json", method = RequestMethod.GET)
     @ResponseBody
-    public ObjectNode getJson( ) {
-        ObjectNode objectNode = jsonService.getJson();
+    public ObjectNode getJson(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        ObjectNode objectNode = jsonService.getJson(httpServletRequest,httpServletResponse);
         System.out.println(objectNode.toString());
         return objectNode;
+        }
     }
-}
+

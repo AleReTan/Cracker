@@ -17,7 +17,11 @@ $(document).ready(function () {
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 type: 'POST',
-                url: '/login'
+                url: '/login',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true
             }
         ).done(
             function(data, textStatus, jqXHR) {

@@ -4,12 +4,15 @@ package com.netcracker.demo.utility;
 import com.netcracker.demo.models.AuthThreadLocalTO;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.http.*;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 @Component
 public class UncRestTemplate {
@@ -20,6 +23,9 @@ public class UncRestTemplate {
 
     public UncRestTemplate() {
         this.restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault()));
+       /* List<ClientHttpRequestInterceptor> interceptors = new ArrayList<ClientHttpRequestInterceptor>();
+        interceptors.add(new RequestInterceptor());
+        restTemplate.setInterceptors(interceptors);*/
     }
 
     public <T> ResponseEntity<T> exchange(String additionUrl,
@@ -27,7 +33,6 @@ public class UncRestTemplate {
                                           Class<T> responseType,
                                           Object... uriVariables) throws RestClientException {
         HttpEntity<String> entity = new HttpEntity<>(addHeaders());
-
         return restTemplate.exchange(BASE_URL + additionUrl, method, entity, responseType, uriVariables);
     }
 
@@ -51,12 +56,12 @@ public class UncRestTemplate {
 
     private HttpHeaders addHeaders() {
         HttpHeaders headers = new HttpHeaders();
-       // String originalInput = "Irina:1234";//тут вызывается сервис владеющий данными о сессии
-       // String token = "Base " + Base64.getEncoder().encodeToString(originalInput.getBytes());
         String token = AuthThreadLocalTO.getAuth();
+        if(token == null){
+            // обработать данное событие обязательно нужно
+        }
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add(HttpHeaders.AUTHORIZATION, token);
-        AuthThreadLocalTO.remove();
         return headers;
     }
 }

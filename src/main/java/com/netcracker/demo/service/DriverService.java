@@ -1,11 +1,17 @@
 package com.netcracker.demo.service;
 
+import com.netcracker.demo.models.AuthThreadLocalTO;
 import com.netcracker.demo.utility.UncRestTemplate;
 import com.netcracker.demo.models.DriverEntityTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,15 +22,23 @@ public class DriverService implements MyService<DriverEntityTO> {
     @Autowired
     UncRestTemplate restTemplate;
 
-
     @Override
-    public void save(DriverEntityTO object) {
-        restTemplate.postForObject(ADDITION_URL, object, DriverEntityTO.class);
+    public void save(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,DriverEntityTO object) {
+        try {
+            restTemplate.postForObject(ADDITION_URL, object, DriverEntityTO.class);
+
+        } catch (HttpStatusCodeException e){
+            AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
+        }
     }
 
     @Override
-    public void update(DriverEntityTO object) {
-        restTemplate.patchForObject(ADDITION_URL, object, DriverEntityTO.class);
+    public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, DriverEntityTO object) {
+        try {
+            restTemplate.patchForObject(ADDITION_URL, object, DriverEntityTO.class);
+        } catch (HttpStatusCodeException e){
+            AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
+        }
     }
 
     @Override
@@ -33,25 +47,38 @@ public class DriverService implements MyService<DriverEntityTO> {
     }
 
     @Override
-    public void delete(DriverEntityTO object) {
+    public void delete(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,DriverEntityTO object) {
 
     }
 
-    public void delete(long id) {
-        ResponseEntity<String> response = restTemplate.exchange(ADDITION_URL + "/" + id, HttpMethod.DELETE, String.class);
-    }
+    public void delete(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse, long id) {
+       try {
+           ResponseEntity<String> response = restTemplate.exchange(ADDITION_URL + "/" + id, HttpMethod.DELETE, String.class);
+       } catch (HttpStatusCodeException e){
+           AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
+       }
+       }
 
     @Override
-    public List<DriverEntityTO> findAll() {
+    public List<DriverEntityTO> findAll(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) {
+        try{
         ResponseEntity<DriverEntityTO[]> response = restTemplate.exchange(
                 ADDITION_URL, HttpMethod.GET, DriverEntityTO[].class);
         return Arrays.asList(response.getBody());
+        } catch (HttpStatusCodeException e){
+            AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
+            return null;
+        }
     }
 
-    public DriverEntityTO findById(long id) {
-        ResponseEntity<DriverEntityTO> response = restTemplate.exchange(
-                ADDITION_URL + "/" + id, HttpMethod.GET, DriverEntityTO.class);
-        return response.getBody();
+    public DriverEntityTO findById(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse, long id) {
+        try {
+            ResponseEntity<DriverEntityTO> response = restTemplate.exchange(
+                    ADDITION_URL + "/" + id, HttpMethod.GET, DriverEntityTO.class);
+            return response.getBody();
+        } catch (HttpStatusCodeException e){
+            AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
+            return null;
+        }
     }
-
 }

@@ -1,54 +1,60 @@
 package com.netcracker.demo.utility;
 
-import com.jayway.jsonpath.JsonPath;
 import com.netcracker.demo.models.AuthThreadLocalTO;
 import com.netcracker.demo.service.AuthService;
-import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
 
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.util.Scanner;
 
 @Component
-
 public class RequestInterceptor implements HandlerInterceptor {
     @Autowired
     AuthService authService;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        //System.out.println("SiteInterceptor preHandle");
         String requestURI = httpServletRequest.getRequestURI();
-        Cookie cookieAuth = authService.getCookie(httpServletRequest);
+        String cookieAuth = CookieUtil.getValueByName(httpServletRequest,CookieUtil.COOKIE_NAME);
         if (cookieAuth != null) {
-            AuthThreadLocalTO.setAuth(authService.getToken(cookieAuth.toString()));
+            AuthThreadLocalTO.setAuth(cookieAuth);
         } else {
-
             if (!requestURI.equals("/login")) {
-               // httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
+                //здесь могут быть проблемы...
+               // httpServletRequest.getRequestDispatcher("loginPage.ftl").forward(httpServletRequest,httpServletResponse);
+                      //  getRequestDispathcer().forward(request, response);
+                httpServletResponse.sendRedirect("/login");
+                return false;
             }
-            System.out.println(">>>MyInterceptor1>>>>>>> Call before request processing （Controller Before method )" + requestURI);
         }
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+        System.out.println("SiteInterceptor postHandle for url" + httpServletRequest.getRequestURI());
+        int httpStatus = httpServletResponse.getStatus();
+
+       if (httpStatus != HttpStatus.OK.value()){
+          if( !httpServletRequest.getRequestURI().equals("/errorMSG")){
+           if(modelAndView!=null){
+                modelAndView.clear();
+           }
+            httpServletRequest.getRequestDispatcher("/errorMSG").forward(httpServletRequest,httpServletResponse);
+            return;}
+        }
 
     }
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-
+        System.out.println("SiteInterceptor afterCompletion");
+        //AuthThreadLocalTO.remove();
     }
 
    /* static String extractPostRequestBody(HttpServletRequest request) throws IOException {

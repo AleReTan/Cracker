@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,10 +21,16 @@ public class JsonService {
     @Autowired
     UncRestTemplate restTemplate;
 
-    public ObjectNode getJson() {
+    public ObjectNode getJson(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        try{
         ResponseEntity<ObjectNode> response = restTemplate.exchange(
                 ADDITION_URL, HttpMethod.GET, ObjectNode.class);
         return response.getBody();
+        }
+        catch (HttpStatusCodeException e){
+            AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
+            return null;
+        }
     }
 
 }

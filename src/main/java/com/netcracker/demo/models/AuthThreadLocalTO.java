@@ -1,14 +1,15 @@
 package com.netcracker.demo.models;
 
 public class AuthThreadLocalTO {
-    private static  final ThreadLocal<String> authThreadLocal = new ThreadLocal<String>();;
 
-    public static void setAuth(String data) {
+    private static  final ThreadLocal authThreadLocal = new ThreadLocal();
+
+    public static <T> void  setAuth(T data) {
         authThreadLocal.set(data);
     }
 
-    public static String getAuth() {
-    return authThreadLocal.get();
+    public static <T> T getAuth() {
+    return (T)authThreadLocal.get();
     }
 
     public static void remove() {

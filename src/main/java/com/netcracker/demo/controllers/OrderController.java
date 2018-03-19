@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 
 
@@ -24,8 +26,8 @@ public class OrderController {
     DriverService driverService;
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public String listAllOrders(Model model) {
-        model.addAttribute("orders", orderService.findAll());
+    public String listAllOrders(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        model.addAttribute("orders", orderService.findAll(httpServletRequest, httpServletResponse));
        return "orders";
     }
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -47,23 +49,23 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.PATCH)
-    public String updateOrder(@ModelAttribute OrderTO order) {
-        orderService.update(order);
+    public String updateOrder(@ModelAttribute OrderTO order, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        orderService.update(httpServletRequest, httpServletResponse, order);
         return "redirect:/orders";
     }
     @RequestMapping(value = {"/createOrder"}, method = RequestMethod.POST)
-    public String addOrder(@ModelAttribute("orders") OrderTO order  ) throws Exception {
+    public String addOrder(@ModelAttribute("orders") OrderTO order, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse  ) throws Exception {
 
         //order.setTimeOrder(LocalDate.now());
-        orderService.save(order);
+        orderService.save(httpServletRequest, httpServletResponse, order);
         System.out.println(order.toString());
         return "redirect:/orders";
     }
 
     @RequestMapping(value = {"/orders/{id}"}, method = RequestMethod.GET)
-    public String getById(@PathVariable("id") long id, Model model){
-        model.addAttribute("order", orderService.findById(id));
-        model.addAttribute("drivers", driverService.findAll());
+    public String getById(@PathVariable("id") long id, Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+        model.addAttribute("order", orderService.findById(httpServletRequest, httpServletResponse, id));
+        model.addAttribute("drivers", driverService.findAll(httpServletRequest, httpServletResponse));
         return "showUser";
     }
 }
