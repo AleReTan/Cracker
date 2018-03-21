@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="css/style.css">
 
     <meta charset="UTF-8">
@@ -12,20 +12,20 @@
     <tr>
         <th>Id</th>
         <th>Название</th>
-        <th>Адрес</th>
+        <th>Адрес местоположения клиента</th>
         <th>Водитель</th>
         <th>Время заказа</th>
         <th>Cтатус</th>
         <th>Стоимость</th>
-
-
     </tr>
 <#list orders as order>
     <tr>
         <td>${order.id}</td>
         <td><a href="/orders/${order.id}">${order.name}</a></td>
         <td>${order.address}</td>
-        <td>${order.driverId}</td>
+        <td> <#list drivers as driver>
+             <#if order.driverId == driver.id> ${driver.firstName} ${driver.lastName} </#if>
+        </#list></td>
         <td>${order.orderStartTime}</td>
         <td>${order.statusOrder}</td>
         <td>${order.orderCost}</td>

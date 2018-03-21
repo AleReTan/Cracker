@@ -26,6 +26,7 @@ public class OrderController {
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String getOrders(Model model) {
         model.addAttribute("orders", orderService.findAll());
+        model.addAttribute("drivers", driverService.findAll());
         return "/order-like/orders";
     }
 

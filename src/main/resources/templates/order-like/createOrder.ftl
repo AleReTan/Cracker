@@ -34,13 +34,16 @@
     <input title="Телефон клиента" type="text" name="clientPhoneNumber">
 
     <p>Адрес</p>
-    <input title="Адрес" type="text" name="address">
+    <input title="Адрес" id="address" type="text" name="address">
 
     <p>Стоимость</p>
     <input title="Стоимость" id="price" type="text" name="orderCost">
 
-    <p>Геолокация</p>
+    <p>Местоположение заказчика</p>
     <input title="Геолокация" id="geo" type="text" name="geoData">
+
+    <p>Местоположение пункта назначения</p>
+    <input title="Геолокация" id="destinationGeo" type="text" name="destinationGeoData">
 
     <p>Водитель</p>
     <select name="driverId" id="driverSelect">

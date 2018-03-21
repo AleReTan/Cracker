@@ -28,19 +28,23 @@
         <td>${order.clientPhoneNumber}</td>
     </tr>
     <tr>
-        <th>Местоположение</th>
+        <th>Местоположение заказчика</th>
         <td>${order.geoData}</td>
     </tr>
     <tr>
+        <th>Пункт назначения</th>
+        <td>${order.destinationGeoData}</td>
+    </tr>
+    <tr>
         <th>Время заказа</th>
-        <td>${(order.orderStartTime)!"sda"}</td>
+        <td>${order.orderStartTime}</td>
     </tr>
     <tr>
         <th>Время окончания заказа</th>
         <td>${(order.orderEndTime)!"Заказ не завершен"}</td>
     </tr>
-        <th>Статус заказ</th>
-        <td>${order.statusOrder}</td>
+    <th>Статус заказ</th>
+    <td>${order.statusOrder}</td>
     </tr>
     <tr>
         <th>Водитель эвакуатора</th>
@@ -69,8 +73,9 @@
     <input type="hidden" name="address" value="${order.address}">
     <input type="hidden" name="orderCost" value="${order.orderCost}">
     <input type="hidden" name="geoData" value="${order.geoData}">
+    <input type="hidden" name="destinationGeoData" value="${order.destinationGeoData}">
     <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
-    <input type="hidden" name = "orderEndTime" value="${(order.orderEndTime)!"Заказ не завершен"}">
+    <input type="hidden" name="orderEndTime" value="${(order.orderEndTime)!"Заказ не завершен"}">
     <input type="hidden" name="statusOrder" value="${order.statusOrder}">
     <input type="submit" value="Сохранить"/>
 </form>
