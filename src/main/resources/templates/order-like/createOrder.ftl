@@ -53,10 +53,18 @@
             </#list>
     </select>
 
+
     <!--затестить кто встанет на заказ если ткнуть кнопку подбор водителя, мб отлавливать тык кнопки и не обращать внимание на выпадашку-->
     <p>Статус заказа</p>
-    <input title="Статус заказа" type="text" name="statusOrder">
-
+        <p><select>
+            <option selected="selected">Выберите статус</option>
+            <option value="Поиск водителя">Поиск водителя</option>
+            <option value="Водитель взял заказ">Водитель взял заказ</option>
+            <option value="Водитель движется к клиенту">Водитель движется к клиенту</option>
+            <option value="Водитель с клиентом">Водитель с клиентом</option>
+            <option value="Заказ завершен">Заказ завершен</option>
+            <option value="Заказ отменен">Заказ отменен</option>
+        </select></p>
     <input type="hidden" name="typeId" value="6">
     <input type="submit" value="Создать">
 </form>
