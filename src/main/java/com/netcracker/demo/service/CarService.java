@@ -52,4 +52,10 @@ public class CarService implements MyService<CarEntityTO> {
                 ADDITION_URL + "/" + id, HttpMethod.GET, CarEntityTO.class);
         return response.getBody();
     }
+
+    public List<CarEntityTO> findAllAvailableCars() {
+        ResponseEntity<CarEntityTO[]> response = restTemplate.exchange(
+                ADDITION_URL + "/" + "available", HttpMethod.GET, CarEntityTO[].class);
+        return Arrays.asList(response.getBody());
+    }
 }

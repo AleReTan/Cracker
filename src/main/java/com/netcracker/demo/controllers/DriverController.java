@@ -34,7 +34,7 @@ public class DriverController {
 
     @RequestMapping(value = "/drivers/create", method = RequestMethod.GET)
     public String createDriverPage(Model model) {
-        model.addAttribute("cars", carService.findAll());//свободные машины, прочекать че делать когда нет свободных
+        model.addAttribute("cars", carService.findAllAvailableCars());//свободные машины, прочекать че делать когда нет свободных
         return "/driver-like/createDriver";
     }
 
@@ -53,7 +53,7 @@ public class DriverController {
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)
     public String getDriver(@PathVariable("id") long id, Model model) {
         model.addAttribute("driver", driverService.findById(id));
-        model.addAttribute("cars", carService.findAll());
+        model.addAttribute("cars", carService.findAllAvailableCars());
         return "/driver-like/driver";
     }
 

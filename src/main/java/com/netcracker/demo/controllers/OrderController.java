@@ -65,7 +65,7 @@ public class OrderController {
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
     public String getOrder(@PathVariable("id") long id, Model model) {
         model.addAttribute("order", orderService.findById(id));
-        model.addAttribute("drivers", driverService.findAll());
+        model.addAttribute("drivers", driverService.findAllAvailableDrivers());
         return "/order-like/order";
     }
 }
