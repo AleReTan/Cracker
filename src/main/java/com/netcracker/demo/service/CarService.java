@@ -1,12 +1,11 @@
 package com.netcracker.demo.service;
 
-import com.netcracker.demo.utility.UncRestTemplate;
 import com.netcracker.demo.models.CarEntityTO;
+import com.netcracker.demo.utility.UncRestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpStatusCodeException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,79 +19,50 @@ public class CarService implements MyService<CarEntityTO> {
     @Autowired
     UncRestTemplate restTemplate;
 
-    /*
-    Добавлние машин
-     */
     @Override
-    public void save(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,CarEntityTO car) {
-       try {
-           restTemplate.postForObject(ADDITION_URL, car, CarEntityTO.class);
-       }catch (HttpStatusCodeException e){
-           AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
-           ;
-       }
+    public void save(HttpServletRequest req, HttpServletResponse res, CarEntityTO car) {
+        restTemplate.postForObject(req, res, ADDITION_URL, car, CarEntityTO.class);
     }
 
     @Override
-    public void update(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,CarEntityTO car) {
-       try {
-           restTemplate.patchForObject(ADDITION_URL, car, CarEntityTO.class);
-       }catch (HttpStatusCodeException e){
-           AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
-       }
+    public void update(HttpServletRequest req, HttpServletResponse res, CarEntityTO car) {
+        restTemplate.patchForObject(req, res, ADDITION_URL, car, CarEntityTO.class);
     }
 
-    /*
-    Если существует
-     */
     @Override
     public boolean isExist(CarEntityTO car) {
         return false;
     }
 
     @Override
-    public void delete(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,CarEntityTO car) {
+    public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, CarEntityTO car) {
         //restTemplate.delete(URL + "/" + car.getId(), car, CarEntityTO.class);
     }
 
-    public void delete(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,long id) {
+    public void delete(HttpServletRequest req, HttpServletResponse res, long id) {
         //restTemplate.delete(URL + "/" + id); //не работает, хз почему
-       try {
-           ResponseEntity<String> response = restTemplate.exchange(ADDITION_URL + "/" + id, HttpMethod.DELETE, String.class);
-       }catch (HttpStatusCodeException e){
-           AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
-       }
-       }
+        ResponseEntity<String> response = restTemplate.exchange(req, res, ADDITION_URL + "/" + id, HttpMethod.DELETE, String.class);
+    }
 
     @Override
-    public List<CarEntityTO> findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        ResponseEntity<CarEntityTO[]> response = restTemplate.exchange(
+    public List<CarEntityTO> findAll(HttpServletRequest req, HttpServletResponse res) {
+
+        ResponseEntity<CarEntityTO[]> response = restTemplate.exchange(req, res,
                 ADDITION_URL, HttpMethod.GET, CarEntityTO[].class);
-        return Arrays.asList(response.getBody());
+        return (response == null) ? null : Arrays.asList(response.getBody());
     }
 
-    public List<CarEntityTO> findAllTest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        try{
-            httpServletResponse.setStatus(HttpStatus.OK.value());
-            ResponseEntity<CarEntityTO[]> response = restTemplate.exchange(
-                    ADDITION_URL, HttpMethod.GET, CarEntityTO[].class);
-            return Arrays.asList(response.getBody());
-        }
-        catch (HttpStatusCodeException e){
-            AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
-            return null;
-        }
+    public List<CarEntityTO> findAllTest(HttpServletRequest req, HttpServletResponse res) {
 
+        ResponseEntity<CarEntityTO[]> response = restTemplate.exchange(req, res,
+                ADDITION_URL, HttpMethod.GET, CarEntityTO[].class);
+        return (response == null) ? null : Arrays.asList(response.getBody());
     }
 
-    public CarEntityTO findById(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,long id) {
-        try{
-        ResponseEntity<CarEntityTO> response = restTemplate.exchange(
+    public CarEntityTO findById(HttpServletRequest req, HttpServletResponse res, long id) {
+
+        ResponseEntity<CarEntityTO> response = restTemplate.exchange(req, res,
                 ADDITION_URL + "/" + id, HttpMethod.GET, CarEntityTO.class);
-        return response.getBody();}
-        catch (HttpStatusCodeException e){
-                AuthService.sendRedirectIfError(e,httpServletRequest,httpServletResponse);
-                return null;
-            }
+        return (response == null) ? null : response.getBody();
     }
 }

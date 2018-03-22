@@ -17,18 +17,15 @@ public class RequestInterceptor implements HandlerInterceptor {
     AuthService authService;
 
     @Override
-    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        //System.out.println("SiteInterceptor preHandle");
-        String requestURI = httpServletRequest.getRequestURI();
-        String cookieAuth = CookieUtil.getValueByName(httpServletRequest,CookieUtil.COOKIE_NAME);
+    public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object o) throws Exception {
+
+        String requestURI = req.getRequestURI();
+        String cookieAuth = CookieUtil.getValueByName(req, CookieUtil.COOKIE_NAME);
         if (cookieAuth != null) {
             AuthThreadLocalTO.setAuth(cookieAuth);
         } else {
             if (!requestURI.equals("/login")) {
-                //здесь могут быть проблемы...
-               // httpServletRequest.getRequestDispatcher("loginPage.ftl").forward(httpServletRequest,httpServletResponse);
-                      //  getRequestDispathcer().forward(request, response);
-                httpServletResponse.sendRedirect("/login");
+                res.sendRedirect("/login");
                 return false;
             }
         }
@@ -36,58 +33,35 @@ public class RequestInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        System.out.println("SiteInterceptor postHandle for url" + httpServletRequest.getRequestURI());
-        int httpStatus = httpServletResponse.getStatus();
+    public void postHandle(HttpServletRequest req, HttpServletResponse res, Object o, ModelAndView modelAndView) throws Exception {
+        //System.out.println("SiteInterceptor postHandle for url" + req.getRequestURI());
 
-       if (httpStatus != HttpStatus.OK.value()){
-          if( !httpServletRequest.getRequestURI().equals("/errorMSG")){
-           if(modelAndView!=null){
-                modelAndView.clear();
-           }
-            httpServletRequest.getRequestDispatcher("/errorMSG").forward(httpServletRequest,httpServletResponse);
-            return;}
+        int httpStatus = res.getStatus();
+
+        if (httpStatus != HttpStatus.OK.value()) {
+
+            if (!req.getRequestURI().equals("/errorMSG")&&!req.getRequestURI().equals("/error")){
+
+                if (modelAndView != null) {
+                    modelAndView.clear();
+                }
+
+                if (httpStatus == HttpStatus.UNAUTHORIZED.value()) {
+                    CookieUtil.clear(req,res, CookieUtil.COOKIE_NAME, req.getServerName());
+                    res.sendRedirect("/login");
+                    return;
+                }
+
+                req.getRequestDispatcher("/errorMSG").forward(req, res);
+                return;
+            }
         }
 
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        System.out.println("SiteInterceptor afterCompletion");
+    public void afterCompletion(HttpServletRequest req, HttpServletResponse res, Object o, Exception e) throws Exception {
+        // System.out.println("SiteInterceptor afterCompletion");
         //AuthThreadLocalTO.remove();
     }
-
-   /* static String extractPostRequestBody(HttpServletRequest request) throws IOException {
-        MultiReadHttpServletRequest requestWrapper= new      MultiReadHttpServletRequest(request);
-        StringBuffer jb = new StringBuffer();
-        String line = null;
-        try {
-        BufferedReader reader = requestWrapper.getReader();
-        while ((line = reader.readLine()) != null)
-        jb.append(line);
-        } catch (Exception e) { /*report an error*/ //}
-
-//}
-
-
-       /* try{
-            // String login = JsonPath.parse(jb).read("$.login", String.class);
-            //String password = JsonPath.read(jb, "$.password");
-        }catch (Exception e){
-            System.out.println(e.toString());}*/
-
-
-      /*    if ("POST".equalsIgnoreCase(request.getMethod())) {
-        Scanner s = null;
-        try {
-            MultiReadHttpServletRequest requestWrapper =new      MultiReadHttpServletRequest(request);
-            ServletInputStream servletInputStream = request.getInputStream();
-            Boolean b = servletInputStream.isReady();
-            // s = new Scanner(request.getInputStream(), "UTF-8").useDelimiter("\\A");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return s.hasNext() ? s.next() : "";
-    }
-        return "";*/
 }

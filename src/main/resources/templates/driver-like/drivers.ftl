@@ -15,6 +15,7 @@
     </style>
 </head>
 <body>
+<h1> <a href="/logout"> Logout</h1>
 <h1>Drivers list</h1>
 <table>
     <tr>

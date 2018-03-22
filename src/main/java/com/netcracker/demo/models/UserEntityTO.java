@@ -23,6 +23,7 @@ public class UserEntityTO {
         this.password = password;
         this.role = role;
     }
+
     public UserEntityTO(String login, String password) {
         this.login = login;
         this.password = password;

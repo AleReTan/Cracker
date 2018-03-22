@@ -1,18 +1,14 @@
 package com.netcracker.demo.controllers;
 
-import com.netcracker.demo.models.DriverEntityTO;
 import com.netcracker.demo.models.UserEntityTO;
-import com.netcracker.demo.service.MyService;
 import com.netcracker.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/admin")

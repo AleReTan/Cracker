@@ -27,7 +27,7 @@ $(document).ready(function () {
             function(data, textStatus, jqXHR) {
                 var Url ="";
                 if (data == "USER"){
-                    Url = "/drivers";
+                    Url = "/orders";
                 }
                 else if(data == "ADMIN") {
                     Url = "/admin";

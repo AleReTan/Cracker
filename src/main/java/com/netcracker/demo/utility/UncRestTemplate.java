@@ -2,17 +2,18 @@ package com.netcracker.demo.utility;
 
 
 import com.netcracker.demo.models.AuthThreadLocalTO;
+import com.netcracker.demo.service.AuthService;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.http.*;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 
 @Component
 public class UncRestTemplate {
@@ -23,42 +24,64 @@ public class UncRestTemplate {
 
     public UncRestTemplate() {
         this.restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault()));
-       /* List<ClientHttpRequestInterceptor> interceptors = new ArrayList<ClientHttpRequestInterceptor>();
-        interceptors.add(new RequestInterceptor());
-        restTemplate.setInterceptors(interceptors);*/
     }
 
-    public <T> ResponseEntity<T> exchange(String additionUrl,
+    public <T> ResponseEntity<T> exchange(HttpServletRequest req, HttpServletResponse res, String additionUrl,
                                           HttpMethod method,
                                           Class<T> responseType,
-                                          Object... uriVariables) throws RestClientException {
-        HttpEntity<String> entity = new HttpEntity<>(addHeaders());
-        return restTemplate.exchange(BASE_URL + additionUrl, method, entity, responseType, uriVariables);
+                                          Object... uriVariables) {
+        HttpEntity<String> entity = new HttpEntity<>(addHeaders(req, res));
+        try {
+            return restTemplate.exchange(BASE_URL + additionUrl, method, entity, responseType, uriVariables);
+        } catch (HttpStatusCodeException e) {
+            AuthService.sendRedirectIfError(e, req, res);
+            return null;
+        }
     }
 
 
-    public <T> T postForObject(String additionUrl,
+    public <T> T postForObject(HttpServletRequest req, HttpServletResponse res, String additionUrl,
                                T requestBody,
-                               Class<T> responseType) throws RestClientException {
-        HttpEntity<T> entity = new HttpEntity<>(requestBody, addHeaders());
-        return restTemplate.postForObject(BASE_URL + additionUrl, entity, responseType);
+                               Class<T> responseType) {
+        HttpEntity<T> entity = new HttpEntity<>(requestBody, addHeaders(req, res));
+        try {
+            return restTemplate.postForObject(BASE_URL + additionUrl, entity, responseType);
+        } catch (HttpStatusCodeException e) {
+            AuthService.sendRedirectIfError(e, req, res);
+            return null;
+        }
+
     }
 
-    public <T> T patchForObject(String additionUrl,
+    public <T> T patchForObject(HttpServletRequest req, HttpServletResponse res, String additionUrl,
                                 T requestBody,
-                                Class<T> responseType) throws RestClientException {
-        HttpEntity<T> entity = new HttpEntity<>(requestBody, addHeaders());
-        return restTemplate.patchForObject(BASE_URL + additionUrl, entity, responseType);
+                                Class<T> responseType) {
+        HttpEntity<T> entity = new HttpEntity<>(requestBody, addHeaders(req, res));
+        try {
+            return restTemplate.patchForObject(BASE_URL + additionUrl, entity, responseType);
+        } catch (HttpStatusCodeException e) {
+            AuthService.sendRedirectIfError(e, req, res);
+            return null;
+        }
     }
 
 
     //остальные методы так же
 
-    private HttpHeaders addHeaders() {
+    private HttpHeaders addHeaders(HttpServletRequest req, HttpServletResponse res) {
         HttpHeaders headers = new HttpHeaders();
         String token = AuthThreadLocalTO.getAuth();
-        if(token == null){
-            // обработать данное событие обязательно нужно
+        if (token == null) {
+            Enumeration<String> headerNames = req.getHeaderNames();
+
+            if (headerNames != null) {
+                while (headerNames.hasMoreElements()) {
+                    String headerName = headerNames.nextElement();
+                    headers.add(headerName, req.getHeader(headerName));
+                }
+            }
+            String Text = HttpStatus.UNAUTHORIZED.getReasonPhrase();
+            AuthService.sendRedirectIfError((HttpStatusCodeException) new RestClientResponseException(Text, HttpStatus.UNAUTHORIZED.value(), Text, headers, null, null), req, res);
         }
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add(HttpHeaders.AUTHORIZATION, token);
