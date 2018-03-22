@@ -2,6 +2,12 @@
 <html lang="rus">
 <head>
     <title>Info</title>
+    <script>
+        // This variable can be accessed from js
+        var statusOrderFMVariable = "${order.statusOrder}";
+    </script>
+    <script type="text/javascript" src="/js/selectOrderStatus.js"></script>
+
 
 </head>
 <body>
@@ -44,7 +50,15 @@
         <td>${(order.orderEndTime)!"Заказ не завершен"}</td>
     </tr>
     <th>Статус заказ</th>
-    <td>${order.statusOrder}</td>
+    <td>
+        <select name="statusOrder" id="status" required form="updateOrder">
+            <option selected>Выберите статус</option>
+            <option value="Поиск водителя" >Поиск водителя</option>
+            <option value="Водитель движется к клиенту">Водитель движется к клиенту</option>
+            <option value="Водитель с клиентом">Водитель с клиентом</option>
+            <option value="Заказ завершен">Заказ завершен</option>
+            <option value="Заказ отменен">Заказ отменен</option>
+        </select></td>
     </tr>
     <tr>
         <th>Водитель эвакуатора</th>
@@ -76,7 +90,6 @@
     <input type="hidden" name="destinationGeoData" value="${order.destinationGeoData}">
     <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
     <input type="hidden" name="orderEndTime" value="${(order.orderEndTime)!"Заказ не завершен"}">
-    <input type="hidden" name="statusOrder" value="${order.statusOrder}">
     <input type="submit" value="Сохранить"/>
 </form>
 <form id="deleteOrder" action="/orders/${order.id}" method="post">
