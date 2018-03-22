@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 @Controller
 public class DriverController {
-
+//TODO: localhost:8080/drivers/ не подгружает скрипт, localhost:8080/drivers подгружает скрипт
     @Autowired
     DriverService driverService;
     @Autowired
@@ -32,8 +32,9 @@ public class DriverController {
         return "redirect:/drivers";
     }
 
-    @RequestMapping(value = {"/drivers/create"}, method = RequestMethod.GET)
-    public String createDriverPage() {
+    @RequestMapping(value = "/drivers/create", method = RequestMethod.GET)
+    public String createDriverPage(Model model) {
+        model.addAttribute("cars", carService.findAllAvailableCars());//свободные машины, прочекать че делать когда нет свободных
         return "/driver-like/createDriver";
     }
 
@@ -42,7 +43,6 @@ public class DriverController {
         driverService.update(driver);
         return "redirect:/drivers";
     }
-
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.DELETE)
     public String deleteDriver(@PathVariable("id") long id) {
@@ -53,8 +53,9 @@ public class DriverController {
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)
     public String getDriver(@PathVariable("id") long id, Model model) {
         model.addAttribute("driver", driverService.findById(id));
-        model.addAttribute("cars", carService.findAll());
+        model.addAttribute("cars", carService.findAllAvailableCars());
         return "/driver-like/driver";
-
     }
+
+
 }

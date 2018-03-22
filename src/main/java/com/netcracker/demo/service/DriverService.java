@@ -1,7 +1,6 @@
 package com.netcracker.demo.service;
 
-
-import com.netcracker.demo.UncRestTemplate;
+import com.netcracker.demo.utility.UncRestTemplate;
 import com.netcracker.demo.models.DriverEntityTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -34,7 +33,6 @@ public class DriverService implements MyService<DriverEntityTO> {
 
     @Override
     public void delete(DriverEntityTO object) {
-
     }
 
     public void delete(long id) {
@@ -52,6 +50,12 @@ public class DriverService implements MyService<DriverEntityTO> {
         ResponseEntity<DriverEntityTO> response = restTemplate.exchange(
                 ADDITION_URL + "/" + id, HttpMethod.GET, DriverEntityTO.class);
         return response.getBody();
+    }
+
+    public List<DriverEntityTO> findAllAvailableDrivers() {
+        ResponseEntity<DriverEntityTO[]> response = restTemplate.exchange(
+                ADDITION_URL + "/" + "available", HttpMethod.GET, DriverEntityTO[].class);
+        return Arrays.asList(response.getBody());
     }
 
 }

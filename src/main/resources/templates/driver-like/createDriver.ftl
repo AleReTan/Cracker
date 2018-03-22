@@ -15,11 +15,16 @@
     <input title="Фамилия" type="text" name="lastName">
     <p>Телефон</p>
     <input title="Телефон" type="text" name="phoneNumber">
-    <p>Айди автомобиля</p><!--Мб допилить с подгрузкой всех машин или выпилить вообще, чтобы изначально 0 был-->
-    <input title="айди автомобиля" type="text" name="carId">
+    <p>Автомобиль</p>
+    <select name="carId">
+            <#list cars as car>
+                <option value="${car.id}"> ${car.model} ${car.number}</option>
+            </#list>
+    </select>
+
     <input type="hidden" name = "typeId" value="8">
+    <input type="hidden" name = "driverGeoData" value="0.0,0.0">
     <input type="submit" value="Создать">
 </form>
-
 </body>
 </html>

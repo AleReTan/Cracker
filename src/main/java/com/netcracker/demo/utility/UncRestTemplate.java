@@ -1,4 +1,4 @@
-package com.netcracker.demo;
+package com.netcracker.demo.utility;
 
 
 import org.apache.http.impl.client.HttpClients;
@@ -26,6 +26,7 @@ public class UncRestTemplate {
                                           Class<T> responseType,
                                           Object... uriVariables) throws RestClientException {
         HttpEntity<String> entity = new HttpEntity<>(addHeaders());
+
         return restTemplate.exchange(BASE_URL + additionUrl, method, entity, responseType, uriVariables);
     }
 

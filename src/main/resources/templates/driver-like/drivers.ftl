@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript" src="js/showDrivers.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
     <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
+        html,body, #map {
+            width: 100%; height: 100%; padding: 0; margin: 0;
 
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
         }
     </style>
 </head>
@@ -43,5 +38,7 @@
 </#list>
 </table>
 <a href="/drivers/create">Create driver</a>
+<div id="map"></div>
+
 </body>
 </html>
