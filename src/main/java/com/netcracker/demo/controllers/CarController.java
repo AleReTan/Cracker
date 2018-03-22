@@ -32,7 +32,6 @@ public class CarController {
 
     @RequestMapping(value = "/cars/{id}", method = RequestMethod.PATCH)
     public String updateCars(@ModelAttribute CarEntityTO car) {
-        System.out.println(car.toString());
         carService.update(car);
         return "redirect:/cars";
     }

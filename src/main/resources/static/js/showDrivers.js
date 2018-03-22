@@ -8,7 +8,7 @@ function init() {
     });
 
     $.ajax({
-        url: "http://localhost:8080/allCarsJson"
+        url: "http://localhost:8080/allDriversJson"
     }).done(function (data) {
         geoObjects = ymaps.geoQuery(data)
             .addToMap(myMap);
