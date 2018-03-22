@@ -64,7 +64,7 @@ public class CarService implements MyService<CarEntityTO> {
         return (response == null) ? null : response.getBody();
     }
 //TODO проверь, что передаются параметры req  res
-    public List<CarEntityTO> findAllAvailableCars(HttpServletRequest req, HttpServletResponse res,) {
+    public List<CarEntityTO> findAllAvailableCars(HttpServletRequest req, HttpServletResponse res) {
         ResponseEntity<CarEntityTO[]> response = restTemplate.exchange(req, res,
                 ADDITION_URL + "/" + "available", HttpMethod.GET, CarEntityTO[].class);
         return Arrays.asList(response.getBody());

@@ -8,8 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 
 
@@ -24,9 +29,9 @@ public class OrderController {
     DriverService driverService;
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public String getOrders(Model model) {
-        model.addAttribute("orders", orderService.findAll());
-        model.addAttribute("drivers", driverService.findAll());
+    public String getOrders(HttpServletRequest req, HttpServletResponse res, Model model) {
+        model.addAttribute("orders", orderService.findAll(req, res));
+        model.addAttribute("drivers", driverService.findAll(req, res));
         return "/order-like/orders";
     }
 
@@ -36,36 +41,36 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.POST)
-    public String createOrder(@ModelAttribute OrderEntityTO order) {
+    public String createOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
         order.setOrderStartTime(LocalDateTime.now().toString());
         order.setOrderEndTime("Не закончен");
         System.out.println(order);
-        orderService.save(order);
+        orderService.save(req, res, order);
         return "redirect:/orders";
     }
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.GET)
-    public String createOrderPage(Model model) {
-        model.addAttribute("drivers", driverService.findAllAvailableDrivers());//свободные водилы, прочекать че делать когда нет свободных
+    public String createOrderPage(Model model, HttpServletRequest req, HttpServletResponse res) {
+        model.addAttribute("drivers", driverService.findAllAvailableDrivers(req, res));//свободные водилы, прочекать че делать когда нет свободных
         return "/order-like/createOrder";
     }
 
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.PATCH)
-    public String updateOrder(@ModelAttribute OrderEntityTO order) {
-        orderService.update(order);
+    public String updateOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
+        orderService.update(req, res, order);
         return "redirect:/orders";
     }
 
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.DELETE)
-    public String deleteOrder(@PathVariable("id") long id) {
-        orderService.delete(id);
+    public String deleteOrder(@PathVariable("id") long id, HttpServletRequest req, HttpServletResponse res) {
+        orderService.delete(req, res, id);
         return "redirect:/orders";
     }
 
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
-    public String getOrder(@PathVariable("id") long id, Model model) {
-        model.addAttribute("order", orderService.findById(id));
-        model.addAttribute("drivers", driverService.findAllAvailableDrivers());
+    public String getOrder(@PathVariable("id") long id, Model model, HttpServletRequest req, HttpServletResponse res) {
+        model.addAttribute("order", orderService.findById(req, res,id));
+        model.addAttribute("drivers", driverService.findAllAvailableDrivers(req, res));
         return "/order-like/order";
     }
 }

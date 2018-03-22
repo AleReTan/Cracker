@@ -23,13 +23,13 @@ public class JsonService {
     public ObjectNode getAllDriversJson(HttpServletRequest req, HttpServletResponse res) {
         ResponseEntity<ObjectNode> response = restTemplate.exchange(req, res,
                 "/" + "allDriversJson", HttpMethod.GET, ObjectNode.class);
-        return response.getBody();
+        return  (response == null) ? null : response.getBody();
     }
 
     public ObjectNode getAvailableDriversJson(HttpServletRequest req, HttpServletResponse res) {
         ResponseEntity<ObjectNode> response = restTemplate.exchange(req, res,
                 "/" + "availableDriversJson", HttpMethod.GET, ObjectNode.class);
-        return response.getBody();
+        return (response == null) ? null : response.getBody();
     }
 
 

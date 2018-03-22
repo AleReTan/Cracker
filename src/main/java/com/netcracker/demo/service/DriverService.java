@@ -59,10 +59,10 @@ public class DriverService implements MyService<DriverEntityTO> {
         return (response == null) ? null : response.getBody();
     }
 
-    public List<DriverEntityTO> findAllAvailableDrivers() {
-        ResponseEntity<DriverEntityTO[]> response = restTemplate.exchange(
+    public List<DriverEntityTO> findAllAvailableDrivers(HttpServletRequest req, HttpServletResponse res) {
+        ResponseEntity<DriverEntityTO[]> response = restTemplate.exchange(req, res,
                 ADDITION_URL + "/" + "available", HttpMethod.GET, DriverEntityTO[].class);
-        return Arrays.asList(response.getBody());
+        return (response == null) ? null : Arrays.asList(response.getBody());
     }
 
 }

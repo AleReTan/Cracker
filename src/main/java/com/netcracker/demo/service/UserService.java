@@ -52,8 +52,7 @@ public class UserService implements MyService<UserEntityTO> {
 
     public void delete(HttpServletRequest req, HttpServletResponse res, String login) {
 
-        restTemplate.exchange(req, res, ADDITION_URL + "/" + login, HttpMethod.DELETE, String.class);
-
+        ResponseEntity<String> response = restTemplate.exchange(req, res, ADDITION_URL + "/" + login, HttpMethod.DELETE, String.class);
     }
 
     public UserEntityTO getUserByLogin(HttpServletRequest req, HttpServletResponse res, String login) {
