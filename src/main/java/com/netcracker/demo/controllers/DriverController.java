@@ -1,22 +1,20 @@
 package com.netcracker.demo.controllers;
 
+import com.netcracker.demo.models.CarEntityTO;
 import com.netcracker.demo.models.DriverEntityTO;
 import com.netcracker.demo.service.CarService;
 import com.netcracker.demo.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class DriverController {
-    //TODO: localhost:8080/drivers/ не подгружает скрипт, localhost:8080/drivers подгружает скрипт
+//TODO: localhost:8080/drivers/ не подгружает скрипт, localhost:8080/drivers подгружает скрипт
     @Autowired
     DriverService driverService;
     @Autowired
@@ -36,8 +34,8 @@ public class DriverController {
     }
 
     @RequestMapping(value = "/drivers/create", method = RequestMethod.GET)
-    public String createDriverPage(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        model.addAttribute("cars", carService.findAll(httpServletRequest, httpServletResponse));//свободные машины, прочекать че делать когда нет свободных
+    public String createDriverPage(Model model,HttpServletRequest req, HttpServletResponse res) {
+        model.addAttribute("cars", carService.findAllAvailableCars(req,res));//свободные машины, прочекать че делать когда нет свободных
         return "/driver-like/createDriver";
     }
 
@@ -54,9 +52,12 @@ public class DriverController {
     }
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)
-    public String getDriver(@PathVariable("id") long id, Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        model.addAttribute("driver", driverService.findById(httpServletRequest, httpServletResponse, id));
-        model.addAttribute("cars", carService.findAll(httpServletRequest, httpServletResponse));
+    public String getDriver(@PathVariable("id") long id, Model model,HttpServletRequest req, HttpServletResponse res) {
+        model.addAttribute("driver", driverService.findById(req,res, id));
+        model.addAttribute("cars", carService.findAllAvailableCars(req,res ));
         return "/driver-like/driver";
+
     }
+
+
 }

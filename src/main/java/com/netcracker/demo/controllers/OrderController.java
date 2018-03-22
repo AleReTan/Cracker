@@ -8,13 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 
 
@@ -29,8 +24,9 @@ public class OrderController {
     DriverService driverService;
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public String getOrders(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        model.addAttribute("orders", orderService.findAll(httpServletRequest, httpServletResponse));
+    public String getOrders(Model model) {
+        model.addAttribute("orders", orderService.findAll());
+        model.addAttribute("drivers", driverService.findAll());
         return "/order-like/orders";
     }
 
@@ -40,36 +36,36 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.POST)
-    public String createOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public String createOrder(@ModelAttribute OrderEntityTO order) {
         order.setOrderStartTime(LocalDateTime.now().toString());
         order.setOrderEndTime("Не закончен");
         System.out.println(order);
-        orderService.save(httpServletRequest, httpServletResponse, order);
+        orderService.save(order);
         return "redirect:/orders";
     }
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.GET)
-    public String createOrderPage(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        model.addAttribute("drivers", driverService.findAll(httpServletRequest, httpServletResponse));//свободные водилы, прочекать че делать когда нет свободных
+    public String createOrderPage(Model model) {
+        model.addAttribute("drivers", driverService.findAllAvailableDrivers());//свободные водилы, прочекать че делать когда нет свободных
         return "/order-like/createOrder";
     }
 
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.PATCH)
-    public String updateOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        orderService.update(httpServletRequest, httpServletResponse, order);
+    public String updateOrder(@ModelAttribute OrderEntityTO order) {
+        orderService.update(order);
         return "redirect:/orders";
     }
 
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.DELETE)
-    public String deleteOrder(@PathVariable("id") long id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        orderService.delete(httpServletRequest, httpServletResponse, id);
+    public String deleteOrder(@PathVariable("id") long id) {
+        orderService.delete(id);
         return "redirect:/orders";
     }
 
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
-    public String getOrder(@PathVariable("id") long id, Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        model.addAttribute("order", orderService.findById(httpServletRequest, httpServletResponse, id));
-        model.addAttribute("drivers", driverService.findAll(httpServletRequest, httpServletResponse));
+    public String getOrder(@PathVariable("id") long id, Model model) {
+        model.addAttribute("order", orderService.findById(id));
+        model.addAttribute("drivers", driverService.findAllAvailableDrivers());
         return "/order-like/order";
     }
 }

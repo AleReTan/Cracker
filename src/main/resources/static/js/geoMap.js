@@ -1,6 +1,8 @@
 ymaps.ready(init);
 var myMap;
 var geoObjects;
+var startCoords;
+var destinationCoords;
 
 function init() {
     myMap = new ymaps.Map("map", {
@@ -10,7 +12,7 @@ function init() {
     });
 
     $.ajax({
-        url: "http://localhost:8080/allCarsJson"
+        url: "http://localhost:8080/availableDriversJson"
     }).done(function (data) {
         geoObjects = ymaps.geoQuery(data)
             .addToMap(myMap);
@@ -18,39 +20,23 @@ function init() {
 
     // Обработка события, возникающего при щелчке
     // левой кнопкой мыши в любой точке карты.
-    // При возникновении такого события откроем балун.
+    // пишем в поле местоположение клиента
     myMap.events.add('click', function (e) {
-        if (!myMap.balloon.isOpen()) {
-            var coords = e.get('coords');
-            myMap.balloon.open(coords, {
-                contentHeader: 'Местоположение клиента',
-                contentBody:
-                '<p>Координаты: ' + [
-                    coords[0].toPrecision(6),
-                    coords[1].toPrecision(6)
-                ].join(', ') + '</p>',
-                contentFooter: '<sup>Щелкните еще раз</sup>'
-            });
+        startCoords = e.get('coords');
+        $("#geo").val(startCoords[0] + "," + startCoords[1]);
+        var myGeocoder = ymaps.geocode(startCoords);
+        myGeocoder.then(function (res) {
+            $("#address").val(res.geoObjects.get(0).getAddressLine());//геокодируем координаты в адрес
+        });
 
-            //$('#maps').value(coords, null);
-            $("#geo").val(coords[0].toPrecision(6) + "," + coords[1].toPrecision(6))
-        }
-        else {
-            myMap.balloon.close();
-        }
     });
 
     // Обработка события, возникающего при щелчке
     // правой кнопки мыши в любой точке карты.
-    // При возникновении такого события покажем всплывающую подсказку
-    // в точке щелчка.
+    // пишем в поле точку назначения
     myMap.events.add('contextmenu', function (e) {
-        myMap.hint.open(e.get('coords'), 'Кто-то щелкнул правой кнопкой');
-    });
-
-    // Скрываем хинт при открытии балуна.
-    myMap.events.add('balloonopen', function (e) {
-        myMap.hint.close();
+        destinationCoords = e.get('coords');
+        $("#destinationGeo").val(destinationCoords[0] + "," + destinationCoords[1]);
     });
 
     document.getElementById('chooseDriver').onclick = function () {
@@ -67,18 +53,17 @@ function init() {
         // Дождемся ответа от сервера и получим объект, ближайший к точке.
         geoObjects.then(function () {
             var closestObject = geoObjects.getClosestTo(orderGeo);
-            console.log(closestObject);
             // Если ответ пуст, то ближайший объект не найдется.
             if (closestObject) {
+                document.getElementById('driverSelect').value = closestObject.properties.get('driverId');
                 //newContent = closestObject.properties.get('balloonContent') + " Mth";
                 //closestObject.properties.set('balloonContent', newContent);
-                closestObject.balloon.open();
                 $("driverId").val(closestObject.properties.get('driverId'));//ставим водителя на заказ
                 var multiRoute = new ymaps.multiRouter.MultiRoute({
                     // Описание опорных точек мультимаршрута.
                     referencePoints: [
-                        closestObject.geometry.getCoordinates(),
-                        orderGeo//эта точка - место заказа
+                        startCoords,
+                        destinationCoords
                     ],
                     params: {
                         // Ограничение на максимальное количество маршрутов, возвращаемое маршрутизатором.
@@ -101,23 +86,19 @@ function init() {
     document.getElementById('driverSelect').onchange = function () {
         //ищем в коллекции geoObject выбранного водилу, он теперь клозестОбжект, дальше по накатанной
         var targetObject;
-        var orderGeoArr = document.getElementById('geo').value.split(',');
-        var orderGeo = [parseFloat(orderGeoArr[0]), parseFloat(orderGeoArr[1])];
-
         geoObjects.each(function (geoObject) {
             if (geoObject.properties.get('driverId') == document.getElementById('driverSelect').value) {
                 targetObject = geoObject;
             }
         })
             .then(function () {
-                console.log(targetObject.properties.get('driverId'));
-                targetObject.balloon.open();
                 $("driverId").val(targetObject.properties.get('driverId'));//ставим водителя на заказ
                 var multiRoute = new ymaps.multiRouter.MultiRoute({
                     // Описание опорных точек мультимаршрута.
                     referencePoints: [
-                        targetObject.geometry.getCoordinates(),
-                        orderGeo//эта точка - место заказа
+                        startCoords,
+                        destinationCoords
+
                     ],
                     params: {
                         // Ограничение на максимальное количество маршрутов, возвращаемое маршрутизатором.

@@ -27,6 +27,8 @@ public class OrderEntityTO {
 
     private String geoData;
 
+    private String destinationGeoData;
+
     private String orderStartTime;
 
     private String orderEndTime;
@@ -114,6 +116,14 @@ public class OrderEntityTO {
         this.geoData = geoData;
     }
 
+    public String getDestinationGeoData() {
+        return destinationGeoData;
+    }
+
+    public void setDestinationGeoData(String destinationGeoData) {
+        this.destinationGeoData = destinationGeoData;
+    }
+
     public String getOrderStartTime() {
         return orderStartTime;
     }
@@ -141,10 +151,10 @@ public class OrderEntityTO {
     public OrderEntityTO() {
     }
 
-    public OrderEntityTO(long id, String name, long typeid, String clientFirstName, String clientLastName, String clientPhoneNumber, String address, long driverId, String orderCost, String geoData, String orderStartTime, String orderEndTime, String statusOrder) {
+    public OrderEntityTO(long id, String name, long typeId, String clientFirstName, String clientLastName, String clientPhoneNumber, String address, long driverId, String orderCost, String geoData, String destinationGeoData, String orderStartTime, String orderEndTime, String statusOrder) {
         this.id = id;
         this.name = name;
-        this.typeId = typeid;
+        this.typeId = typeId;
         this.clientFirstName = clientFirstName;
         this.clientLastName = clientLastName;
         this.clientPhoneNumber = clientPhoneNumber;
@@ -152,35 +162,36 @@ public class OrderEntityTO {
         this.driverId = driverId;
         this.orderCost = orderCost;
         this.geoData = geoData;
+        this.destinationGeoData = destinationGeoData;
         this.orderStartTime = orderStartTime;
         this.orderEndTime = orderEndTime;
         this.statusOrder = statusOrder;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrderEntityTO)) return false;
-        OrderEntityTO orderEntityTO = (OrderEntityTO) o;
-        return id == orderEntityTO.id &&
-                typeId == orderEntityTO.typeId &&
-                driverId == orderEntityTO.driverId &&
-                Objects.equals(name, orderEntityTO.name) &&
-                Objects.equals(clientFirstName, orderEntityTO.clientFirstName) &&
-                Objects.equals(clientLastName, orderEntityTO.clientLastName) &&
-                Objects.equals(clientPhoneNumber, orderEntityTO.clientPhoneNumber) &&
-                Objects.equals(address, orderEntityTO.address) &&
-                Objects.equals(orderCost, orderEntityTO.orderCost) &&
-                Objects.equals(geoData, orderEntityTO.geoData) &&
-                Objects.equals(orderStartTime, orderEntityTO.orderStartTime) &&
-                Objects.equals(orderEndTime, orderEntityTO.orderEndTime) &&
-                Objects.equals(statusOrder, orderEntityTO.statusOrder);
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderEntityTO that = (OrderEntityTO) o;
+        return getId() == that.getId() &&
+                getTypeId() == that.getTypeId() &&
+                getDriverId() == that.getDriverId() &&
+                Objects.equals(getName(), that.getName()) &&
+                Objects.equals(getClientFirstName(), that.getClientFirstName()) &&
+                Objects.equals(getClientLastName(), that.getClientLastName()) &&
+                Objects.equals(getClientPhoneNumber(), that.getClientPhoneNumber()) &&
+                Objects.equals(getAddress(), that.getAddress()) &&
+                Objects.equals(getOrderCost(), that.getOrderCost()) &&
+                Objects.equals(getGeoData(), that.getGeoData()) &&
+                Objects.equals(getDestinationGeoData(), that.getDestinationGeoData()) &&
+                Objects.equals(getOrderStartTime(), that.getOrderStartTime()) &&
+                Objects.equals(getOrderEndTime(), that.getOrderEndTime()) &&
+                Objects.equals(getStatusOrder(), that.getStatusOrder());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, typeId, clientFirstName, clientLastName, clientPhoneNumber, address, driverId, orderCost, geoData, orderStartTime, orderEndTime, statusOrder);
+        return Objects.hash(getId(), getName(), getTypeId(), getClientFirstName(), getClientLastName(), getClientPhoneNumber(), getAddress(), getDriverId(), getOrderCost(), getGeoData(), getDestinationGeoData(), getOrderStartTime(), getOrderEndTime(), getStatusOrder());
     }
 
     @Override
@@ -196,6 +207,7 @@ public class OrderEntityTO {
                 ", driverId=" + driverId +
                 ", orderCost='" + orderCost + '\'' +
                 ", geoData='" + geoData + '\'' +
+                ", destinationGeoData='" + destinationGeoData + '\'' +
                 ", orderStartTime='" + orderStartTime + '\'' +
                 ", orderEndTime='" + orderEndTime + '\'' +
                 ", statusOrder='" + statusOrder + '\'' +

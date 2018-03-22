@@ -1,7 +1,7 @@
 package com.netcracker.demo.service;
 
-import com.netcracker.demo.models.CarEntityTO;
 import com.netcracker.demo.utility.UncRestTemplate;
+import com.netcracker.demo.models.CarEntityTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +19,9 @@ public class CarService implements MyService<CarEntityTO> {
     @Autowired
     UncRestTemplate restTemplate;
 
+    /*
+    Добавлние машин
+     */
     @Override
     public void save(HttpServletRequest req, HttpServletResponse res, CarEntityTO car) {
         restTemplate.postForObject(req, res, ADDITION_URL, car, CarEntityTO.class);
@@ -29,6 +32,9 @@ public class CarService implements MyService<CarEntityTO> {
         restTemplate.patchForObject(req, res, ADDITION_URL, car, CarEntityTO.class);
     }
 
+    /*
+    Если существует
+     */
     @Override
     public boolean isExist(CarEntityTO car) {
         return false;
@@ -36,11 +42,9 @@ public class CarService implements MyService<CarEntityTO> {
 
     @Override
     public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, CarEntityTO car) {
-        //restTemplate.delete(URL + "/" + car.getId(), car, CarEntityTO.class);
     }
 
     public void delete(HttpServletRequest req, HttpServletResponse res, long id) {
-        //restTemplate.delete(URL + "/" + id); //не работает, хз почему
         ResponseEntity<String> response = restTemplate.exchange(req, res, ADDITION_URL + "/" + id, HttpMethod.DELETE, String.class);
     }
 
@@ -52,17 +56,17 @@ public class CarService implements MyService<CarEntityTO> {
         return (response == null) ? null : Arrays.asList(response.getBody());
     }
 
-    public List<CarEntityTO> findAllTest(HttpServletRequest req, HttpServletResponse res) {
-
-        ResponseEntity<CarEntityTO[]> response = restTemplate.exchange(req, res,
-                ADDITION_URL, HttpMethod.GET, CarEntityTO[].class);
-        return (response == null) ? null : Arrays.asList(response.getBody());
-    }
 
     public CarEntityTO findById(HttpServletRequest req, HttpServletResponse res, long id) {
 
         ResponseEntity<CarEntityTO> response = restTemplate.exchange(req, res,
                 ADDITION_URL + "/" + id, HttpMethod.GET, CarEntityTO.class);
         return (response == null) ? null : response.getBody();
+    }
+//TODO проверь, что передаются параметры req  res
+    public List<CarEntityTO> findAllAvailableCars(HttpServletRequest req, HttpServletResponse res,) {
+        ResponseEntity<CarEntityTO[]> response = restTemplate.exchange(req, res,
+                ADDITION_URL + "/" + "available", HttpMethod.GET, CarEntityTO[].class);
+        return Arrays.asList(response.getBody());
     }
 }

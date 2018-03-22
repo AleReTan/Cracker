@@ -34,13 +34,16 @@
     <input title="Телефон клиента" type="text" name="clientPhoneNumber">
 
     <p>Адрес</p>
-    <input title="Адрес" type="text" name="address">
+    <input title="Адрес" id="address" type="text" name="address">
 
     <p>Стоимость</p>
     <input title="Стоимость" id="price" type="text" name="orderCost">
 
-    <p>Геолокация</p>
+    <p>Местоположение заказчика</p>
     <input title="Геолокация" id="geo" type="text" name="geoData">
+
+    <p>Местоположение пункта назначения</p>
+    <input title="Геолокация" id="destinationGeo" type="text" name="destinationGeoData">
 
     <p>Водитель</p>
     <select name="driverId" id="driverSelect">
@@ -50,10 +53,17 @@
             </#list>
     </select>
 
+
     <!--затестить кто встанет на заказ если ткнуть кнопку подбор водителя, мб отлавливать тык кнопки и не обращать внимание на выпадашку-->
     <p>Статус заказа</p>
-    <input title="Статус заказа" type="text" name="statusOrder">
-
+        <p><select name="statusOrder">
+            <option selected="selected">Выберите статус</option>
+            <option value="Поиск водителя">Поиск водителя</option>
+            <option value="Водитель движется к клиенту">Водитель движется к клиенту</option>
+            <option value="Водитель с клиентом">Водитель с клиентом</option>
+            <option value="Заказ завершен">Заказ завершен</option>
+            <option value="Заказ отменен">Заказ отменен</option>
+        </select></p>
     <input type="hidden" name="typeId" value="6">
     <input type="submit" value="Создать">
 </form>
