@@ -62,7 +62,8 @@
     </tr>
     <tr>
         <th>Водитель эвакуатора</th>
-        <td><select name="driverId" required form="updateOrder">
+        <td><select name="driverId" id="driverId" form="updateOrder">
+            <option value="${order.driverId}" selected>Выберите водителя</option>
         <#list drivers as driver>
             <option value="${driver.id}"
                     <#if order.driverId == driver.id>selected</#if> >${driver.firstName} ${driver.lastName}</option>
@@ -90,7 +91,7 @@
     <input type="hidden" name="destinationGeoData" value="${order.destinationGeoData}">
     <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
     <input type="hidden" name="orderEndTime" value="${(order.orderEndTime)!"Заказ не завершен"}">
-    <input type="submit" value="Сохранить"/>
+    <input type="submit" id="saveButton" value="Сохранить"/>
 </form>
 <form id="deleteOrder" action="/orders/${order.id}" method="post">
     <input type="hidden" name="_method" value="delete"/>

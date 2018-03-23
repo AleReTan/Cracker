@@ -17,13 +17,15 @@
     <input title="Телефон" type="text" name="phoneNumber">
     <p>Автомобиль</p>
     <select name="carId">
+        <#if cars?size != 1> <b>Нет свободных машин</b></#if>
+        <option value="0" selected>Выберите машину</option>
             <#list cars as car>
                 <option value="${car.id}"> ${car.model} ${car.number}</option>
             </#list>
     </select>
 
-    <input type="hidden" name = "typeId" value="8">
-    <input type="hidden" name = "driverGeoData" value="0.0,0.0">
+    <input type="hidden" name="typeId" value="8">
+    <input type="hidden" name="driverGeoData" value="0.0,0.0">
     <input type="submit" value="Создать">
 </form>
 </body>

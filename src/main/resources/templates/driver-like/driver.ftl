@@ -30,6 +30,7 @@
     <tr>
         <th>Автомобиль</th>
         <td><select name="carId" required form="updateDriver">
+            <option value="${driver.carId}" selected>Выберите машину</option>
             <#list cars as car>
                 <option value="${car.id}" <#if driver.carId == car.id>selected</#if> > ${car.model} ${car.number}</option>
             </#list>

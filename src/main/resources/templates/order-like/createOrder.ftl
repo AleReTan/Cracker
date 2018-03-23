@@ -46,8 +46,9 @@
     <input title="Геолокация" id="destinationGeo" type="text" name="destinationGeoData">
 
     <p>Водитель</p>
+     <#if drivers?size != 1 > <b>Нет свободных водителей</b></#if>
     <select name="driverId" id="driverSelect">
-        <option>Выберите водителя</option>
+        <option value="0" selected>Выберите водителя</option>
             <#list drivers as driver>
                 <option value="${driver.id}"> ${driver.lastName} ${driver.phoneNumber}</option>
             </#list>
@@ -56,14 +57,14 @@
 
     <!--затестить кто встанет на заказ если ткнуть кнопку подбор водителя, мб отлавливать тык кнопки и не обращать внимание на выпадашку-->
     <p>Статус заказа</p>
-        <p><select name="statusOrder">
-            <option selected="selected">Выберите статус</option>
-            <option value="Поиск водителя">Поиск водителя</option>
-            <option value="Водитель движется к клиенту">Водитель движется к клиенту</option>
-            <option value="Водитель с клиентом">Водитель с клиентом</option>
-            <option value="Заказ завершен">Заказ завершен</option>
-            <option value="Заказ отменен">Заказ отменен</option>
-        </select></p>
+    <p><select name="statusOrder">
+        <option selected>Выберите статус</option>
+        <option value="Поиск водителя">Поиск водителя</option>
+        <option value="Водитель движется к клиенту">Водитель движется к клиенту</option>
+        <option value="Водитель с клиентом">Водитель с клиентом</option>
+        <option value="Заказ завершен">Заказ завершен</option>
+        <option value="Заказ отменен">Заказ отменен</option>
+    </select></p>
     <input type="hidden" name="typeId" value="6">
     <input type="submit" value="Создать">
 </form>

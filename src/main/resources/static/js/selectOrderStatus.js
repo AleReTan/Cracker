@@ -3,12 +3,18 @@ window.onload = function () {
 };
 
 function init () {
-    selectItemByValue(document.getElementById('status'),statusOrderFMVariable);
+    var selectStatusMenu = document.getElementById('status');
+    selectItemByValue(selectStatusMenu,statusOrderFMVariable);
+    if (statusOrderFMVariable === "Заказ завершен" || statusOrderFMVariable === "Заказ отменен"){
+            selectStatusMenu.disabled = true;
+            document.getElementById('driverId').disabled = true;
+            document.getElementById('saveButton').disabled = true;
+    }
 }
 
-function selectItemByValue(elmnt, value) {
-    for (var i = 0; i < elmnt.options.length; i++) {
-        if (elmnt.options[i].value == value)
-            elmnt.selectedIndex = i;
+function selectItemByValue(element, value) {
+    for (var i = 0; i < element.options.length; i++) {
+        if (element.options[i].value === value)
+            element.selectedIndex = i;
     }
 }
