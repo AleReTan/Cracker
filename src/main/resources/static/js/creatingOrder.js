@@ -37,6 +37,7 @@ function init() {
     myMap.events.add('contextmenu', function (e) {
         destinationCoords = e.get('coords');
         $("#destinationGeo").val(destinationCoords[0] + "," + destinationCoords[1]);
+        calculatePrice();
     });
 
     document.getElementById('chooseDriver').onclick = function () {
@@ -59,24 +60,6 @@ function init() {
                 //newContent = closestObject.properties.get('balloonContent') + " Mth";
                 //closestObject.properties.set('balloonContent', newContent);
                 $("driverId").val(closestObject.properties.get('driverId'));//ставим водителя на заказ
-                var multiRoute = new ymaps.multiRouter.MultiRoute({
-                    // Описание опорных точек мультимаршрута.
-                    referencePoints: [
-                        startCoords,
-                        destinationCoords
-                    ],
-                    params: {
-                        // Ограничение на максимальное количество маршрутов, возвращаемое маршрутизатором.
-                        results: 1
-                    }
-                });
-                //myMap.geoObjects.add(multiRoute);
-
-                multiRoute.events.once('activeroutechange', function () {
-                    distance = multiRoute.getRoutes().get(0).properties.get('distance').value;
-                    console.log(distance);
-                    $("#price").val((500 + distance / 1000 * 50).toFixed(0))
-                });
             }
 
         });
@@ -113,4 +96,25 @@ function init() {
                 });
             });
     };
+
+    function calculatePrice() {
+        var multiRoute = new ymaps.multiRouter.MultiRoute({
+            // Описание опорных точек мультимаршрута.
+            referencePoints: [
+                startCoords,
+                destinationCoords
+            ],
+            params: {
+                // Ограничение на максимальное количество маршрутов, возвращаемое маршрутизатором.
+                results: 1
+            }
+        });
+        //myMap.geoObjects.add(multiRoute);
+
+        multiRoute.events.once('activeroutechange', function () {
+            distance = multiRoute.getRoutes().get(0).properties.get('distance').value;
+            console.log(distance);
+            $("#price").val((500 + distance / 1000 * 50).toFixed(0))
+        });
+    }
 }
