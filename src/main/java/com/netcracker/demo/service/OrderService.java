@@ -30,6 +30,18 @@ public class OrderService implements MyService<OrderEntityTO> {
         restTemplate.patchForObject(req, res, ADDITION_URL, object, OrderEntityTO.class);
     }
 
+    public void pickClient(HttpServletRequest req, HttpServletResponse res, OrderEntityTO object) {
+        restTemplate.patchForObject(req, res, ADDITION_URL + "/" + "pickclient", object, OrderEntityTO.class);
+    }
+
+    public void closeOrder(HttpServletRequest req, HttpServletResponse res, OrderEntityTO object) {
+        restTemplate.patchForObject(req, res, ADDITION_URL + "/" + "closeorder", object, OrderEntityTO.class);
+    }
+
+    public void cancelOrder(HttpServletRequest req, HttpServletResponse res, OrderEntityTO object) {
+        restTemplate.patchForObject(req, res, ADDITION_URL + "/" + "cancelorder", object, OrderEntityTO.class);
+    }
+
     @Override
     public boolean isExist(OrderEntityTO object) {
         return false;

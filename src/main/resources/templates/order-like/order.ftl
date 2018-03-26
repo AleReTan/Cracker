@@ -46,8 +46,8 @@
         <th>Время окончания заказа</th>
         <td>${(order.orderEndTime)!"Заказ не завершен"}</td>
     </tr>
-        <th>Статус заказ</th>
-        <td>${order.statusOrder}</td>
+    <th>Статус заказ</th>
+    <td>${order.statusOrder}</td>
     </tr>
 
     <tr>
@@ -71,7 +71,9 @@
 
 <br>
 <a href="/orders">Back</a>
-<form id="updateOrder" action="/orders/${order.id}" method="post">
+<!-- ифы наружу, внутри формы, внутри запускать на разные URL, на сервисе методы водитель прибыл, закончил заказ-->
+<#if order.statusOrder == "Водитель движется к клиенту">
+<form id="pickClient" action="/orders/${order.id}/pickclient" method="post">
     <input type="hidden" name="_method" value="patch"/>
     <input type="hidden" name="name" value="${order.name}">
     <input type="hidden" name="typeId" value="${order.typeId}">
@@ -85,14 +87,26 @@
     <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
     <input type="hidden" name="orderEndTime" value="${order.orderEndTime}">
     <input type="hidden" name="driverId" value="${order.driverId}">
-    <#if order.statusOrder == "Водитель движется к клиенту">
-        <input type="hidden" name="statusOrder" value="Водитель с клиентом">
-        <input type="submit" id="saveButton" value="Забрал клиента"/>
-    <#elseif order.statusOrder == "Водитель с клиентом">
-        <input type="hidden" name="statusOrder" value="Заказ завершен">
-        <input type="submit" id="saveButton" value="Завершить заказ"/>
-    </#if>
+    <input type="submit" id="saveButton" value="Забрал клиента"/>
 </form>
+<#elseif order.statusOrder == "Водитель с клиентом">
+    <form id="closeOrder" action="/orders/${order.id}/closeorder" method="post">
+        <input type="hidden" name="_method" value="patch"/>
+        <input type="hidden" name="name" value="${order.name}">
+        <input type="hidden" name="typeId" value="${order.typeId}">
+        <input type="hidden" name="clientFirstName" value="${order.clientFirstName}">
+        <input type="hidden" name="clientLastName" value="${order.clientLastName}">
+        <input type="hidden" name="clientPhoneNumber" value="${order.clientPhoneNumber}">
+        <input type="hidden" name="address" value="${order.address}">
+        <input type="hidden" name="orderCost" value="${order.orderCost}">
+        <input type="hidden" name="geoData" value="${order.geoData}">
+        <input type="hidden" name="destinationGeoData" value="${order.destinationGeoData}">
+        <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
+        <input type="hidden" name="orderEndTime" value="${order.orderEndTime}">
+        <input type="hidden" name="driverId" value="${order.driverId}">
+        <input type="submit" id="saveButton" value="Завершить заказ"/>
+    </form>
+</#if>
 
 <form id="changeDriver" action="/orders/${order.id}" method="post">
     <input type="hidden" name="_method" value="patch"/>
@@ -117,7 +131,7 @@
     </#if>
 </form>
 
-<form id="cancelOrder" action="/orders/${order.id}" method="post">
+<form id="cancelOrder" action="/orders/${order.id}/cancelorder" method="post">
     <input type="hidden" name="_method" value="patch"/>
     <input type="hidden" name="name" value="${order.name}">
     <input type="hidden" name="typeId" value="${order.typeId}">
@@ -131,9 +145,8 @@
     <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
     <input type="hidden" name="orderEndTime" value="${order.orderEndTime}">
     <#if    order.statusOrder != "Водитель с клиентом" &&
-            order.statusOrder != "Заказ завершен" &&
-            order.statusOrder != "Заказ отменен" >
-        <input type="hidden" name="statusOrder" value="Заказ отменен">
+    order.statusOrder != "Заказ завершен" &&
+    order.statusOrder != "Заказ отменен" >
         <input type="submit" id="cancelButton" value="Отменить заказ"/>
     </#if>
 </form>

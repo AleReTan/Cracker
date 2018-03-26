@@ -59,6 +59,24 @@ public class OrderController {
         return "redirect:/orders";
     }
 
+    @RequestMapping(value = "/orders/{id}/pickclient",method = RequestMethod.PATCH)
+    public String pickClient(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res){
+        orderService.pickClient(req, res, order);
+        return "redirect:/orders";
+    }
+
+    @RequestMapping(value = "/orders/{id}/closeorder",method = RequestMethod.PATCH)
+    public String closeOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res){
+        orderService.closeOrder(req, res, order);
+        return "redirect:/orders";
+    }
+
+    @RequestMapping(value = "/orders/{id}/cancelorder",method = RequestMethod.PATCH)
+    public String cancelorder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res){
+        orderService.cancelOrder(req, res, order);
+        return "redirect:/orders";
+    }
+
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.DELETE)
     public String deleteOrder(@PathVariable("id") long id, HttpServletRequest req, HttpServletResponse res) {
         orderService.delete(req, res, id);
