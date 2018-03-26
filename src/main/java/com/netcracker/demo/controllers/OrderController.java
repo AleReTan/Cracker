@@ -1,6 +1,7 @@
 package com.netcracker.demo.controllers;
 
 
+import com.netcracker.demo.models.DriverEntityTO;
 import com.netcracker.demo.models.OrderEntityTO;
 import com.netcracker.demo.service.DriverService;
 import com.netcracker.demo.service.OrderService;
@@ -42,8 +43,6 @@ public class OrderController {
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.POST)
     public String createOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
-        order.setOrderStartTime(LocalDateTime.now().toString());
-        order.setOrderEndTime("Не закончен");
         orderService.save(req, res, order);
         return "redirect:/orders";
     }
@@ -56,11 +55,6 @@ public class OrderController {
 
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.PATCH)
     public String updateOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
-        if (order.getStatusOrder().equals("Заказ завершен") ||
-                order.getStatusOrder().equals("Заказ отменен")) {
-            order.setOrderEndTime(LocalDateTime.now().toString());
-            order.setDriverId(0);//0 для автоматического удаления этого референса планировшиком
-        }
         orderService.update(req, res, order);
         return "redirect:/orders";
     }
@@ -73,8 +67,12 @@ public class OrderController {
 
     @RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
     public String getOrder(@PathVariable("id") long id, Model model, HttpServletRequest req, HttpServletResponse res) {
-        model.addAttribute("order", orderService.findById(req, res, id));
+        OrderEntityTO orderEntityTO = orderService.findById(req, res, id);
+        model.addAttribute("order", orderEntityTO);
         model.addAttribute("drivers", driverService.findAllAvailableDrivers(req, res));
+        DriverEntityTO selectedDriver = driverService.findById(req, res, orderEntityTO.getDriverId());
+        if (selectedDriver != null)
+            model.addAttribute("selectedDriver", selectedDriver);
         return "/order-like/order";
     }
 }

@@ -46,17 +46,18 @@
     <input title="Геолокация" id="destinationGeo" type="text" name="destinationGeoData">
 
     <p>Водитель</p>
-     <#if drivers?size != 1 > <b>Нет свободных водителей</b></#if>
+     <#if drivers?size == 0 > <b>Нет свободных водителей</b></#if>
     <select name="driverId" id="driverSelect">
         <option value="0" selected>Выберите водителя</option>
             <#list drivers as driver>
                 <option value="${driver.id}"> ${driver.lastName} ${driver.phoneNumber}</option>
             </#list>
     </select>
-
+    <input type="button" id="chooseDriver" value="Подобрать водителя"/>
 
     <!--затестить кто встанет на заказ если ткнуть кнопку подбор водителя, мб отлавливать тык кнопки и не обращать внимание на выпадашку-->
-    <p>Статус заказа</p>
+    <!--<p>Статус заказа</p>
+
     <p><select name="statusOrder">
         <option selected>Выберите статус</option>
         <option value="Поиск водителя">Поиск водителя</option>
@@ -64,11 +65,11 @@
         <option value="Водитель с клиентом">Водитель с клиентом</option>
         <option value="Заказ завершен">Заказ завершен</option>
         <option value="Заказ отменен">Заказ отменен</option>
-    </select></p>
+    </select></p>-->
     <input type="hidden" name="typeId" value="6">
     <input type="submit" value="Создать">
 </form>
-<input type="button" id="chooseDriver" value="Подобрать водителя"/>
+
 <div id="map"></div>
 </body>
 </html>
