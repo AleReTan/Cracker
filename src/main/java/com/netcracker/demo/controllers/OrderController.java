@@ -70,9 +70,9 @@ public class OrderController {
         OrderEntityTO orderEntityTO = orderService.findById(req, res, id);
         model.addAttribute("order", orderEntityTO);
         model.addAttribute("drivers", driverService.findAllAvailableDrivers(req, res));
-        DriverEntityTO selectedDriver = driverService.findById(req, res, orderEntityTO.getDriverId());
-        if (selectedDriver != null)
-            model.addAttribute("selectedDriver", selectedDriver);
+        //DriverEntityTO selectedDriver = driverService.findById(req, res, orderEntityTO.getDriverId());
+        //if (selectedDriver != null)
+        model.addAttribute("selectedDriver", driverService.findById(req, res, orderEntityTO.getDriverId()));
         return "/order-like/order";
     }
 }

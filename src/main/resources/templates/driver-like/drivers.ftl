@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-<h1> <a href="/logout"> Logout</h1>
+<h2> <a href="/logout"> Logout </a></h2>
 <h1>Drivers list</h1>
 <table>
     <tr>
@@ -32,7 +32,7 @@
         <td>${driver.lastName}</td>
         <td><#list cars as car>
             <!--иф вложить в <a href по carId если хотим ссылаться на машину -->
-            <#if driver.carId == car.id> ${car.model} ${car.number}</#if>
+            <#if driver.carId == car.id><a href="/cars/${driver.carId}"> ${car.model} ${car.number}</a></#if>
         </#list></td>
 
     </tr>

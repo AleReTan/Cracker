@@ -2,7 +2,11 @@
 <html lang="rus">
 <head>
     <title>Driver info</title>
-
+    <script>
+        // This variable can be accessed from js
+        var selectedCarId = "${(selectedCar.id)!}";
+    </script>
+    <script type="text/javascript" src="/js/driverScript.js"></script>
 </head>
 <body>
 <h1>Информация по водителю</h1>
@@ -29,12 +33,25 @@
     </tr>
     <tr>
         <th>Автомобиль</th>
-        <td><select name="carId" required form="updateDriver">
+       <!-- <td><select name="carId" required form="updateDriver">
             <option value="${driver.carId}" selected>Выберите машину</option>
             <#list cars as car>
-                <option value="${car.id}" <#if driver.carId == car.id>selected</#if> > ${car.model} ${car.number}</option>
+                <option value="${car.id}"
+                        <#if driver.carId == car.id>selected</#if> > ${car.model} ${car.number}</option>
             </#list>
+        </select></td>-->
+
+        <td><select name="carId" id="driverId" form="updateDriver">
+        <#if (selectedCar.id)??>
+            <option value="${(selectedCar.id)}"
+                    selected>${(selectedCar.model)} ${(selectedCar.number)}</option>
+        </#if>
+        <#list cars as car>
+            <option value="${car.id}"
+                    <#if driver.carId == car.id>selected</#if> > ${car.model} ${car.number}</option>
+        </#list>
         </select></td>
+
     </tr>
 </table>
 <br>
@@ -47,7 +64,7 @@
     <input type="hidden" name = "lastName" value="${driver.lastName}">
     <input type="hidden" name = "phoneNumber" value="${driver.phoneNumber}">
     <input type="hidden" name = "driverGeoData" value="${(driver.driverGeoData)!"0.0,0.0"}">
-    <input type="submit" value="Сохранить" />
+    <input type="submit" id="saveButton" disabled value="Сохранить" />
 </form>
 <form id="deleteDriver" action="/drivers/${driver.id}" method="post">
     <input type="hidden" name="_method" value="delete"/>

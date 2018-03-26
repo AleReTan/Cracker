@@ -53,8 +53,10 @@ public class DriverController {
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)
     public String getDriver(@PathVariable("id") long id, Model model,HttpServletRequest req, HttpServletResponse res) {
-        model.addAttribute("driver", driverService.findById(req,res, id));
-        model.addAttribute("cars", carService.findAllAvailableCars(req,res ));
+        DriverEntityTO driverEntityTO = driverService.findById(req,res, id);
+        model.addAttribute("driver", driverEntityTO);
+        model.addAttribute("cars", carService.findAllAvailableCars(req,res));
+        model.addAttribute("selectedCar", carService.findById(req, res, driverEntityTO.getCarId()));
         return "/driver-like/driver";
 
     }

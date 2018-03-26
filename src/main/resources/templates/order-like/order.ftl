@@ -92,7 +92,6 @@
         <input type="hidden" name="statusOrder" value="Заказ завершен">
         <input type="submit" id="saveButton" value="Завершить заказ"/>
     </#if>
-
 </form>
 
 <form id="changeDriver" action="/orders/${order.id}" method="post">
