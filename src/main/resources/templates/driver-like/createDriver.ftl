@@ -25,7 +25,7 @@
     </select>
 
     <input type="hidden" name="typeId" value="8">
-    <input type="hidden" name = "onShift" value="false">
+    <input type="hidden" name = "onShift" value="true">
     <input type="hidden" name="driverGeoData" value="0.0,0.0">
     <input type="submit" value="Создать">
 </form>

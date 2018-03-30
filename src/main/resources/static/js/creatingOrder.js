@@ -3,6 +3,7 @@ var myMap;
 var geoObjects;
 var startCoords;
 var destinationCoords;
+var multiRoute;
 
 function init() {
     myMap = new ymaps.Map("map", {
@@ -37,6 +38,7 @@ function init() {
     myMap.events.add('contextmenu', function (e) {
         destinationCoords = e.get('coords');
         $("#destinationGeo").val(destinationCoords[0] + "," + destinationCoords[1]);
+        myMap.geoObjects.remove(multiRoute);
         calculatePrice();
     });
 
@@ -76,29 +78,12 @@ function init() {
         })
             .then(function () {
                 $("driverId").val(targetObject.properties.get('driverId'));//ставим водителя на заказ
-                var multiRoute = new ymaps.multiRouter.MultiRoute({
-                    // Описание опорных точек мультимаршрута.
-                    referencePoints: [
-                        startCoords,
-                        destinationCoords
-
-                    ],
-                    params: {
-                        // Ограничение на максимальное количество маршрутов, возвращаемое маршрутизатором.
-                        results: 1
-                    }
-                });
-                //myMap.geoObjects.add(multiRoute);
-                multiRoute.events.once('activeroutechange', function () {
-                    distance = multiRoute.getRoutes().get(0).properties.get('distance').value;
-                    console.log(distance);
-                    $("#price").val((500 + distance / 1000 * 50).toFixed(0))
-                });
+                calculatePrice();
             });
     };
 
     function calculatePrice() {
-        var multiRoute = new ymaps.multiRouter.MultiRoute({
+        multiRoute = new ymaps.multiRouter.MultiRoute({
             // Описание опорных точек мультимаршрута.
             referencePoints: [
                 startCoords,
@@ -109,7 +94,7 @@ function init() {
                 results: 1
             }
         });
-        //myMap.geoObjects.add(multiRoute);
+        myMap.geoObjects.add(multiRoute);
 
         multiRoute.events.once('activeroutechange', function () {
             distance = multiRoute.getRoutes().get(0).properties.get('distance').value;
