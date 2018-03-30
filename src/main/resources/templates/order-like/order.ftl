@@ -2,6 +2,11 @@
 <html lang="rus">
 <head>
     <title>Info</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/loginStyle.css">
+    <link rel="stylesheet" href="/css/table.css">
     <script>
         // This variable can be accessed from js
         var statusOrderFMVariable = "${order.statusOrder}";
@@ -12,7 +17,10 @@
 
 </head>
 <body>
+<header class="user__header">
 <h1>Информация по заказу</h1>
+    <header>
+        <div>
 <table>
     <tr>
         <th>Имя</th>
@@ -68,7 +76,7 @@
         <td>${order.orderCost}</td>
     </tr>
 </table>
-
+</div>
 <br>
 <a href="/orders">Back</a>
 <!-- ифы наружу, внутри формы, внутри запускать на разные URL, на сервисе методы водитель прибыл, закончил заказ-->
