@@ -72,7 +72,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders/{id}/cancelorder",method = RequestMethod.PATCH)
-    public String cancelorder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res){
+    public String cancelOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res){
         orderService.cancelOrder(req, res, order);
         return "redirect:/orders";
     }

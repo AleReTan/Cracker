@@ -29,7 +29,10 @@ function init() {
         myGeocoder.then(function (res) {
             $("#address").val(res.geoObjects.get(0).getAddressLine());//геокодируем координаты в адрес
         });
-
+        if(destinationCoords){
+            myMap.geoObjects.remove(multiRoute);
+            calculatePrice();
+        }
     });
 
     // Обработка события, возникающего при щелчке
@@ -41,10 +44,9 @@ function init() {
         myMap.geoObjects.remove(multiRoute);
         calculatePrice();
     });
-
     document.getElementById('chooseDriver').onclick = function () {
-        var orderGeoArr = document.getElementById('geo').value.split(',');
-        var orderGeo = [parseFloat(orderGeoArr[0]), parseFloat(orderGeoArr[1])];
+        // var orderGeoArr = document.getElementById('geo').value.split(',');
+        // var orderGeo = [parseFloat(orderGeoArr[0]), parseFloat(orderGeoArr[1])];
         /*
                 $.ajax({
                     url: "json"
@@ -55,7 +57,7 @@ function init() {
                         .addToMap(myMap);*/
         // Дождемся ответа от сервера и получим объект, ближайший к точке.
         geoObjects.then(function () {
-            var closestObject = geoObjects.getClosestTo(orderGeo);
+            var closestObject = geoObjects.getClosestTo(startCoords);
             // Если ответ пуст, то ближайший объект не найдется.
             if (closestObject) {
                 document.getElementById('driverSelect').value = closestObject.properties.get('driverId');
