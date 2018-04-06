@@ -15,6 +15,8 @@
     <input title="Фамилия" type="text" name="lastName">
     <p>Телефон</p>
     <input title="Телефон" type="text" name="phoneNumber">
+    <p>Логин</p>
+    <input title="Логин" type="text" name="login">
     <p>Автомобиль</p>
     <select name="carId">
         <#if cars?size != 1> <b>Нет свободных машин</b></#if>

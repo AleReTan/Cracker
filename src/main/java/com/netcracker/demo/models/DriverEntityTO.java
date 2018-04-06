@@ -23,10 +23,12 @@ public class DriverEntityTO {
 
     private String onShift;
 
+    private String login;
+
     public DriverEntityTO() {
     }
 
-    public DriverEntityTO(long id, String name, long typeId, String firstName, String lastName, String phoneNumber, String driverGeoData, long carId, String onShift) {
+    public DriverEntityTO(long id, String name, long typeId, String firstName, String lastName, String phoneNumber, String driverGeoData, long carId, String onShift, String login) {
         this.id = id;
         this.name = name;
         this.typeId = typeId;
@@ -36,6 +38,7 @@ public class DriverEntityTO {
         this.driverGeoData = driverGeoData;
         this.carId = carId;
         this.onShift = onShift;
+        this.login = login;
     }
 
     public long getId() {
@@ -111,6 +114,14 @@ public class DriverEntityTO {
         this.onShift = onShift;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -124,13 +135,13 @@ public class DriverEntityTO {
                 Objects.equals(getLastName(), that.getLastName()) &&
                 Objects.equals(getPhoneNumber(), that.getPhoneNumber()) &&
                 Objects.equals(getDriverGeoData(), that.getDriverGeoData()) &&
-                Objects.equals(getOnShift(), that.getOnShift());
+                Objects.equals(getOnShift(), that.getOnShift()) &&
+                Objects.equals(getLogin(), that.getLogin());
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(getId(), getName(), getTypeId(), getFirstName(), getLastName(), getPhoneNumber(), getDriverGeoData(), getCarId(), getOnShift());
+        return Objects.hash(getId(), getName(), getTypeId(), getFirstName(), getLastName(), getPhoneNumber(), getDriverGeoData(), getCarId(), getOnShift(), getLogin());
     }
 
     @Override
@@ -144,6 +155,7 @@ public class DriverEntityTO {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", driverGeoData='" + driverGeoData + '\'' +
                 ", onShift='" + onShift + '\'' +
+                ", login='" + login + '\'' +
                 ", carId=" + carId;
     }
 }

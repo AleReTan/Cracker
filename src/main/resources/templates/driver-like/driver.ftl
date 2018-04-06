@@ -69,6 +69,7 @@
     <input type="hidden" name = "phoneNumber" value="${driver.phoneNumber}">
     <input type="hidden" name = "driverGeoData" value="${(driver.driverGeoData)!"0.0,0.0"}">
     <input type="hidden" name = "onShift" value="${(driver.onShift)}">
+    <input type="hidden" name = "login" value="${(driver.login)}">
     <input type="submit" id="saveButton" disabled value="Сохранить" />
 </form>
 <form id="deleteDriver" action="/drivers/${driver.id}" method="post">
