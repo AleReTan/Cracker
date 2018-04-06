@@ -23,7 +23,7 @@ img {
 
 .table-users {
   border: 1px solid #327a81;
-  border-radius: 10px;
+  border-radius: 50px;
   -webkit-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
   max-width: calc(100% - 2em);
@@ -35,10 +35,12 @@ img {
 table {
   width: 80%;
   position: absolute;
-  top: 50px;
+  top: 100px;
   left: 200px;
 
 }
+
+
 table td, table th {
   color: #2b686e;
   padding: 10px;
