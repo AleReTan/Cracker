@@ -1,22 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Dispath service of towling</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript" src="js/showDrivers.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/loginStyle.css">
+    <link rel="stylesheet" href="css/tabAll.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <style>
-        html,body, #map {
-            width: 100%; height: 100%; padding: 0; margin: 0;
-
+         #map {
+            width: 50%; height: 50%; position: absolute; margin: 0;
+             align-content: center;
+             left:650px;
+             top: 103px;
         }
     </style>
 </head>
 <body>
-<h2> <a href="/logout"> Logout </a></h2>
-<h1>Drivers list</h1>
+<div>
+    <header class="user__header">
+        <h1 style="color: azure">Список водителей</h1>
+    </header>
+</div>
+<div>
+    <nav role='navigation'>
+        <ul>
+            <li><a onclick="location.href='/orders'">Заказы</a></li>
+            <li><a onclick="location.href='/drivers';">Водители</a></li>
+            <li><a onclick="location.href='/cars';">Машины</a></li>
+            <li><a onclick="location.href='/logout';">Выйти</a></li>
+        </ul>
+    </nav>
+</div>
+
 <table>
     <tr>
         <th>Номер телефона</th>
@@ -37,7 +59,7 @@
     </tr>
 </#list>
 </table>
-<a href="/drivers/create">Create driver</a>
+
 <div id="map"></div>
 
 </body>
