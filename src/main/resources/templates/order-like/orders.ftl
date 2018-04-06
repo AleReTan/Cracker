@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Dispath service of towling</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,15 +10,25 @@
     <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="css/loginStyle.css">
     <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/menu.css">
 
 </head>
 <body>
     <header class="user__header">
 <h1 style="color: azure">Список заказов</h1>
 </header>
+    <div>
+    <nav role='navigation'>
+        <ul>
+            <li><a onclick="location.href='/orders'">Заказы</a></li>
+            <li><a onclick="location.href='/drivers'">Водители</a></li>
+            <li><a onclick="location.href='/cars'">Машины</a></li>
+            <li><a onclick="location.href='/logout'">Выйти</a></li>
+        </ul>
+    </nav>
+        </div>
 
-
-<div   class="pagedown">
+    <div class="pagedown">
 <table>
     <tr>
         <th>Номер</th>
@@ -44,8 +55,9 @@
 </table>
 </div>
     <div>
-        <a class="button" href="/orders/create">Создать заказ</a>
+        <button class="button" onclick="location.href='/orders/create'">Создать заказ</button>
     </div>
+
 
 </body>
 </html>
