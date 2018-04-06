@@ -6,6 +6,8 @@ var destinationCoords;
 var multiRoute;
 
 function init() {
+    //скрывает выпадашку
+    hidePopUp();
     myMap = new ymaps.Map("map", {
         center: [51.66149636, 39.20038956],
         zoom: 12,
@@ -18,13 +20,12 @@ function init() {
         geoObjects = ymaps.geoQuery(data)
             .addToMap(myMap);
     });
-
     // Обработка события, возникающего при щелчке
     // левой кнопкой мыши в любой точке карты.
     // пишем в поле местоположение клиента
     myMap.events.add('click', function (e) {
         startCoords = e.get('coords');
-        $("#geo").val(startCoords[0] + "," + startCoords[1]);
+        $("#geoData").val(startCoords[0] + "," + startCoords[1]);
         var myGeocoder = ymaps.geocode(startCoords);
         myGeocoder.then(function (res) {
             $("#address").val(res.geoObjects.get(0).getAddressLine());//геокодируем координаты в адрес
@@ -40,7 +41,7 @@ function init() {
     // пишем в поле точку назначения
     myMap.events.add('contextmenu', function (e) {
         destinationCoords = e.get('coords');
-        $("#destinationGeo").val(destinationCoords[0] + "," + destinationCoords[1]);
+        $("#destinationGeoData").val(destinationCoords[0] + "," + destinationCoords[1]);
         myMap.geoObjects.remove(multiRoute);
         calculatePrice();
     });
@@ -80,7 +81,7 @@ function init() {
         })
             .then(function () {
                 $("driverId").val(targetObject.properties.get('driverId'));//ставим водителя на заказ
-                calculatePrice();
+                //calculatePrice();
             });
     };
 
@@ -101,7 +102,49 @@ function init() {
         multiRoute.events.once('activeroutechange', function () {
             distance = multiRoute.getRoutes().get(0).properties.get('distance').value;
             console.log(distance);
-            $("#price").val((500 + distance / 1000 * 50).toFixed(0))
+            $("#orderCost").val((500 + distance / 1000 * 50).toFixed(0))
         });
     }
+}
+
+function catcher(){
+    var data = {
+        clientFirstName :  $('#clientFirstName').val(),
+        clientLastName :  $('#clientLastName').val(),
+        clientPhoneNumber :  $('#clientPhoneNumber').val(),
+        orderCost :  $('#orderCost').val(),
+        address :  $('#address').val(),
+        geoData :  $('#geoData').val(),
+        destinationGeoData :  $('#destinationGeoData').val(),
+        driverId :  $('#driverSelect').val(),
+        typeId : 6
+    };
+    $.ajax({
+        data : data,
+        url: "http://localhost:8080/orders/create",
+        type: 'POST'
+    }).done(
+        function() {
+            showPopUp("succes");
+            console.log("succes");
+            setTimeout(hidePopUp(),3000);
+            //редирект
+        }
+    ).fail(
+        function(dataIn) {
+            console.log("fail");
+            console.log(dataIn);
+            alert(data);
+        }
+    );
+}
+
+function showPopUp(content) {
+    $('#popup').val(content);
+    popup = document.getElementById('popup');
+    popup.style.display("block");
+
+}
+function hidePopUp() {
+    document.getElementById('popup').value = "wfdsd";
 }

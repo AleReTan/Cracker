@@ -45,10 +45,22 @@ public class UncRestTemplate {
                                Class<T> responseType) {
         HttpEntity<T> entity = new HttpEntity<>(requestBody, addHeaders(req, res));
         try {
-            return restTemplate.postForObject(BASE_URL + additionUrl, entity, responseType);
+            T t = restTemplate.postForObject(BASE_URL + additionUrl, entity, responseType);
+
+
+            return t;
+
         } catch (HttpStatusCodeException e) {
-            AuthService.sendRedirectIfError(e, req, res);
-            return null;
+            System.out.println(req.getHeaderNames());
+            if(res.getStatus() == 500){
+                String errorMessage = res.getHeader("Error message");
+                System.out.println(errorMessage);
+                throw new IllegalArgumentException(errorMessage);
+            }
+            else {
+                AuthService.sendRedirectIfError(e, req, res);
+                return null;
+            }
         }
 
     }

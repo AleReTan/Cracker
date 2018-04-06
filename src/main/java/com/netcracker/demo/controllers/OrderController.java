@@ -7,6 +7,8 @@ import com.netcracker.demo.service.DriverService;
 import com.netcracker.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,9 +44,15 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.POST)
-    public String createOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
-        orderService.save(req, res, order);
-        return "redirect:/orders";
+    public ResponseEntity createOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
+        System.out.println(order.toString());
+        try {
+            orderService.save(req, res, order);
+        }
+        catch(IllegalArgumentException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.GET)
