@@ -6,8 +6,15 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <!--<link rel="stylesheet" href="/css/loginStyle.css">
-    <link rel="stylesheet" href="/css/formfirst.css">-->
+    <link rel="stylesheet" href="/css/loginStyle.css">
+    <link rel="stylesheet" href="/css/formfirst.css">
+    <style>
+        #popup {
+            background: #ffb;
+            padding: 10px;
+            border: 2px solid #999;
+        }
+    </style>
     <script type="text/javascript" src="/js/creatingOrder.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -15,9 +22,9 @@
 </head>
 <body>
 <div class="popup" id="popup">
-    Text in Popup
+    <span id="popup-content">Text in Popup</span>
 </div>
-
+<script>$('#popup').hide(0)</script>
 </div id="container">
 <div class="underline">
 </div class= "pagedown">

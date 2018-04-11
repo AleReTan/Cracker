@@ -48,8 +48,8 @@ public class OrderController {
         System.out.println(order.toString());
         try {
             orderService.save(req, res, order);
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
+            e.getMessage();
             return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity(HttpStatus.OK);
@@ -67,20 +67,20 @@ public class OrderController {
         return "redirect:/orders";
     }
 
-    @RequestMapping(value = "/orders/{id}/pickclient",method = RequestMethod.PATCH)
-    public String pickClient(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res){
+    @RequestMapping(value = "/orders/{id}/pickclient", method = RequestMethod.PATCH)
+    public String pickClient(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
         orderService.pickClient(req, res, order);
         return "redirect:/orders";
     }
 
-    @RequestMapping(value = "/orders/{id}/closeorder",method = RequestMethod.PATCH)
-    public String closeOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res){
+    @RequestMapping(value = "/orders/{id}/closeorder", method = RequestMethod.PATCH)
+    public String closeOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
         orderService.closeOrder(req, res, order);
         return "redirect:/orders";
     }
 
-    @RequestMapping(value = "/orders/{id}/cancelorder",method = RequestMethod.PATCH)
-    public String cancelOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res){
+    @RequestMapping(value = "/orders/{id}/cancelorder", method = RequestMethod.PATCH)
+    public String cancelOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
         orderService.cancelOrder(req, res, order);
         return "redirect:/orders";
     }
@@ -96,8 +96,6 @@ public class OrderController {
         OrderEntityTO orderEntityTO = orderService.findById(req, res, id);
         model.addAttribute("order", orderEntityTO);
         model.addAttribute("drivers", driverService.findAllAvailableDrivers(req, res));
-        //DriverEntityTO selectedDriver = driverService.findById(req, res, orderEntityTO.getDriverId());
-        //if (selectedDriver != null)
         model.addAttribute("selectedDriver", driverService.findById(req, res, orderEntityTO.getDriverId()));
         return "/order-like/order";
     }

@@ -6,8 +6,6 @@ var destinationCoords;
 var multiRoute;
 
 function init() {
-    //скрывает выпадашку
-    hidePopUp();
     myMap = new ymaps.Map("map", {
         center: [51.66149636, 39.20038956],
         zoom: 12,
@@ -30,7 +28,7 @@ function init() {
         myGeocoder.then(function (res) {
             $("#address").val(res.geoObjects.get(0).getAddressLine());//геокодируем координаты в адрес
         });
-        if(destinationCoords){
+        if (destinationCoords) {
             myMap.geoObjects.remove(multiRoute);
             calculatePrice();
         }
@@ -107,44 +105,50 @@ function init() {
     }
 }
 
-function catcher(){
+function catcher() {
     var data = {
-        clientFirstName :  $('#clientFirstName').val(),
-        clientLastName :  $('#clientLastName').val(),
-        clientPhoneNumber :  $('#clientPhoneNumber').val(),
-        orderCost :  $('#orderCost').val(),
-        address :  $('#address').val(),
-        geoData :  $('#geoData').val(),
-        destinationGeoData :  $('#destinationGeoData').val(),
-        driverId :  $('#driverSelect').val(),
-        typeId : 6
+        clientFirstName: $('#clientFirstName').val(),
+        clientLastName: $('#clientLastName').val(),
+        clientPhoneNumber: $('#clientPhoneNumber').val(),
+        orderCost: $('#orderCost').val(),
+        address: $('#address').val(),
+        geoData: $('#geoData').val(),
+        destinationGeoData: $('#destinationGeoData').val(),
+        driverId: $('#driverSelect').val(),
+        typeId: 6
     };
     $.ajax({
-        data : data,
+        data: data,
         url: "http://localhost:8080/orders/create",
         type: 'POST'
     }).done(
-        function() {
-            showPopUp("succes");
+        function () {
             console.log("succes");
-            setTimeout(hidePopUp(),3000);
-            //редирект
+            showPopUp("succes");
+            hidePopUp(2000);
+            window.location.replace("http://localhost:8080/orders");
         }
     ).fail(
-        function(dataIn) {
+        function (dataIn) {
             console.log("fail");
-            console.log(dataIn);
-            alert(data);
+            console.log(dataIn.responseText);
+            showPopUp(dataIn.responseText);
+            hidePopUp(2000);
+
         }
     );
 }
 
 function showPopUp(content) {
-    $('#popup').val(content);
-    popup = document.getElementById('popup');
-    popup.style.display("block");
+    $('#popup-content').text(content);
+    $('#popup').show();
+
 
 }
-function hidePopUp() {
-    document.getElementById('popup').value = "wfdsd";
+
+function hidePopUp(time) {
+    setTimeout(function () {
+        $('#popup').hide(time)
+    }, 5000);
+
 }

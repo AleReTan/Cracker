@@ -22,10 +22,8 @@ public class OrderService implements MyService<OrderEntityTO> {
 
     @Override
     public void save(HttpServletRequest req, HttpServletResponse res, OrderEntityTO object) {
-        System.out.println("Зашли в ордер сервис");
         //потестить как ajax должен получить эксепшен из uncRestTemplate
         restTemplate.postForObject(req, res, ADDITION_URL, object, OrderEntityTO.class);
-        System.out.println(res.getStatus());
     }
 
     @Override

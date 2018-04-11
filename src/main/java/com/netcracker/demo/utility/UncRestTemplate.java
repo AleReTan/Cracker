@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,23 +47,19 @@ public class UncRestTemplate {
         HttpEntity<T> entity = new HttpEntity<>(requestBody, addHeaders(req, res));
         try {
             T t = restTemplate.postForObject(BASE_URL + additionUrl, entity, responseType);
-
-
             return t;
 
         } catch (HttpStatusCodeException e) {
-            System.out.println(req.getHeaderNames());
-            if(res.getStatus() == 500){
-                String errorMessage = res.getHeader("Error message");
+            //проверяем, если пишла 500, но нет хедеа, значит причина не в полях
+            if (e.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR && (e.getResponseHeaders().get("Error message").get(0) != null)) {
+                String errorMessage = e.getResponseHeaders().get("Error message").get(0);
                 System.out.println(errorMessage);
                 throw new IllegalArgumentException(errorMessage);
-            }
-            else {
+            } else {
                 AuthService.sendRedirectIfError(e, req, res);
                 return null;
             }
         }
-
     }
 
     public <T> T patchForObject(HttpServletRequest req, HttpServletResponse res, String additionUrl,

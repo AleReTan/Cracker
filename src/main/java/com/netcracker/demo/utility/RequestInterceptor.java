@@ -51,7 +51,7 @@ public class RequestInterceptor implements HandlerInterceptor {
                     res.sendRedirect("/login");
                     return;
                 }
-
+                //тут форвард, его после респонса не получится
                 req.getRequestDispatcher("/errorMSG").forward(req, res);
                 return;
             }
