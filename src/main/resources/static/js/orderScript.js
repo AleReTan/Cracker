@@ -1,5 +1,5 @@
 // window.onload = function () {
-//     init();
+//init();
 // };
 ymaps.ready(init);
 
@@ -37,6 +37,8 @@ function init() {
     //если переключились на уже назначенного водителя, то блочим возможность выбрать его
     document.getElementById('driverSelect').onchange = function () {
         if (document.getElementById('driverSelect').value !== selectedDriverId) {
+            console.log(selectedDriverId + "selDrId");
+            console.log(document.getElementById('driverSelect').value);
             document.getElementById('setDriver').disabled = false;
         }
         else {
