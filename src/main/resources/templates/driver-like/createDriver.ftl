@@ -34,11 +34,11 @@
 </div>
 
 <form name="driver" action="/drivers/create" method="post">
-    <input title="Название"  placeholder="Название" type="text" name="name">
-    <input title="Имя" type="text" placeholder="Имя"  name="firstName">
-    <input title="Фамилия" type="text" placeholder="Фамилия"  name="lastName">
+    <input title="Название" placeholder="Название" type="text" name="name">
+    <input title="Имя" type="text" placeholder="Имя" name="firstName">
+    <input title="Фамилия" type="text" placeholder="Фамилия" name="lastName">
     <input title="Телефон" type="text" placeholder="Телефон" name="phoneNumber">
-
+    <!--Тут не хватает login-->
     <select name="carId">
         <#if cars?size != 1> <b>Нет свободных машин</b></#if>
         <option value="0" selected>Выберите машину</option>

@@ -33,12 +33,12 @@
     </nav>
 </div>
 <form name="cars" action="/cars/create" method="post">
-    <input title="Название" placeholder="Название"  type="text" name="name">
-    <input title="Номер автомобиля"  placeholder="Номер автомобиля" type="text" name="number">
-    <input title="Модель" type="text" placeholder="Модель"  name="model">
-    <input title="Цвет" type="text" placeholder="Цвет"  name="color">
+    <input title="Название" placeholder="Название" type="text" name="name">
+    <input title="Номер автомобиля" placeholder="Номер автомобиля" type="text" name="number">
+    <input title="Модель" type="text" placeholder="Модель" name="model">
+    <input title="Цвет" type="text" placeholder="Цвет" name="color">
     <input title="Тип" type="text" placeholder="Тип" name="type">
-    <input type="hidden" name = "typeId" value="7">
+    <input type="hidden" name="typeId" value="7">
     <input class="form_button" type="submit" value="Создать">
 </form>
 

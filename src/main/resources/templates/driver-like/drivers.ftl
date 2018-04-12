@@ -14,11 +14,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <style>
-         #map {
-            width: 50%; height: 50%; position: absolute; margin: 0;
-             align-content: center;
-             left:650px;
-             top: 103px;
+        #map {
+            width: 50%;
+            height: 50%;
+            position: absolute;
+            margin: 0;
+            align-content: center;
+            left: 650px;
+            top: 103px;
         }
     </style>
 </head>
@@ -55,12 +58,9 @@
         <td><#list cars as car>
             <#if driver.carId == car.id><a href="/cars/${driver.carId}"> ${car.model} ${car.number}</a></#if>
         </#list></td>
-
     </tr>
 </#list>
 </table>
-
 <div id="map"></div>
-
 </body>
 </html>

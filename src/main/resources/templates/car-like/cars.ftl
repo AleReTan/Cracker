@@ -30,12 +30,12 @@
 </div>
 
 <div>
-<table >
-    <tr>
-        <th>Название</th>
-        <th>Номер</th>
-        <th>Модель</th>
-    </tr>
+    <table>
+        <tr>
+            <th>Название</th>
+            <th>Номер</th>
+            <th>Модель</th>
+        </tr>
 <#list cars as car>
     <tr>
         <td><a href="/cars/${car.id}">${car.name}</a></td>
@@ -43,10 +43,7 @@
         <td>${car.model}</td>
     </tr>
 </#list>
-</table>
-
-
+    </table>
 </div>
-
 </body>
 </html>

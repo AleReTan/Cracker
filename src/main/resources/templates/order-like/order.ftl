@@ -2,6 +2,7 @@
 <html lang="rus" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Dispath service of towling</title>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -12,67 +13,79 @@
         // This variable can be accessed from js
         var statusOrderFMVariable = "${order.statusOrder}";
         var selectedDriverId = "${(selectedDriver.id)!}";
+        var startPoint = "${order.geoData}";
+        var destinationPoint = "${order.destinationGeoData}";
     </script>
     <script type="text/javascript" src="/js/orderScript.js"></script>
-
+    <style>
+        #map {
+            width: 50%;
+            height: 50%;
+            position: absolute;
+            margin: 0;
+            align-content: center;
+            left: 650px;
+            top: 450px;
+        }
+    </style>
 
 </head>
 <body>
 <header class="user__header">
-<h1 style="color: azure">Информация по заказу</h1>
+    <h1 style="color: azure">Информация по заказу</h1>
 </header>
-    <div>
-        <nav role='navigation'>
-            <ul>
-                <li><a onclick="location.href='/orders'">Заказы</a></li>
-                <li><a onclick="location.href='/drivers'">Водители</a></li>
-                <li><a onclick="location.href='/cars'">Машины</a></li>
-                <li><a onclick="location.href='/logout'">Выйти</a></li>
-            </ul>
-        </nav>
-    </div>
+<div>
+    <nav role='navigation'>
+        <ul>
+            <li><a onclick="location.href='/orders'">Заказы</a></li>
+            <li><a onclick="location.href='/drivers'">Водители</a></li>
+            <li><a onclick="location.href='/cars'">Машины</a></li>
+            <li><a onclick="location.href='/logout'">Выйти</a></li>
+        </ul>
+    </nav>
+</div>
 
-    <div>
-<table>
-    <tr>
-        <th>Имя</th>
-        <td>${order.clientFirstName}</td>
-    </tr>
-    <tr>
-        <th>Фамилия</th>
-        <td>${order.clientLastName}</td>
-    </tr>
-    <tr>
-        <th>Адрес</th>
-        <td>${order.address}</td>
-    </tr>
-    <tr>
-        <th>Телефон</th>
-        <td>${order.clientPhoneNumber}</td>
-    </tr>
-    <tr>
-        <th>Местоположение заказчика</th>
-        <td>${order.geoData}</td>
-    </tr>
-    <tr>
-        <th>Пункт назначения</th>
-        <td>${order.destinationGeoData}</td>
-    </tr>
-    <tr>
-        <th>Время заказа</th>
-        <td>${order.orderStartTime}</td>
-    </tr>
-    <tr>
-        <th>Время окончания заказа</th>
-        <td>${(order.orderEndTime)!"Заказ не завершен"}</td>
-    </tr>
-    <th>Статус заказ</th>
-    <td>${order.statusOrder}</td>
-    </tr>
+<div>
+    <table>
+        <tr>
+            <th>Имя</th>
+            <td>${order.clientFirstName}</td>
+        </tr>
+        <tr>
+            <th>Фамилия</th>
+            <td>${order.clientLastName}</td>
+        </tr>
+        <tr>
+            <th>Адрес</th>
+            <td>${order.address}</td>
+        </tr>
+        <tr>
+            <th>Телефон</th>
+            <td>${order.clientPhoneNumber}</td>
+        </tr>
+        <tr>
+            <th>Местоположение заказчика</th>
+            <td>${order.geoData}</td>
+        </tr>
+        <tr>
+            <th>Пункт назначения</th>
+            <td>${order.destinationGeoData}</td>
+        </tr>
+        <tr>
+            <th>Время заказа</th>
+            <td>${order.orderStartTime}</td>
+        </tr>
+        <tr>
+            <th>Время окончания заказа</th>
+            <td>${(order.orderEndTime)!"Заказ не завершен"}</td>
+        </tr>
+        <th>Статус заказ</th>
+        <td>${order.statusOrder}</td>
+        </tr>
 
-    <tr>
-        <th>Водитель эвакуатора</th>
-        <td><select name="driverId" id="driverId" form="changeDriver">
+        <tr>
+            <th>Водитель эвакуатора</th>
+            <td><select name="driverId" id="driverId" form="changeDriver">
         <#if (selectedDriver.id)??>
             <option value="${(selectedDriver.id)}"
                     selected>${(selectedDriver.firstName)} ${(selectedDriver.lastName)}</option>
@@ -81,13 +94,13 @@
             <option value="${driver.id}"
                     <#if order.driverId == driver.id>selected</#if> >${driver.firstName} ${driver.lastName}</option>
         </#list>
-        </select></td>
-    </tr>
-    <tr>
-        <th>Cтоимость заказа</th>
-        <td>${order.orderCost}</td>
-    </tr>
-</table>
+            </select></td>
+        </tr>
+        <tr>
+            <th>Cтоимость заказа</th>
+            <td>${order.orderCost}</td>
+        </tr>
+    </table>
 </div>
 <br>
 
@@ -107,7 +120,7 @@
     <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
     <input type="hidden" name="orderEndTime" value="${order.orderEndTime}">
     <input type="hidden" name="driverId" value="${order.driverId}">
-    <input class="form_button"  type="submit" id="saveButton" value="Забрал клиента"/>
+    <input class="form_button" type="submit" id="saveButton" value="Забрал клиента"/>
 </form>
 <#elseif order.statusOrder == "Водитель с клиентом">
     <form id="closeOrder" action="/orders/${order.id}/closeorder" method="post">
@@ -175,6 +188,6 @@
     <input type="hidden" name="_method" value="delete"/>
     <input class="form_button" type="submit" value="Удалить"/>
 </form>
-
+<div id="map"></div>
 </body>
 </html>

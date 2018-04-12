@@ -29,11 +29,11 @@
 </div>
 
 
-
 <div class="user__header">
-<input  class="form_button" onclick="location.href='/drivers/create';" type="button" value="Добавить водителя" />
-<input class="form_button" type="button" onclick="location.href='/cars/create';" value="Добавить машину"/>
-<input class="form_button" type="button" onclick="location.href='/admin/users/createUser';" value="Добавить пользователя"/>
+    <input class="form_button" onclick="location.href='/drivers/create';" type="button" value="Добавить водителя"/>
+    <input class="form_button" type="button" onclick="location.href='/cars/create';" value="Добавить машину"/>
+    <input class="form_button" type="button" onclick="location.href='/admin/users/createUser';"
+           value="Добавить пользователя"/>
 
 </div>
 
