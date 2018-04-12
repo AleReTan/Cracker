@@ -32,10 +32,6 @@
         <td>${(driver.driverGeoData)!"0.0,0.0"}</td>
     </tr>
     <tr>
-        <th>На смене</th>
-        <td>${(driver.onShift)}</td>
-    </tr>
-    <tr>
         <th>Автомобиль</th>
        <!-- <td><select name="carId" required form="updateDriver">
             <option value="${driver.carId}" selected>Выберите машину</option>
