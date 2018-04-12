@@ -85,7 +85,7 @@
 
         <tr>
             <th>Водитель эвакуатора</th>
-            <td><select name="driverId" id="driverId" form="changeDriver">
+            <td><select name="driverId" id="driverSelect" form="changeDriver">
         <#if (selectedDriver.id)??>
             <option value="${(selectedDriver.id)}"
                     selected>${(selectedDriver.firstName)} ${(selectedDriver.lastName)}</option>
@@ -105,6 +105,7 @@
 <br>
 
 <!-- ифы наружу, внутри формы, внутри запускать на разные URL, на сервисе методы водитель прибыл, закончил заказ-->
+<#if order.statusOrder == "Поиск водителя"><input class="form_button" type="button" id="chooseDriver" value="Подобрать водителя"/></#if>
 <#if order.statusOrder == "Водитель движется к клиенту">
 <form id="pickClient" action="/orders/${order.id}/pickclient" method="post">
     <input type="hidden" name="_method" value="patch"/>
