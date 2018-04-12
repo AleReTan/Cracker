@@ -1,16 +1,14 @@
 package com.netcracker.demo.controllers;
 
-import com.netcracker.demo.models.DriverEntityTO;
 import com.netcracker.demo.models.UserEntityTO;
-import com.netcracker.demo.service.MyService;
 import com.netcracker.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -29,14 +27,14 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String getUsers(Model model) {
-        model.addAttribute("allUsers", userService.findAll());
+    public String getUsers(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        model.addAttribute("allUsers", userService.findAll(httpServletRequest, httpServletResponse));
         return "/user-like/users";
     }
 
     @RequestMapping(value = "/users/{login}", method = RequestMethod.GET)
-    public String getUserByLogin(@PathVariable("login") String login, Model model) {
-        model.addAttribute("userData", userService.getUserByLogin(login));
+    public String getUserByLogin(@PathVariable("login") String login, Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        model.addAttribute("userData", userService.getUserByLogin(httpServletRequest, httpServletResponse, login));
         return "/user-like/user";
     }
 
@@ -46,20 +44,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/createUser", method = RequestMethod.POST)
-    public String createUsers(@ModelAttribute UserEntityTO u) {
-        userService.save(u);
+    public String createUsers(@ModelAttribute UserEntityTO u, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        userService.save(httpServletRequest, httpServletResponse, u);
         return "redirect:/admin/users";
     }
 
     @RequestMapping(value = "/users/{login}", method = RequestMethod.POST)
-    public String deleteDriver(@PathVariable("login") String login) {
-        userService.delete(login);
+    public String deleteDriver(@PathVariable("login") String login, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        userService.delete(httpServletRequest, httpServletResponse, login);
         return "redirect:/admin/users";
     }
 
     @RequestMapping(value = "/users/deleteUser", method = RequestMethod.POST)
-    public void deleteUser(@RequestBody UserEntityTO u) {
-        userService.delete(u);
+    public void deleteUser(@RequestBody UserEntityTO u, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        userService.delete(httpServletRequest, httpServletResponse, u);
     }
 }
-

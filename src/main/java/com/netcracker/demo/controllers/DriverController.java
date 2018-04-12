@@ -9,7 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
-import java.util.Arrays;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class DriverController {
@@ -20,41 +21,44 @@ public class DriverController {
     CarService carService;
 
     @RequestMapping(value = "/drivers", method = RequestMethod.GET)
-    public String getDrivers(Model model) {
-        model.addAttribute("drivers", driverService.findAll());
-        model.addAttribute("cars", carService.findAll());
+    public String getDrivers(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        model.addAttribute("drivers", driverService.findAll(httpServletRequest, httpServletResponse));
+        model.addAttribute("cars", carService.findAll(httpServletRequest, httpServletResponse));
         return "/driver-like/drivers";
     }
 
     @RequestMapping(value = "/drivers/create", method = RequestMethod.POST)
-    public String createDriver(@ModelAttribute DriverEntityTO driver) {
-        driverService.save(driver);
+    public String createDriver(@ModelAttribute DriverEntityTO driver, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        driverService.save(httpServletRequest, httpServletResponse, driver);
         return "redirect:/drivers";
     }
 
     @RequestMapping(value = "/drivers/create", method = RequestMethod.GET)
-    public String createDriverPage(Model model) {
-        model.addAttribute("cars", carService.findAllAvailableCars());//свободные машины, прочекать че делать когда нет свободных
+    public String createDriverPage(Model model,HttpServletRequest req, HttpServletResponse res) {
+        model.addAttribute("cars", carService.findAllAvailableCars(req,res));//свободные машины, прочекать че делать когда нет свободных
         return "/driver-like/createDriver";
     }
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.PATCH)
-    public String updateDriver(@ModelAttribute DriverEntityTO driver) {
-        driverService.update(driver);
+    public String updateDriver(@ModelAttribute DriverEntityTO driver, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        driverService.update(httpServletRequest, httpServletResponse, driver);
         return "redirect:/drivers";
     }
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.DELETE)
-    public String deleteDriver(@PathVariable("id") long id) {
-        driverService.delete(id);
+    public String deleteDriver(@PathVariable("id") long id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        driverService.delete(httpServletRequest, httpServletResponse, id);
         return "redirect:/drivers";
     }
 
     @RequestMapping(value = "/drivers/{id}", method = RequestMethod.GET)
-    public String getDriver(@PathVariable("id") long id, Model model) {
-        model.addAttribute("driver", driverService.findById(id));
-        model.addAttribute("cars", carService.findAllAvailableCars());
+    public String getDriver(@PathVariable("id") long id, Model model,HttpServletRequest req, HttpServletResponse res) {
+        DriverEntityTO driverEntityTO = driverService.findById(req,res, id);
+        model.addAttribute("driver", driverEntityTO);
+        model.addAttribute("cars", carService.findAllAvailableCars(req,res));
+        model.addAttribute("selectedCar", carService.findById(req, res, driverEntityTO.getCarId()));
         return "/driver-like/driver";
+
     }
 
 

@@ -24,6 +24,11 @@ public class UserEntityTO {
         this.role = role;
     }
 
+    public UserEntityTO(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
     public String getLogin() {
         return login;
     }

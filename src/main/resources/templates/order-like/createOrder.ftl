@@ -1,73 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+    <title>Dispath service of towling</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <script type="text/javascript" src="/js/geoMap.js"></script>
+    <script type="text/javascript" src="/js/creatingOrder.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/loginStyle.css">
+    <link rel="stylesheet" href="/css/formfirst.css">
+    <link rel="stylesheet" href="css/menu.css">
     <style>
-        html, body, #map {
-            width: 90%;
-            height: 90%;
-            padding: 0;
-            margin: 0;
+        #popup {
+            background: #ffb;
+            padding: 10px;
+            border: 2px solid #999;
         }
     </style>
-    <meta charset="UTF-8">
+    <div class="popup" id="popup">
+        <span id="popup-content">Text in Popup</span>
+    </div>
+    <script>$('#popup').hide(0)</script>
+    <div>
+        <header class="user__header">
+            <h1 style="color: azure">Создать заказ</h1>
+        </header>
+    </div>
+    <div>
+        <nav role='navigation'>
+            <ul>
+                <li><a onclick="location.href='/orders'">Заказы</a></li>
+                <li><a onclick="location.href='/drivers'">Водители</a></li>
+                <li><a onclick="location.href='/cars'">Машины</a></li>
+                <li><a onclick="location.href='/logout'">Выйти</a></li>
+            </ul>
+        </nav>
+    </div>
 
 </head>
 <body>
 
-<form name="order" action="/orders/create" method="post">
+<form class="contact-form" name="order" action="JavaScript:catcher()">
+    <div>
+        <input title="Название" type="hidden" placeholder="Название" name="name" value=" ">
+    </div>
 
-    <p>Название</p>
-    <input title="Название" type="text" name="name">
+    <div>
+        <input title="Имя" type="text" id="clientFirstName" placeholder="Имя" name="clientFirstName">
+    </div>
+    <div>
+        <input title="Фамилия" type="text" id="clientLastName" placeholder="Фамилия" name="clientLastName">
+    </div>
+    <div>
+        <input title="Телефон клиента" type="text" id="clientPhoneNumber" placeholder="Телефон клиента"
+               name="clientPhoneNumber">
+    </div>
+    <div>
+        <input title="Стоимость" id="orderCost" placeholder="Стоимость" type="text" name="orderCost">
+    </div>
+    <details><br/>
+        <div>
+            <input title="Адрес" id="address" placeholder="Адрес" type="text" name="address">
+        </div>
+        <div>
+            <input title="Геолокация" id="geoData" type="text"
+                   placeholder="Местоположение заказчика"
+                   name="geoData">
+        </div>
 
-    <p>Имя</p>
-    <input title="Имя" type="text" name="clientFirstName">
+        <div>
+            <input title="Геолокация" id="destinationGeoData"
+                   placeholder="Местоположение пункта назначения"
+                   type="text" name="destinationGeoData">
+        </div>
+    </details>
+    <br/>
 
-    <p>Фамилия</p>
-    <input title="Фамилия" type="text" name="clientLastName">
-
-    <p>Телефон</p>
-    <input title="Телефон клиента" type="text" name="clientPhoneNumber">
-
-    <p>Адрес</p>
-    <input title="Адрес" id="address" type="text" name="address">
-
-    <p>Стоимость</p>
-    <input title="Стоимость" id="price" type="text" name="orderCost">
-
-    <p>Местоположение заказчика</p>
-    <input title="Геолокация" id="geo" type="text" name="geoData">
-
-    <p>Местоположение пункта назначения</p>
-    <input title="Геолокация" id="destinationGeo" type="text" name="destinationGeoData">
-
-    <p>Водитель</p>
+     <#if drivers?size == 0 > <b>Нет свободных водителей</b></#if>
     <select name="driverId" id="driverSelect">
-        <option>Выберите водителя</option>
+        <option value="0" selected>Выберите водителя</option>
             <#list drivers as driver>
                 <option value="${driver.id}"> ${driver.lastName} ${driver.phoneNumber}</option>
             </#list>
     </select>
 
+    <div>
+        <input id="chooseDriver" type="button" class="form_button" value="Подобрать водителя"/>
+        <input type="hidden" name="typeId" value="6">
+        <input class="form_button" type="submit" value="Создать"/>
+        <input class="form_button" type="button" onclick="history.back();" value="Назад"/>
+    </div>
 
-    <!--затестить кто встанет на заказ если ткнуть кнопку подбор водителя, мб отлавливать тык кнопки и не обращать внимание на выпадашку-->
-    <p>Статус заказа</p>
-        <p><select name="statusOrder">
-            <option selected="selected">Выберите статус</option>
-            <option value="Поиск водителя">Поиск водителя</option>
-            <option value="Водитель движется к клиенту">Водитель движется к клиенту</option>
-            <option value="Водитель с клиентом">Водитель с клиентом</option>
-            <option value="Заказ завершен">Заказ завершен</option>
-            <option value="Заказ отменен">Заказ отменен</option>
-        </select></p>
-    <input type="hidden" name="typeId" value="6">
-    <input type="submit" value="Создать">
 </form>
-<input type="button" id="chooseDriver" value="Подобрать водителя"/>
+
 <div id="map"></div>
 </body>
 </html>

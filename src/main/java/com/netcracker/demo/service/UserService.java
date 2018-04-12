@@ -1,32 +1,35 @@
 package com.netcracker.demo.service;
 
-import com.netcracker.demo.models.UserEntityTO;
-import org.springframework.http.*;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
+import com.netcracker.demo.models.UserEntityTO;
+import com.netcracker.demo.utility.UncRestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 
-@Service
+@Service("UserService")
 public class UserService implements MyService<UserEntityTO> {
 
-    private RestTemplate restTemplate = new RestTemplate();
-    static final String URL = "http://localhost:8082/admin/users";
-//    static final String AUTH_URL = "http://localhost:8082/auth";
+    @Autowired
+    private UncRestTemplate restTemplate;
+    private static final String ADDITION_URL = "/admin/users";
+
 
     @Override
-    public void save(UserEntityTO object) {
-        HttpEntity<UserEntityTO> entity = new HttpEntity<>(object, getHeaders(getToken("Irina", "1234")));
-        restTemplate.postForObject(URL, entity, UserEntityTO.class);
+    public void save(HttpServletRequest req, HttpServletResponse res, UserEntityTO object) {
+        restTemplate.postForObject(req, res, ADDITION_URL, object, UserEntityTO.class);
     }
 
     @Override
-    public void update(UserEntityTO object) {
-        HttpEntity<UserEntityTO> entity = new HttpEntity<>(getHeaders(getToken("Irina", "1234")));
-        ResponseEntity<UserEntityTO[]> response = restTemplate.exchange(
-                URL + "/" + object.getLogin(), HttpMethod.DELETE, entity, UserEntityTO[].class);
+    public void update(HttpServletRequest req, HttpServletResponse res, UserEntityTO object) {
+
+        restTemplate.patchForObject(req, res, ADDITION_URL + "/" + object.getLogin(), object, UserEntityTO.class);
     }
 
     @Override
@@ -35,43 +38,26 @@ public class UserService implements MyService<UserEntityTO> {
     }
 
     @Override
-    public void delete(UserEntityTO object) {
+    public void delete(HttpServletRequest req, HttpServletResponse res, UserEntityTO object) {
 
     }
 
     @Override
-    public List<UserEntityTO> findAll() {
-        HttpEntity<UserEntityTO> entity = new HttpEntity<>(getHeaders(getToken("Irina", "1234")));
-        ResponseEntity<UserEntityTO[]> response = restTemplate.exchange(
-                URL, HttpMethod.GET, entity, UserEntityTO[].class);
-        return Arrays.asList(response.getBody());
+    public List<UserEntityTO> findAll(HttpServletRequest req, HttpServletResponse res) {
+
+        ResponseEntity<UserEntityTO[]> response = restTemplate.exchange(req, res,
+                ADDITION_URL, HttpMethod.GET, UserEntityTO[].class);
+        return (response == null) ? null : Arrays.asList(response.getBody());
     }
 
-    public void delete(String login) {
-        HttpEntity<String> entity = new HttpEntity<>(getHeaders(getToken("Irina", "1234")));
-        ResponseEntity<String> response = restTemplate.exchange(
-                URL + "/" + login, HttpMethod.DELETE, entity, String.class);
+    public void delete(HttpServletRequest req, HttpServletResponse res, String login) {
+
+        ResponseEntity<String> response = restTemplate.exchange(req, res, ADDITION_URL + "/" + login, HttpMethod.DELETE, String.class);
     }
 
-    public UserEntityTO getUserByLogin(String login) {
-        HttpEntity<UserEntityTO> entity = new HttpEntity<>(getHeaders(getToken("Irina", "1234")));
-        ResponseEntity<UserEntityTO> response = restTemplate.exchange(URL + "/" + login, HttpMethod.GET, entity, UserEntityTO.class);
-        return response.getBody();
-    }
-
-
-    //Захардкожено
-    private HttpHeaders getHeaders(String token) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add(HttpHeaders.AUTHORIZATION, token);
-        return headers;
-    }
-
-    //Захардкожено
-    private String getToken(String login, String password) {
-        String originalInput = login + ":" + password;
-        return "Basic " + Base64.getEncoder().encodeToString(originalInput.getBytes());
+    public UserEntityTO getUserByLogin(HttpServletRequest req, HttpServletResponse res, String login) {
+        ResponseEntity<UserEntityTO> response = restTemplate.exchange(req, res, ADDITION_URL + "/" + login, HttpMethod.GET, UserEntityTO.class);
+        return (response == null) ? null : response.getBody();
     }
 
 }
