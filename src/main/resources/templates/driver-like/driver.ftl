@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="rus">
 <head>
-    <title>Driver info</title>
+    <title>Dispath service of towling</title>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/loginStyle.css">
+    <link rel="stylesheet" href="/css/tabAll.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script>
         // This variable can be accessed from js
         var selectedCarId = "${(selectedCar.id)!}";
@@ -9,7 +16,20 @@
     <script type="text/javascript" src="/js/driverScript.js"></script>
 </head>
 <body>
-<h1>Информация по водителю</h1>
+<header class="user__header">
+    <h1 style="color: azure">Информация по водителю</h1>
+</header>
+<div>
+    <nav role='navigation'>
+        <ul>
+            <li><a onclick="location.href='/orders'">Заказы</a></li>
+            <li><a onclick="location.href='/drivers'">Водители</a></li>
+            <li><a onclick="location.href='/cars'">Машины</a></li>
+            <li><a onclick="location.href='/logout'">Выйти</a></li>
+        </ul>
+    </nav>
+</div>
+
 <table>
     <tr>
         <th>ID</th>
@@ -47,7 +67,6 @@
     </tr>
 </table>
 <br>
-<a href="/drivers">Back</a>
 <form id="updateDriver" action="/drivers/${driver.id}" method="post">
     <input type="hidden" name="_method" value="patch"/>
     <input type="hidden" name="name" value="${driver.name}">
@@ -58,11 +77,11 @@
     <input type="hidden" name="driverGeoData" value="${(driver.driverGeoData)!"0.0,0.0"}">
     <input type="hidden" name="onShift" value="${(driver.onShift)}">
     <input type="hidden" name="login" value="${(driver.login)}">
-    <input type="submit" id="saveButton" disabled value="Сохранить"/>
+    <input class="form_button" type="submit" id="saveButton" disabled value="Сохранить"/>
 </form>
 <form id="deleteDriver" action="/drivers/${driver.id}" method="post">
     <input type="hidden" name="_method" value="delete"/>
-    <input type="submit" value="Удалить"/>
+    <input class="form_button" type="submit" value="Удалить"/>
 </form>
 </body>
 </html>
