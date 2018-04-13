@@ -31,10 +31,21 @@
         </ul>
     </nav>
 </div>
-<form class="form__input" name="user" action="/admin/users/createUser" method="post">
-    <input  title="Логин" placeholder="Логин" type="text" name="login">
+<form  name="user" action="/admin/users/createUser" method="post">
+    <div>
+    <input  title="Логин" placeholder="Логин" class="form__input" type="text" name="login">
+    </div>
+    <div>
     <input  title="Пароль" placeholder="Пароль" type="password"  name="password">
-    <input  type="hidden" name = "role" value="USER">
+    <div>
+    <br/>
+    <div>
+    <select>
+    <option>USER</option>
+    <option>Driver</option>
+    <option>Admin</option>
+    </select>
+    </div>
     <div>
     <input class="form_button"  type="submit" value="Создать"/>
     <input class="form_button"  type="reset" value="Отмена"/>
