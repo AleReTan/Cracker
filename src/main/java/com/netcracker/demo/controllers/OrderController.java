@@ -45,7 +45,7 @@ public class OrderController {
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.POST)
     public ResponseEntity createOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
-        System.out.println(order.toString());
+
         try {
             orderService.save(req, res, order);
         } catch (IllegalArgumentException e) {
@@ -96,7 +96,6 @@ public class OrderController {
         OrderEntityTO orderEntityTO = orderService.findById(req, res, id);
         model.addAttribute("order", orderEntityTO);
         model.addAttribute("drivers", driverService.findAllAvailableDrivers(req, res));
-        System.out.println(driverService.findById(req, res, orderEntityTO.getDriverId()));
         model.addAttribute("selectedDriver", driverService.findById(req, res, orderEntityTO.getDriverId()));
         return "/order-like/order";
     }

@@ -40,7 +40,6 @@ public class AuthController {
     @RequestMapping(value = "/errorMSG", method = RequestMethod.GET)
     public String getErrorPage(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         String message = (httpServletRequest.getAttribute("HttpStatus") == null) ? Integer.toString(httpServletResponse.getStatus()) : httpServletRequest.getAttribute("HttpStatus").toString();
-        System.out.println(message);
         model.addAttribute("errorMessage", message);
         return "/authentification/errorPage";
     }

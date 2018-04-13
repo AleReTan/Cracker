@@ -53,7 +53,7 @@
     </tr>
     <tr>
         <th>Автомобиль</th>
-        <td><select name="carId" id="driverId" form="updateDriver">
+        <td><select name="carId" id="carId" form="updateDriver">
         <#if (selectedCar.id)??>
             <option value="${(selectedCar.id)}"
                     selected>${(selectedCar.model)} ${(selectedCar.number)}</option>
