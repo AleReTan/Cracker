@@ -1,6 +1,5 @@
 package com.netcracker.demo.controllers;
 
-import com.netcracker.demo.models.CarEntityTO;
 import com.netcracker.demo.models.DriverEntityTO;
 import com.netcracker.demo.service.CarService;
 import com.netcracker.demo.service.DriverService;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class DriverController {
-//TODO: localhost:8080/drivers/ не подгружает скрипт, localhost:8080/drivers подгружает скрипт
     @Autowired
     DriverService driverService;
     @Autowired

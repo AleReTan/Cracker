@@ -37,19 +37,19 @@
     </div>
     <div>
         <input title="Пароль" placeholder="Пароль" type="password" name="password">
-        <div>
-            <br/>
-            <div>
-                <select>
-                    <option>USER</option>
-                    <option>DRIVER</option>
-                    <option>ADMIN</option>
-                </select>
-            </div>
-            <div>
-                <input class="form_button" type="submit" value="Создать"/>
-                <input class="form_button" type="reset" value="Отмена"/>
-            </div>
+    </div>
+    <br/>
+    <div>
+        <select name = "role">
+            <option value="USER">USER</option>
+            <option value="DRIVER">DRIVER</option>
+            <option value="ADMIN">ADMIN</option>
+        </select>
+    </div>
+    <div>
+        <input class="form_button" type="submit" value="Создать"/>
+        <input class="form_button" type="reset" value="Отмена"/>
+    </div>
 </form>
 
 </body>

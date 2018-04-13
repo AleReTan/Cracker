@@ -32,15 +32,20 @@
         </ul>
     </nav>
 </div>
-
+<form name="driverUser" action="/admin/users/createUser" method="post">
+    <input title="Логин" placeholder="Логин" type="text" name="login">
+    <input title="Пароль" placeholder="Пароль" type="password" name="password">
+    <input  type="hidden" name = "role" value="DRIVER">
+    <input class="form_button" type="submit" value="Создать пользователя">
+</form>
 <form name="driver" action="/drivers/create" method="post">
     <input title="Название" placeholder="Название" type="text" name="name">
     <input title="Имя" type="text" placeholder="Имя" name="firstName">
     <input title="Фамилия" type="text" placeholder="Фамилия" name="lastName">
     <input title="Телефон" type="text" placeholder="Телефон" name="phoneNumber">
-    <!--Тут не хватает login-->
+    <input type="hidden" name="login" value=>
     <select name="carId">
-        <#if cars?size != 1> <b>Нет свободных машин</b></#if>
+        <#if cars?size == 0> <b>Нет свободных машин</b></#if>
         <option value="0" selected>Выберите машину</option>
             <#list cars as car>
                 <option value="${car.id}"> ${car.model} ${car.number}</option>
@@ -51,5 +56,6 @@
     <input type="hidden" name="driverGeoData" value="0.0,0.0">
     <input class="form_button" type="submit" value="Создать">
 </form>
+
 </body>
 </html>
