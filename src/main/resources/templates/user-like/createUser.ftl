@@ -41,9 +41,10 @@
     <br/>
     <div>
         <select name = "role">
+            <option value="ADMIN">ADMIN</option>
             <option value="USER">USER</option>
             <option value="DRIVER">DRIVER</option>
-            <option value="ADMIN">ADMIN</option>
+            <option value="VENDOR">VENDOR</option>
         </select>
     </div>
     <div>
