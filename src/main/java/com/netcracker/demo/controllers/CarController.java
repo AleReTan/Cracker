@@ -3,6 +3,8 @@ package com.netcracker.demo.controllers;
 import com.netcracker.demo.models.CarEntityTO;
 import com.netcracker.demo.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,9 +21,6 @@ public class CarController {
     @Autowired
     CarService carService;
 
-     /*
-    Получение всех автомобилей, выводит их в виде таблицы на страницу Cars.ftl
-     */
     @RequestMapping(value = "/cars", method = RequestMethod.GET)
     public String getCars(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         model.addAttribute("cars", carService.findAll(httpServletRequest, httpServletResponse));
@@ -29,9 +28,15 @@ public class CarController {
     }
 
     @RequestMapping(value = {"/cars/create"}, method = RequestMethod.POST)
-    public String createCar(@ModelAttribute CarEntityTO car, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        carService.save(httpServletRequest, httpServletResponse, car);
-        return "redirect:/cars";
+    public ResponseEntity createCar(@ModelAttribute CarEntityTO car, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+
+        try {
+            carService.save(httpServletRequest, httpServletResponse, car);
+        } catch (IllegalArgumentException e) {
+            e.getMessage();
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/cars/create", method = RequestMethod.GET)
@@ -46,14 +51,14 @@ public class CarController {
     }
 
     @RequestMapping(value = "/cars/{id}", method = RequestMethod.DELETE)
-    public String deleteCars(@PathVariable("id") long id,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public String deleteCars(@PathVariable("id") long id, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         carService.delete(httpServletRequest, httpServletResponse, id);
         return "redirect:/cars";
     }
 
     @RequestMapping(value = "/cars/{id}", method = RequestMethod.GET)
-    public String getCars(@PathVariable("id") long id, Model model,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        Model car = model.addAttribute("car", carService.findById( httpServletRequest,httpServletResponse, id));
+    public String getCars(@PathVariable("id") long id, Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        Model car = model.addAttribute("car", carService.findById(httpServletRequest, httpServletResponse, id));
         return "/car-like/car";
     }
 }

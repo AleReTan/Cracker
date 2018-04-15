@@ -14,9 +14,9 @@
 <body>
 
 <div>
-<header class="user__header">
-    <h1 style="color: azure">Информация по пользователю</h1>
-</header>
+    <header class="user__header">
+        <h1 style="color: azure">Информация по пользователю</h1>
+    </header>
 </div>
 <div>
     <nav role='navigation'>
@@ -45,7 +45,7 @@
 </table>
 <form id="deleteUser" action="/admin/users/${userData.login}" method="post">
     <input type="hidden" name="_method" value="delete"/>
-    <input class="form_button" id="dlt" type="submit" value="Удалить" />
+    <input class="form_button" id="dlt" type="submit" value="Удалить"/>
 </form>
 </body>
 </html>
