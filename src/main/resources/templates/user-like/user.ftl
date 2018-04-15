@@ -44,6 +44,7 @@
     </tr>
 </table>
 <form id="deleteUser" action="/admin/users/${userData.login}" method="post">
+    <input type="hidden" name="_method" value="delete"/>
     <input class="form_button" id="dlt" type="submit" value="Удалить" />
 </form>
 </body>

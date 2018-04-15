@@ -88,7 +88,6 @@
 
     <div>
         <input id="chooseDriver" type="button" class="form_button" value="Подобрать водителя"/>
-        <input type="hidden" name="typeId" value="6">
         <input class="form_button" type="submit" value="Создать"/>
         <input class="form_button" type="button" onclick="history.back();" value="Назад"/>
     </div>

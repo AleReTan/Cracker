@@ -44,24 +44,12 @@ function init() {
         calculatePrice();
     });
     document.getElementById('chooseDriver').onclick = function () {
-        // var orderGeoArr = document.getElementById('geo').value.split(',');
-        // var orderGeo = [parseFloat(orderGeoArr[0]), parseFloat(orderGeoArr[1])];
-        /*
-                $.ajax({
-                    url: "json"
-                }).done(findDriver);
-
-                function findDriver(data) {
-                    geoObjects = ymaps.geoQuery(data)
-                        .addToMap(myMap);*/
         // Дождемся ответа от сервера и получим объект, ближайший к точке.
         geoObjects.then(function () {
             var closestObject = geoObjects.getClosestTo(startCoords);
             // Если ответ пуст, то ближайший объект не найдется.
             if (closestObject) {
                 document.getElementById('driverSelect').value = closestObject.properties.get('driverId');
-                //newContent = closestObject.properties.get('balloonContent') + " Mth";
-                //closestObject.properties.set('balloonContent', newContent);
                 $("driverId").val(closestObject.properties.get('driverId'));//ставим водителя на заказ
             }
 
@@ -114,8 +102,7 @@ function catcher() {
         address: $('#address').val(),
         geoData: $('#geoData').val(),
         destinationGeoData: $('#destinationGeoData').val(),
-        driverId: $('#driverSelect').val(),
-        typeId: 6
+        driverId: $('#driverSelect').val()
     };
     $.ajax({
         data: data,
