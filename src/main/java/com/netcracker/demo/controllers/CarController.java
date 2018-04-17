@@ -67,7 +67,6 @@ public class CarController {
     public String getCars(@PathVariable("id") long id, Model model,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         Model car = model.addAttribute("car", carService.findById(httpServletRequest, httpServletResponse, id));
         model.addAttribute("roles", roleService.getRole(httpServletRequest, httpServletResponse));
-
         return "/car-like/car";
     }
 
