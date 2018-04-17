@@ -50,7 +50,7 @@ public class OrderController {
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.POST)
     public ResponseEntity createOrder(@ModelAttribute OrderEntityTO order, HttpServletRequest req, HttpServletResponse res) {
-        System.out.println(order.toString());
+        System.out.println(order);
         try {
             orderService.save(req, res, order);
         } catch (IllegalArgumentException e) {

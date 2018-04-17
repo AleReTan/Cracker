@@ -55,14 +55,15 @@ public class UserController {
         return "redirect:/admin/users";
     }
 
-    @RequestMapping(value = "/users/{login}", method = RequestMethod.POST)
-    public String deleteDriver(@PathVariable("login") String login, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        userService.delete(httpServletRequest, httpServletResponse, login);
-        return "redirect:/admin/users";
+    @RequestMapping(value = "/drivers/{login}", method = RequestMethod.PATCH)
+    public String updateDriver(@ModelAttribute UserEntityTO u, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        userService.update(httpServletRequest, httpServletResponse, u);
+        return "redirect:/drivers";
     }
 
-    @RequestMapping(value = "/users/deleteUser", method = RequestMethod.POST)
-    public void deleteUser(@RequestBody UserEntityTO u, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        userService.delete(httpServletRequest, httpServletResponse, u);
+    @RequestMapping(value = "/users/{login}", method = RequestMethod.DELETE)
+    public String deleteUser(@PathVariable("login") String login, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        userService.delete(httpServletRequest, httpServletResponse, login);
+        return "redirect:/admin/users";
     }
 }

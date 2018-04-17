@@ -55,11 +55,11 @@
     </tr>
     <tr>
         <th>Геоданные</th>
-        <td>${(driver.driverGeoData)!"0.0,0.0"}</td>
+        <td>${driver.driverGeoData}</td>
     </tr>
     <tr>
         <th>Автомобиль</th>
-        <td><select name="carId" id="driverId" form="updateDriver">
+        <td><select name="carId" id="carId" form="updateDriver">
         <#if (selectedCar.id)??>
             <option value="${(selectedCar.id)}"
                     selected>${(selectedCar.model)} ${(selectedCar.number)}</option>
@@ -80,7 +80,7 @@
     <input type="hidden" name="firstName" value="${driver.firstName}">
     <input type="hidden" name="lastName" value="${driver.lastName}">
     <input type="hidden" name="phoneNumber" value="${driver.phoneNumber}">
-    <input type="hidden" name="driverGeoData" value="${(driver.driverGeoData)!"0.0,0.0"}">
+    <input type="hidden" name="driverGeoData" value="${driver.driverGeoData}">
     <input type="hidden" name="onShift" value="${(driver.onShift)}">
     <input type="hidden" name="login" value="${(driver.login)}">
     <input class="form_button" type="submit" id="saveButton" disabled value="Сохранить"/>
