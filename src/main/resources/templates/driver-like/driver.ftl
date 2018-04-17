@@ -22,8 +22,14 @@
 <div>
     <nav role='navigation'>
         <ul>
+        <#if roles== "ADMIN">
+            <li><a onclick="location.href='/admin'">Главная</a></li>
+        </#if>
             <li><a onclick="location.href='/orders'">Заказы</a></li>
             <li><a onclick="location.href='/drivers'">Водители</a></li>
+        <#if roles== "ADMIN">
+            <li><a onclick="location.href='/admin/users'">Пользователи</a></li>
+        </#if>
             <li><a onclick="location.href='/cars'">Машины</a></li>
             <li><a onclick="location.href='/logout'">Выйти</a></li>
         </ul>
@@ -79,9 +85,12 @@
     <input type="hidden" name="login" value="${(driver.login)}">
     <input class="form_button" type="submit" id="saveButton" disabled value="Сохранить"/>
 </form>
+<#if roles = "ADMIN">
 <form id="deleteDriver" action="/drivers/${driver.id}" method="post">
     <input type="hidden" name="_method" value="delete"/>
     <input class="form_button" type="submit" value="Удалить"/>
+
 </form>
+</#if>
 </body>
 </html>

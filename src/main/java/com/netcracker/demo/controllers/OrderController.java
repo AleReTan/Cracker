@@ -5,6 +5,7 @@ import com.netcracker.demo.models.DriverEntityTO;
 import com.netcracker.demo.models.OrderEntityTO;
 import com.netcracker.demo.service.DriverService;
 import com.netcracker.demo.service.OrderService;
+import com.netcracker.demo.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -31,10 +32,14 @@ public class OrderController {
     @Autowired
     DriverService driverService;
 
+    @Autowired
+    RoleService roleService;
+
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String getOrders(HttpServletRequest req, HttpServletResponse res, Model model) {
         model.addAttribute("orders", orderService.findAll(req, res));
         model.addAttribute("drivers", driverService.findAll(req, res));
+        model.addAttribute("roles", roleService.getRole(req, res));
         return "/order-like/orders";
     }
 
@@ -58,6 +63,7 @@ public class OrderController {
     @RequestMapping(value = "/orders/create", method = RequestMethod.GET)
     public String createOrderPage(Model model, HttpServletRequest req, HttpServletResponse res) {
         model.addAttribute("drivers", driverService.findAllAvailableDrivers(req, res));//свободные водилы, прочекать че делать когда нет свободных
+        model.addAttribute("roles", roleService.getRole(req, res));
         return "/order-like/createOrder";
     }
 
@@ -96,6 +102,7 @@ public class OrderController {
         OrderEntityTO orderEntityTO = orderService.findById(req, res, id);
         model.addAttribute("order", orderEntityTO);
         model.addAttribute("drivers", driverService.findAllAvailableDrivers(req, res));
+        model.addAttribute("roles", roleService.getRole(req, res));
         System.out.println(driverService.findById(req, res, orderEntityTO.getDriverId()));
         model.addAttribute("selectedDriver", driverService.findById(req, res, orderEntityTO.getDriverId()));
         return "/order-like/order";

@@ -2,6 +2,7 @@ package com.netcracker.demo.controllers;
 
 import com.netcracker.demo.models.CarEntityTO;
 import com.netcracker.demo.service.CarService;
+import com.netcracker.demo.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +20,15 @@ public class CarController {
     @Autowired
     CarService carService;
 
+    @Autowired
+    RoleService roleService;
+
      /*
     Получение всех автомобилей, выводит их в виде таблицы на страницу Cars.ftl
      */
     @RequestMapping(value = "/cars", method = RequestMethod.GET)
     public String getCars(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        model.addAttribute("roles", roleService.getRole(httpServletRequest, httpServletResponse));
         model.addAttribute("cars", carService.findAll(httpServletRequest, httpServletResponse));
         return "/car-like/cars";
     }
@@ -54,6 +59,7 @@ public class CarController {
     @RequestMapping(value = "/cars/{id}", method = RequestMethod.GET)
     public String getCars(@PathVariable("id") long id, Model model,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         Model car = model.addAttribute("car", carService.findById( httpServletRequest,httpServletResponse, id));
+        model.addAttribute("roles", roleService.getRole(httpServletRequest, httpServletResponse));
         return "/car-like/car";
     }
 }

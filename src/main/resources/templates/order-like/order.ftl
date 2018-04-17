@@ -19,13 +19,14 @@
     <script type="text/javascript" src="/js/orderScript.js"></script>
     <style>
         #map {
-            width: 50%;
-            height: 50%;
+            width: 80%;
+            height: 40%;
             position: absolute;
-            margin: 0;
+            margin: auto;
             align-content: center;
-            left: 650px;
-            top: 450px;
+            left: 90px;
+            top: 700px;
+            bottom: 10px;
         }
     </style>
 
@@ -37,8 +38,14 @@
 <div>
     <nav role='navigation'>
         <ul>
+        <#if roles== "ADMIN">
+            <li><a onclick="location.href='/admin'">Главная</a></li>
+        </#if>
             <li><a onclick="location.href='/orders'">Заказы</a></li>
             <li><a onclick="location.href='/drivers'">Водители</a></li>
+        <#if roles== "ADMIN">
+            <li><a onclick="location.href='/admin/users'">Пользователи</a></li>
+        </#if>
             <li><a onclick="location.href='/cars'">Машины</a></li>
             <li><a onclick="location.href='/logout'">Выйти</a></li>
         </ul>
@@ -183,11 +190,12 @@
     </#if>
 </form>
 
-
+<#if roles = "ADMIN">
 <form id="deleteOrder" action="/orders/${order.id}" method="post">
     <input type="hidden" name="_method" value="delete"/>
     <input class="form_button" type="submit" value="Удалить"/>
 </form>
+</#if>
 <div id="map"></div>
 </body>
 </html>

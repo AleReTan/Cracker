@@ -4,6 +4,7 @@ import com.netcracker.demo.models.CarEntityTO;
 import com.netcracker.demo.models.DriverEntityTO;
 import com.netcracker.demo.service.CarService;
 import com.netcracker.demo.service.DriverService;
+import com.netcracker.demo.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +20,14 @@ public class DriverController {
     DriverService driverService;
     @Autowired
     CarService carService;
+    @Autowired
+    RoleService roleService;
 
     @RequestMapping(value = "/drivers", method = RequestMethod.GET)
     public String getDrivers(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         model.addAttribute("drivers", driverService.findAll(httpServletRequest, httpServletResponse));
         model.addAttribute("cars", carService.findAll(httpServletRequest, httpServletResponse));
+        model.addAttribute("roles", roleService.getRole(httpServletRequest, httpServletResponse));
         return "/driver-like/drivers";
     }
 
@@ -57,6 +61,7 @@ public class DriverController {
         model.addAttribute("driver", driverEntityTO);
         model.addAttribute("cars", carService.findAllAvailableCars(req,res));
         model.addAttribute("selectedCar", carService.findById(req, res, driverEntityTO.getCarId()));
+        model.addAttribute("roles", roleService.getRole(req, res));
         return "/driver-like/driver";
 
     }

@@ -1,6 +1,7 @@
 package com.netcracker.demo.controllers;
 
 import com.netcracker.demo.models.UserEntityTO;
+import com.netcracker.demo.service.RoleService;
 import com.netcracker.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class UserController {
         this.userService = userService;
     }
 
+    @Autowired
+    RoleService roleService;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String admin() {
         return "/admin";
@@ -29,12 +33,14 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String getUsers(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         model.addAttribute("allUsers", userService.findAll(httpServletRequest, httpServletResponse));
+        model.addAttribute("roles", roleService.getRole(httpServletRequest, httpServletResponse));
         return "/user-like/users";
     }
 
     @RequestMapping(value = "/users/{login}", method = RequestMethod.GET)
     public String getUserByLogin(@PathVariable("login") String login, Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         model.addAttribute("userData", userService.getUserByLogin(httpServletRequest, httpServletResponse, login));
+        model.addAttribute("roles", roleService.getRole(httpServletRequest,httpServletResponse));
         return "/user-like/user";
     }
 

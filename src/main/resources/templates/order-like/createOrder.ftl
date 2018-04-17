@@ -23,24 +23,31 @@
         <span id="popup-content">Text in Popup</span>
     </div>
     <script>$('#popup').hide(0)</script>
-    <div>
-        <header class="user__header">
-            <h1 style="color: azure">Создать заказ</h1>
-        </header>
-    </div>
-    <div>
-        <nav role='navigation'>
-            <ul>
-                <li><a onclick="location.href='/orders'">Заказы</a></li>
-                <li><a onclick="location.href='/drivers'">Водители</a></li>
-                <li><a onclick="location.href='/cars'">Машины</a></li>
-                <li><a onclick="location.href='/logout'">Выйти</a></li>
-            </ul>
-        </nav>
-    </div>
 
 </head>
 <body>
+<div>
+    <header class="user__header">
+        <h1 style="color: azure">Создать заказ</h1>
+    </header>
+</div>
+<div>
+    <nav role='navigation'>
+        <ul>
+        <#if roles== "ADMIN">
+            <li><a onclick="location.href='/admin'">Главная</a></li>
+        </#if>
+            <li><a onclick="location.href='/orders'">Заказы</a></li>
+            <li><a onclick="location.href='/drivers'">Водители</a></li>
+        <#if roles== "ADMIN">
+            <li><a onclick="location.href='/admin/users'">Пользователи</a></li>
+        </#if>
+            <li><a onclick="location.href='/cars'">Машины</a></li>
+            <li><a onclick="location.href='/logout'">Выйти</a></li>
+        </ul>
+    </nav>
+</div>
+
 
 <form class="contact-form" name="order" action="JavaScript:catcher()">
     <div>
@@ -94,7 +101,6 @@
     </div>
 
 </form>
-
 <div id="map"></div>
 </body>
 </html>
