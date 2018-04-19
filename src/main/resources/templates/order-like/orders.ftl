@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Roboto:700,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="css/table.css">
-    <link rel="stylesheet" href="css/loginStyle.css">
-    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/tableOrders.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/createOrderButton.css">
     <link rel="stylesheet" href="css/menu.css">
 
 </head>

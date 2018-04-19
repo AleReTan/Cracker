@@ -9,9 +9,9 @@
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript" src="/js/creatingOrder.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/css/loginStyle.css">
-    <link rel="stylesheet" href="/css/formfirst.css">
-    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/formcreate.css">
+    <link rel="stylesheet" href="/css/menu.css">
     <style>
         #popup {
             background: #ffb;
@@ -23,14 +23,11 @@
         <span id="popup-content">Text in Popup</span>
     </div>
     <script>$('#popup').hide(0)</script>
-
 </head>
 <body>
-<div>
-    <header class="user__header">
-        <h1 style="color: azure">Создать заказ</h1>
-    </header>
-</div>
+<header class="user__header">
+    <h1 style="color: azure">Создание заказа</h1>
+</header>
 <div>
     <nav role='navigation'>
         <ul>
@@ -47,7 +44,6 @@
         </ul>
     </nav>
 </div>
-
 
 <form class="contact-form" name="order" action="JavaScript:catcher()">
     <div>

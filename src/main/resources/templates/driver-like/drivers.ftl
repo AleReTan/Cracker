@@ -9,8 +9,8 @@
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript" src="js/showDrivers.js"></script>
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/loginStyle.css">
-    <link rel="stylesheet" href="css/tabAll.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/tableMini.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <style>

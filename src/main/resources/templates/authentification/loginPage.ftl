@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="authorisation.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="css/loginStyle.css">
+    <link rel="stylesheet" href="css/main.css">
 
     <script  src="js/loginScript.js"></script>
 </head>

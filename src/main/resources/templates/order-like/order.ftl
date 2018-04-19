@@ -4,8 +4,8 @@
     <title>Dispath service of towling</title>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/css/loginStyle.css">
-    <link rel="stylesheet" href="/css/tabAll.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/tableMini.css">
     <link rel="stylesheet" href="/css/menu.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -22,11 +22,11 @@
             width: 80%;
             height: 40%;
             position: absolute;
-            margin: auto;
+
             align-content: center;
-            left: 90px;
-            top: 700px;
-            bottom: 10px;
+            left: 115px;
+            top: 620px;
+           margin-bottom: 20px;
         }
     </style>
 
@@ -111,8 +111,9 @@
 </div>
 <br>
 <!-- ифы наружу, внутри формы, внутри запускать на разные URL, на сервисе методы водитель прибыл, закончил заказ-->
-<#if order.statusOrder == "Поиск водителя"><input class="form_button" type="button" id="chooseDriver"
-                                                  value="Подобрать водителя"/></#if>
+<#if order.statusOrder == "Поиск водителя">
+<input class="form_button" type="button" id="chooseDriver" value="Подобрать водителя"/>
+</#if>
 <#if order.statusOrder == "Водитель движется к клиенту">
 <form id="pickClient" action="/orders/${order.id}/pickclient" method="post">
     <input type="hidden" name="_method" value="patch"/>
@@ -166,7 +167,7 @@
     <#if order.statusOrder == "Водитель с клиентом" ||
     order.statusOrder == "Заказ завершен" ||
     order.statusOrder == "Заказ отменен" >
-        <input class="form_button" type="submit" id="setDriver" disabled hidden value="Установить водителя"/>
+        <input class="form_disabled" type="submit" id="setDriver" disabled hidden value="Установить водителя"/>
     <#else>
         <input class="form_button" type="submit" id="setDriver" disabled value="Установить водителя"/>
     </#if>
