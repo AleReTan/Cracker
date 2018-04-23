@@ -22,9 +22,6 @@
 <div>
     <nav role='navigation'>
         <ul>
-        <#if roles== "ADMIN">
-            <li><a onclick="location.href='/admin'">Главная</a></li>
-        </#if>
             <li><a onclick="location.href='/orders'">Заказы</a></li>
             <li><a onclick="location.href='/drivers'">Водители</a></li>
         <#if roles== "ADMIN">
@@ -52,5 +49,8 @@
 
 </table>
 <input class="form_button" type="button" href="/admin" value="Назад"/>
+<#if roles== "ADMIN">
+<input class="form_button" type="button" onclick="location.href='/admin/users/createUser';" value="Добавить пользователя"/>
+</#if>
 </body>
 </html>
