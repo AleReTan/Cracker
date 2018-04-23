@@ -1,6 +1,5 @@
 package com.netcracker.demo.models;
 
-
 import java.util.Objects;
 
 
@@ -34,6 +33,8 @@ public class OrderEntityTO {
     private String orderEndTime;
 
     private String statusOrder;
+
+    private String creator;
 
 
     public long getId() {
@@ -148,10 +149,18 @@ public class OrderEntityTO {
         this.statusOrder = statusOrder;
     }
 
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
     public OrderEntityTO() {
     }
 
-    public OrderEntityTO(long id, String name, long typeId, String clientFirstName, String clientLastName, String clientPhoneNumber, String address, long driverId, String orderCost, String geoData, String destinationGeoData, String orderStartTime, String orderEndTime, String statusOrder) {
+    public OrderEntityTO(long id, String name, long typeId, String clientFirstName, String clientLastName, String clientPhoneNumber, String address, long driverId, String orderCost, String geoData, String destinationGeoData, String orderStartTime, String orderEndTime, String statusOrder, String creator) {
         this.id = id;
         this.name = name;
         this.typeId = typeId;
@@ -166,6 +175,7 @@ public class OrderEntityTO {
         this.orderStartTime = orderStartTime;
         this.orderEndTime = orderEndTime;
         this.statusOrder = statusOrder;
+        this.creator = creator;
     }
 
     @Override
@@ -186,18 +196,20 @@ public class OrderEntityTO {
                 Objects.equals(getDestinationGeoData(), that.getDestinationGeoData()) &&
                 Objects.equals(getOrderStartTime(), that.getOrderStartTime()) &&
                 Objects.equals(getOrderEndTime(), that.getOrderEndTime()) &&
-                Objects.equals(getStatusOrder(), that.getStatusOrder());
+                Objects.equals(getStatusOrder(), that.getStatusOrder()) &&
+                Objects.equals(getCreator(), that.getCreator());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getTypeId(), getClientFirstName(), getClientLastName(), getClientPhoneNumber(), getAddress(), getDriverId(), getOrderCost(), getGeoData(), getDestinationGeoData(), getOrderStartTime(), getOrderEndTime(), getStatusOrder());
+
+        return Objects.hash(getId(), getName(), getTypeId(), getClientFirstName(), getClientLastName(), getClientPhoneNumber(), getAddress(), getDriverId(), getOrderCost(), getGeoData(), getDestinationGeoData(), getOrderStartTime(), getOrderEndTime(), getStatusOrder(), getCreator());
     }
 
     @Override
     public String toString() {
-        return "OrderEntityTO{" +
-                "id=" + id +
+        return OrderEntityTO.class.getSimpleName() +
+                " id=" + id +
                 ", name='" + name + '\'' +
                 ", typeId=" + typeId +
                 ", clientFirstName='" + clientFirstName + '\'' +
@@ -210,8 +222,8 @@ public class OrderEntityTO {
                 ", destinationGeoData='" + destinationGeoData + '\'' +
                 ", orderStartTime='" + orderStartTime + '\'' +
                 ", orderEndTime='" + orderEndTime + '\'' +
-                ", statusOrder='" + statusOrder + '\'' +
-                '}';
+                ", creator='" + creator + '\'' +
+                ", statusOrder='" + statusOrder;
     }
 
 }
