@@ -15,13 +15,13 @@
     <meta charset="UTF-8">
     <style>
         #map {
-            width: 70%;
-            height: 30%;
+            width: 50%;
+            height: 50%;
             position: absolute;
             margin: 0;
             align-content: center;
-            left: 122px;
-            top: 350px;
+            left: 650px;
+            top: 103px;
         }
     </style>
 </head>
@@ -34,7 +34,9 @@
 <div>
     <nav role='navigation'>
             <ul>
-
+            <#if roles== "ADMIN">
+                <li><a onclick="location.href='/admin'">Главная</a></li>
+            </#if>
                 <li><a onclick="location.href='/orders'">Заказы</a></li>
                 <li><a onclick="location.href='/drivers'">Водители</a></li>
             <#if roles== "ADMIN">
@@ -65,10 +67,6 @@
     </tr>
 </#list>
 </table>
-
-<#if roles== "ADMIN">
-<input class="form_button" onclick="location.href='/drivers/create';" type="button" value="Добавить водителя"/>
-</#if>
 <div id="map"></div>
 </body>
 </html>

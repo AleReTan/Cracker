@@ -7,8 +7,6 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.maskedinput-1.1.3.js"></script>
-    <script src="mask.js" type="text/javascript"></script>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/tableMini.css">
     <link rel="stylesheet" href="/css/menu.css">
@@ -22,6 +20,9 @@
 <div>
     <nav role='navigation'>
         <ul>
+        <#if roles== "ADMIN">
+            <li><a onclick="location.href='/admin'">Главная</a></li>
+        </#if>
             <li><a onclick="location.href='/orders'">Заказы</a></li>
             <li><a onclick="location.href='/drivers'">Водители</a></li>
         <#if roles== "ADMIN">
@@ -44,7 +45,7 @@
     </tr>
     <tr>
         <th>Номер</th>
-        <td><input title="Номер" type="text" required form="updateCars" name="number" id="number" value=${car.number}></td>
+        <td><input title="Номер" type="text" required form="updateCars" name="number" value=${car.number}></td>
     </tr>
     <tr>
         <th>Модель</th>
@@ -52,7 +53,7 @@
     </tr>
     <tr>
         <th>Цвет</th>
-        <td><input  type="text" required form="updateCars" name="color" pattern="[A-Za-z]" title="White" value=${car.color}></td>
+        <td><input title="Цвет" type="text" required form="updateCars" name="color" value=${car.color}></td>
     </tr>
     <tr>
         <th>Тип</th>
@@ -67,12 +68,14 @@
     <input type="hidden" name="typeId" value="${car.typeId}">
     <input type="hidden" name="model" value="${car.model}">
     <input type="hidden" name="type" value="${car.type}">
-    <input class="form_disabled"  disabled type="submit" value="Сохранить"/>
+    <input class="form_button" type="submit" value="Сохранить"/>
 </form>
 
 <form id="deleteCars" action="/cars/${car.id}" method="post">
     <input type="hidden" name="_method" value="delete"/>
-
+<#if roles== "ADMIN">
+    <input class="form_button" name="delete" type="submit" value="Удалить"/>
+</#if>
 </form>
 
 

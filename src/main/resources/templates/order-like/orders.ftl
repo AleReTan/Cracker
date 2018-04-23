@@ -20,7 +20,9 @@
 <div>
     <nav role='navigation'>
         <ul>
-
+        <#if roles== "ADMIN">
+            <li><a onclick="location.href='/admin'">Главная</a></li>
+        </#if>
             <li><a onclick="location.href='/orders'">Заказы</a></li>
             <li><a onclick="location.href='/drivers'">Водители</a></li>
         <#if roles== "ADMIN">

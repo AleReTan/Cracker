@@ -30,7 +30,7 @@ $(document).ready(function () {
                     Url = "/orders";
                 }
                 else if(data == "ADMIN") {
-                    Url = "/orders";
+                    Url = "/admin";
                 }
 
                 window.location = Url;
@@ -40,5 +40,7 @@ $(document).ready(function () {
                 alert('Booh! Wrong credentials, try again!');
             }
         );
-
+        if (!confirm("Are you sure continue?")) {
+            e.preventDefault();
+        }
     }
