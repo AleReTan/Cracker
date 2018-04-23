@@ -22,7 +22,6 @@
 <div>
     <nav role='navigation'>
         <ul>
-            <li><a onclick="location.href='/admin'">Главная</a></li>
             <li><a onclick="location.href='/orders'">Заказы</a></li>
             <li><a onclick="location.href='/drivers'">Водители</a></li>
             <li><a onclick="location.href='/admin/users'">Пользователи</a></li>
@@ -33,7 +32,7 @@
 </div>
 <form name="user" action="/admin/users/createUser" method="post">
     <div>
-        <input title="Логин" placeholder="Логин" class="form__input" type="text" name="login">
+        <input title="Логин" placeholder="Логин" class="form__input" type="text" name="login"  pattern="[A-Za-z] + "  title="Например, Ivan">
     </div>
     <div>
         <input title="Пароль" placeholder="Пароль" type="password" name="password">
