@@ -47,6 +47,7 @@ public class AuthService {
     public void logout(HttpServletRequest req, HttpServletResponse res) {
 
         ResponseEntity<String> response = restTemplate.exchange(req, res, LOGOUT_URL, HttpMethod.GET, String.class);
+        CookieUtil.clear(req, res, CookieUtil.COOKIE_NAME, CookieUtil.LOCALHOST);
     }
 
     public String getToken(String login, String password) {
