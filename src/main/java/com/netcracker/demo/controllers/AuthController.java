@@ -34,7 +34,8 @@ public class AuthController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public void getLogout(HttpServletRequest request, HttpServletResponse response) {
-        authService.logout(request, response);// return "redirect:/login";
+        authService.logout(request, response);
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/errorMSG", method = RequestMethod.GET)
