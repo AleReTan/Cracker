@@ -12,8 +12,22 @@ function init() {
         controls: []
     });
 
+    //Создание поля для поиска обьекта
+    // Создаем экземпляр класса ymaps.control.SearchControl
+    mySearchControl = new ymaps.control.SearchControl({
+        options: {
+            noPlacemark: true
+        }
+    }),
+        // Результаты поиска будем помещать в коллекцию.
+        mySearchResults = new ymaps.GeoObjectCollection(null, {
+            hintContentLayout: ymaps.templateLayoutFactory.createClass('$[properties.name]')
+        });
+    myMap.controls.add(mySearchControl);
+    
+
     $.ajax({
-        url: "http://localhost:8080/availableDriversJson"
+        url: "http://localhost:8081/availableDriversJson"
     }).done(function (data) {
         geoObjects = ymaps.geoQuery(data)
             .addToMap(myMap);
@@ -33,6 +47,7 @@ function init() {
             calculatePrice();
         }
     });
+
 
     // Обработка события, возникающего при щелчке
     // правой кнопки мыши в любой точке карты.
@@ -106,14 +121,14 @@ function catcher() {
     };
     $.ajax({
         data: data,
-        url: "http://localhost:8080/orders/create",
+        url: "http://localhost:8081/orders/create",
         type: 'POST'
     }).done(
         function () {
             console.log("succes");
             showPopUp("succes");
             hidePopUp(2000);
-            window.location.replace("http://localhost:8080/orders");
+            window.location.replace("http://localhost:8081/orders");
         }
     ).fail(
         function (dataIn) {
