@@ -18,14 +18,15 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
+import java.util.Objects;
 
 @Component
-@PropertySource("classpath:url.properties")
+//@PropertySource("classpath:url.properties")
 public class UncRestTemplate {
-    @Resource
-    private static Environment env;
+    //@Resource
+    //private Environment env;
 
-    public static final String BASE_URL = env.getRequiredProperty("back.url");
+    public static final String BASE_URL = "http://localhost:8082";
 
     private RestTemplate restTemplate;
 
