@@ -25,14 +25,6 @@ public class RoleService {
         if(response == null){
             return null;
         }
-        response.getHeaders();
-        List<String> header = response.getHeaders().getValuesAsList(HttpHeaders.AUTHORIZATION);
-        if (!header.isEmpty()) {
-            String token = header.get(0);
-            if (token != null && token.startsWith(AuthService.SESSION)) {
-                CookieUtil.create(res, CookieUtil.COOKIE_NAME, token, -1, CookieUtil.LOCALHOST);
-            }
-        }
         return response.getBody();
     }
 

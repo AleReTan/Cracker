@@ -38,7 +38,7 @@ public class AuthService {
         if (!header.isEmpty()) {
             String token = header.get(0);
             if (token != null && token.startsWith(AuthService.SESSION)) {
-                CookieUtil.create(res, CookieUtil.COOKIE_NAME, token, -1, CookieUtil.LOCALHOST);
+                CookieUtil.create(res, CookieUtil.COOKIE_NAME, token, -1, req.getServerName());
             }
         }
         return response.getBody();
@@ -47,7 +47,7 @@ public class AuthService {
     public void logout(HttpServletRequest req, HttpServletResponse res) {
 
         ResponseEntity<String> response = restTemplate.exchange(req, res, LOGOUT_URL, HttpMethod.GET, String.class);
-        CookieUtil.clear(req, res, CookieUtil.COOKIE_NAME, CookieUtil.LOCALHOST);
+        CookieUtil.clear(req, res, CookieUtil.COOKIE_NAME, req.getServerName());
     }
 
     public String getToken(String login, String password) {
