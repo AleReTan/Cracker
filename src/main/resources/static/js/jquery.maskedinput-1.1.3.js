@@ -84,8 +84,7 @@
 		}, settings);		
 		
 		//Build Regex for format validation
-		var re = new RegExp("^"+	
-		$.map( mask.split(""), function(c,i){		  		  
+		var re = new RegExp("^"+ $.map( mask.split(""), function(c,i){
 		  return charMap[c]||((/[A-Za-z0-9]/.test(c)?"":"\\")+c);
 		}).join('')+				
 		"$");		

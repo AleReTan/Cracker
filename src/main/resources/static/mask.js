@@ -1,3 +1,4 @@
-$("#phone").inputmask({"mask": "(999) 999-9999"});
 
-$("#number").inputmask({"mask": "x999xx99"});
+$(document).ready(function($) {
+    $("#clientPhoneNumber").mask( "+7(999) 999-9999");
+});
