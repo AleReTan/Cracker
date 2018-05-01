@@ -22,20 +22,20 @@ function createDriver() {
 
     $.ajax({
         data: dataUser,
-        url: "http://localhost:8080/admin/users/createUser",
+        url: front_url + "/admin/users/createUser",
         type: 'POST'
     }).done(
         function () {
             console.log("successful user creating");
             $.ajax({
                 data: dataDriver,
-                url: "http://localhost:8080/drivers/create",
+                url: front_url + "/drivers/create",
                 type: 'POST'
             }).done(
                 function () {
                     showPopUp("succes");
                     hidePopUp(2000);
-                    window.location.replace("http://localhost:8080/admin");
+                    window.location.replace(front_url + "/admin");
                 }
             ).fail(function (dataIn) {
                 console.log("fail");
@@ -43,7 +43,7 @@ function createDriver() {
                 showPopUp(dataIn.responseText);
                 hidePopUp(2000);
                 $.ajax({
-                    url: "http://localhost:8080/admin/users/" + $('#login').val(),
+                    url: front_url + "/admin/users/" + $('#login').val(),
                     type: 'DELETE'
                 });
             });

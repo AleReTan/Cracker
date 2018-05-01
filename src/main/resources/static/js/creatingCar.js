@@ -16,14 +16,14 @@ function createCar() {
 
     $.ajax({
         data: data,
-        url: "http://localhost:8080/cars/create",
+        url: front_url + "/cars/create",
         type: 'POST'
     }).done(
         function () {
             console.log("successful car creating");
             showPopUp("succes");
             hidePopUp(2000);
-            window.location.replace("http://localhost:8080/admin");
+            window.location.replace(front_url + "/admin");
         }
     ).fail(
         function (dataIn) {

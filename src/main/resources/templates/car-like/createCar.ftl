@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.maskedinput-1.1.3.js"></script>
     <script src="mask.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/properties.js"></script>
     <script type="text/javascript" src="/js/creatingCar.js"></script>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/formcreate.css">

@@ -1,0 +1,1 @@
+var front_url = "http://localhost:8080";

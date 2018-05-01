@@ -11,7 +11,7 @@ function init() {
     });
 
     $.ajax({
-        url: "http://localhost:8080/availableDriversJson"
+        url: front_url + "/availableDriversJson"
     }).done(function (data) {
         geoObjects = ymaps.geoQuery(data)
             .addToMap(myMap);

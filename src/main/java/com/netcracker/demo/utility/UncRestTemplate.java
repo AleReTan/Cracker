@@ -4,6 +4,8 @@ package com.netcracker.demo.utility;
 import com.netcracker.demo.models.AuthThreadLocalTO;
 import com.netcracker.demo.service.AuthService;
 import org.apache.http.impl.client.HttpClients;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
@@ -12,14 +14,18 @@ import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
 @Component
+@PropertySource("classpath:url.properties")
 public class UncRestTemplate {
+    @Resource
+    private static Environment env;
 
-    public static final String BASE_URL = "http://localhost:8082";
+    public static final String BASE_URL = env.getRequiredProperty("back.url");
 
     private RestTemplate restTemplate;
 

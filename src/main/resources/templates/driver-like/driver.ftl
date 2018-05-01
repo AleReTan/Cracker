@@ -13,6 +13,7 @@
         // This variable can be accessed from js
         var selectedCarId = "${(selectedCar.id)!}";
     </script>
+    <script type="text/javascript" src="/js/properties.js"></script>
     <script type="text/javascript" src="/js/driverScript.js"></script>
 </head>
 <body>

@@ -16,6 +16,7 @@
         var startPoint = "${order.geoData}";
         var destinationPoint = "${order.destinationGeoData}";
     </script>
+    <script type="text/javascript" src="/js/properties.js"></script>
     <script type="text/javascript" src="/js/orderScript.js"></script>
     <style>
         #map {

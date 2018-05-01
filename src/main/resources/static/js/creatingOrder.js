@@ -27,7 +27,7 @@ function init() {
     
 
     $.ajax({
-        url: "http://localhost:8081/availableDriversJson"
+        url: front_url + "/availableDriversJson"
     }).done(function (data) {
         geoObjects = ymaps.geoQuery(data)
             .addToMap(myMap);
@@ -121,14 +121,14 @@ function catcher() {
     };
     $.ajax({
         data: data,
-        url: "http://localhost:8081/orders/create",
+        url: front_url + "/orders/create",
         type: 'POST'
     }).done(
         function () {
             console.log("succes");
             showPopUp("succes");
             hidePopUp(2000);
-            window.location.replace("http://localhost:8081/orders");
+            window.location.replace(front_url + "/orders");
         }
     ).fail(
         function (dataIn) {
