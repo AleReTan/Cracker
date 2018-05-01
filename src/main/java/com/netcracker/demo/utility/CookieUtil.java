@@ -12,16 +12,11 @@ public class CookieUtil {
     public static final String LOCALHOST = "localhost";
 
     public static void create(HttpServletResponse httpServletResponse, String name, String value, Integer maxAge, String domain) {
-        //boolean secure = true;
-        boolean secure = false;
-        if (domain.equals(LOCALHOST)||domain.equals("127.0.0.1") ) {
-            secure = false;
-        }
 
         Cookie cookie = new Cookie(name, value);
         cookie.setDomain(domain);
         cookie.setPath("/");
-        cookie.setSecure(secure);
+        cookie.setSecure(false);
         cookie.setHttpOnly(true);
 
         if (maxAge > 0) {
