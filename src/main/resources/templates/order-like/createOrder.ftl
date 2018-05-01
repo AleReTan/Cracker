@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="bower\jquery-validation\1.17.0\jquery-validation-1.17.0.jar!\META-INF\resources\webjars\jquery-validation\1.17.0\dist\jquery.validate.js"></script>
     <script type="text/javascript" src="js/jquery.maskedinput-1.1.3.js"></script>
-    <script type="text/javascript" src="js/mask.js" ></script>
+    <script type="text/javascript" src="js/mask.js"></script>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/formcreate.css">
     <link rel="stylesheet" href="/css/menu.css">
@@ -56,13 +56,13 @@
     </div>
 
     <div>
-        <input type="text" id="clientFirstName" placeholder="Имя" name="clientFirstName" pattern="[A-Za-z]" title="Имя может только содержать латинские буквы"/>
+        <input type="text" id="clientFirstName" placeholder="Имя" name="clientFirstName" title="Имя может только содержать латинские буквы"/>
     </div>
     <div>
-        <input  type="text" id="clientLastName" placeholder="Фамилия" name="clientLastName" pattern="[A-Za-z]" title="Фамилия может только содержать латинские буквы"/>
+        <input  type="text" id="clientLastName" placeholder="Фамилия" name="clientLastName" title="Фамилия может только содержать латинские буквы"/>
     </div>
     <div>
-        <input title="Телефон" type="text" id="phone" placeholder="+7(999)999-9999" name="clientPhoneNumber" >
+        <input title="Телефон" type="text" id="clientPhoneNumber" placeholder="+7(999)999-9999" name="clientPhoneNumber" >
     </div>
     <div>
         <input title="Стоимость" id="orderCost" placeholder="Стоимость" type="text" name="orderCost">

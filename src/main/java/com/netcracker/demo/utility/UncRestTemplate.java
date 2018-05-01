@@ -53,7 +53,6 @@ public class UncRestTemplate {
             //проверяем, если пишла 500, но нет хедеа, значит причина не в полях
             if (e.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR && (e.getResponseHeaders().get("Error message").get(0) != null)) {
                 String errorMessage = e.getResponseHeaders().get("Error message").get(0);
-                System.out.println(errorMessage);
                 throw new IllegalArgumentException(errorMessage);
             } else {
                 AuthService.sendRedirectIfError(e, req, res);

@@ -127,6 +127,7 @@
     <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
     <input type="hidden" name="orderEndTime" value="${order.orderEndTime}">
     <input type="hidden" name="driverId" value="${order.driverId}">
+    <input type="hidden" name="creator" value="${order.creator}">
     <input class="form_button" type="submit" id="saveButton" value="Забрал клиента"/>
 </form>
 <#elseif order.statusOrder == "Водитель с клиентом">
@@ -144,6 +145,7 @@
         <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
         <input type="hidden" name="orderEndTime" value="${order.orderEndTime}">
         <input type="hidden" name="driverId" value="${order.driverId}">
+        <input type="hidden" name="creator" value="${order.creator}">
         <input class="form_button" type="submit" id="saveButton" value="Завершить заказ"/>
     </form>
 </#if>
@@ -161,6 +163,7 @@
     <input type="hidden" name="destinationGeoData" value="${order.destinationGeoData}">
     <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
     <input type="hidden" name="orderEndTime" value="${order.orderEndTime}">
+    <input type="hidden" name="creator" value="${order.creator}">
     <input type="hidden" name="statusOrder" value="${order.statusOrder}">
     <#if order.statusOrder == "Водитель с клиентом" ||
     order.statusOrder == "Заказ завершен" ||
@@ -180,6 +183,7 @@
     <input type="hidden" name="address" value="${order.address}">
     <input type="hidden" name="orderCost" value="${order.orderCost}">
     <input type="hidden" name="geoData" value="${order.geoData}">
+    <input type="hidden" name="creator" value="${order.creator}">
     <input type="hidden" name="destinationGeoData" value="${order.destinationGeoData}">
     <input type="hidden" name="orderStartTime" value="${order.orderStartTime}">
     <input type="hidden" name="orderEndTime" value="${order.orderEndTime}">

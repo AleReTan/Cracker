@@ -33,7 +33,6 @@ public class DriverController {
 
     @RequestMapping(value = "/drivers/create", method = RequestMethod.POST)
     public ResponseEntity createDriver(@ModelAttribute DriverEntityTO driver, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        System.out.println(driver);
         try {
             driverService.save(httpServletRequest, httpServletResponse, driver);
         } catch (IllegalArgumentException e) {
