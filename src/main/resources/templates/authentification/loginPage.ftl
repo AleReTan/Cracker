@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="css/main.css">
 
     <script  src="js/loginScript.js"></script>
+
+    <script>
+        history.pushState(null, null, document.title);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.title);
+        });
+    </script>
 </head>
 <body class="font_login">
 

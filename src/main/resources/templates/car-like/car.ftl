@@ -7,8 +7,8 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.maskedinput-1.1.3.js"></script>
-    <script src="mask.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/jquery.maskedinput-1.1.3.js"></script>
+    <script type="text/javascript" src="/mask.js" ></script>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/tableMini.css">
     <link rel="stylesheet" href="/css/menu.css">
@@ -44,7 +44,7 @@
     </tr>
     <tr>
         <th>Номер</th>
-        <td><input title="Номер" type="text" required form="updateCars" name="number" id="number" value=${car.number}></td>
+        <td><input title="Номер" type="text"  form="updateCars" name="number" id="number" value=${car.number}></td>
     </tr>
     <tr>
         <th>Модель</th>
@@ -52,8 +52,7 @@
     </tr>
     <tr>
         <th>Цвет</th>
-        <td><input  type="text" required form="updateCars" name="color" pattern="[A-Za-z]" title="White" value=${car.color}></td>
-    </tr>
+        <td><input type="text"  name="color" pattern="[А-Яа-яЁё]{3,}" title="Цвет машины состоит из русских букв" value=${car.color}></td>
     <tr>
         <th>Тип</th>
         <td>${car.type}</td>
@@ -67,14 +66,18 @@
     <input type="hidden" name="typeId" value="${car.typeId}">
     <input type="hidden" name="model" value="${car.model}">
     <input type="hidden" name="type" value="${car.type}">
-    <input class="form_disabled"  disabled type="submit" value="Сохранить"/>
+<#if roles== "ADMIN">
+    <input class="form_button" type="submit" value="Сохранить"/>
+<#elseif roles == "USER">
+    <input class="form_disabled" disabled type="submit" value="Сохранить"/>
+</#if>
+
 </form>
 
 <form id="deleteCars" action="/cars/${car.id}" method="post">
     <input type="hidden" name="_method" value="delete"/>
 
 </form>
-
 
 
 </body>

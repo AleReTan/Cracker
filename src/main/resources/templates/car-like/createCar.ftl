@@ -7,8 +7,8 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.maskedinput-1.1.3.js"></script>
-    <script src="mask.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/js/jquery.maskedinput-1.1.3.js"></script>
+    <script type="text/javascript" src="/mask.js" ></script>
     <script type="text/javascript" src="/js/properties.js"></script>
     <script type="text/javascript" src="/js/creatingCar.js"></script>
     <link rel="stylesheet" href="/css/main.css">
@@ -47,10 +47,10 @@
     </nav>
 </div>
 <form name="cars" action="JavaScript:createCar()">
-    <input title="Номер автомобиля" placeholder="Номер автомобиля" id="number" type="text" name="number">
-    <input type="text" id="model" placeholder="Модель"  pattern="[A-Z]" title="AUDI" name="model">
-    <input type="text" id="color" placeholder="Цвет" name="color" pattern="[А-Яа-я]" title="Белый">
-    <input type="text" id="type" placeholder="Тип" name="type" pattern="[А-Яа-я]" title="Легковой">
+    <input title="Номер автомобиля (A0001AA(36/136))" placeholder="Номер автомобиля" id="number" type="text" name="number">
+    <input type="text" id="model" placeholder="Модель"  pattern="[А-Яа-яЁё]{3,}" title="Название содержит русские символы, минимум 3" name="model">
+    <input type="text" id="color" placeholder="Цвет" name="color" pattern="[А-Яа-яЁё]{3,}" title="Цвет содержит русские символы, минимум 3">
+    <input type="text" id="type" placeholder="Тип" name="type" pattern="[А-Яа-яЁё]{3,}" title="Тип машины содержит русские символы, минимум 3">
     <input class="form_button" type="submit" value="Создать">
 </form>
 

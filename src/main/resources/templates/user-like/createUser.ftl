@@ -32,10 +32,10 @@
 </div>
 <form name="user" action="/admin/users/createUser" method="post">
     <div>
-        <input title="Логин" placeholder="Логин" class="form__input" type="text" name="login"  pattern="[A-Za-z] + "  title="Например, Ivan">
+        <input title="Логин содержит латинские символы, минимум 3" placeholder="Логин" class="form__input" pattern="[A-Za-z]{3,}" type="text" name="login"  />
     </div>
     <div>
-        <input title="Пароль" placeholder="Пароль" type="password" name="password">
+        <input title="Пароль должен содержать 6 символов" placeholder="Пароль" required type="password" name="password" maxlength="6" minlength="6" pattern="[0-9A-za-zА-Яа-яЁё]{6,}">
     </div>
     <br/>
     <div>

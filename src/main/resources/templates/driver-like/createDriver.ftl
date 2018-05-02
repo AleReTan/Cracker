@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Dispath service of towling</title>
@@ -10,6 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/js/properties.js"></script>
     <script type="text/javascript" src="/js/creatingDriver.js"></script>
+    <script type="text/javascript" src="/js/jquery.maskedinput-1.1.3.js"></script>
+    <script type="text/javascript" src="/mask.js" ></script>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/formcreate.css">
     <link rel="stylesheet" href="/css/menu.css">
@@ -44,10 +46,11 @@
     </nav>
 </div>
 <form name="driver" action="JavaScript:createDriver()">
-    <input title="Логин" placeholder="Логин" id="login" type="text" name="login">
-    <input title="Пароль" placeholder="Пароль" id="password" type="text" name="password">
-    <input title="Имя" type="text" id="firstName" placeholder="Имя" name="firstName">
-    <input title="Фамилия" type="text" id="lastName" placeholder="Фамилия" name="lastName">
+    <input title="Логин содержит латинские символы, минимум 3 " placeholder="Логин" id="login" pattern="[A-Za-z]{3,}" type="text" name="login">
+    <input title="Пароль должен содержать 6 символов" placeholder="Пароль" id="password"  maxlength="6" minlength="6" pattern="[0-9A-za-zА-Яа-яЁё]{6,}" type="password" name="password" /><br /><br />
+
+    <input title="Имя содержит русские символы, минимум 3" type="text" id="firstName" placeholder="Имя" pattern="[А-Яа-яЁё]{3,}" name="firstName">
+    <input title="Фамилия содержит русские символы, минимум 3" type="text" id="lastName" placeholder="Фамилия" pattern="[А-Яа-яЁё]{3,}" name="lastName">
     <input title="Телефон" type="text" id="phoneNumber" placeholder="Телефон" name="phoneNumber">
     <select id="carSelect" name="carId">
         <#if cars?size == 0> <b>Нет свободных машин</b></#if>

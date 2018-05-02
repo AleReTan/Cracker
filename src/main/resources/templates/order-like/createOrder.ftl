@@ -55,31 +55,31 @@
     </div>
 
     <div>
-        <input type="text" id="clientFirstName" placeholder="Имя" name="clientFirstName" />
+        <input type="text" id="clientFirstName" placeholder="Имя" name="clientFirstName" pattern="[А-Яа-яЁё]{3,}"/>
     </div>
     <div>
-        <input  type="text" id="clientLastName" placeholder="Фамилия" name="clientLastName" />
+        <input  type="text" id="clientLastName" placeholder="Фамилия" name="clientLastName" pattern="[А-Яа-яЁё]{3,}" />
     </div>
     <div>
-        <input title="Телефон" type="text" id="clientPhoneNumber" placeholder="+7(999)999-9999" name="clientPhoneNumber" >
+        <input title="Телефон" type="text" id="clientPhoneNumber" name="clientPhoneNumber" placeholder="8(900)888 8888" />
     </div>
     <div>
-        <input title="Стоимость" id="orderCost" placeholder="Стоимость" type="text" name="orderCost">
+        <input title="Стоимость" id="orderCost" placeholder="Стоимость" type="text" name="orderCost" readonly>
     </div>
     <details><br/>
         <div>
-            <input title="Адрес" id="address" placeholder="Адрес" type="text" name="address">
+            <input title="Адрес" id="address" placeholder="Адрес" type="text" name="address" readonly>
         </div>
         <div>
             <input title="Геолокация" id="geoData" type="text"
                    placeholder="Местоположение заказчика"
-                   name="geoData">
+                   name="geoData" readonly>
         </div>
 
         <div>
             <input title="Геолокация" id="destinationGeoData"
                    placeholder="Местоположение пункта назначения"
-                   type="text" name="destinationGeoData">
+                   type="text" name="destinationGeoData" readonly>
         </div>
     </details>
     <br/>

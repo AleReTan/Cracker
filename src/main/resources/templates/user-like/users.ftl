@@ -48,7 +48,6 @@
 </#list>
 
 </table>
-<input class="form_button" type="button" href="/admin" value="Назад"/>
 <#if roles== "ADMIN">
 <input class="form_button" type="button" onclick="location.href='/admin/users/createUser';" value="Добавить пользователя"/>
 </#if>
