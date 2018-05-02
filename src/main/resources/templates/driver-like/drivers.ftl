@@ -7,7 +7,8 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <script type="text/javascript" src="js/showDrivers.js"></script>
+    <script type="text/javascript" src="/js/properties.js"></script>
+    <script type="text/javascript" src="/js/showDrivers.js"></script>
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/tableMini.css">

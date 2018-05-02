@@ -24,7 +24,7 @@ function init() {
             hintContentLayout: ymaps.templateLayoutFactory.createClass('$[properties.name]')
         });
     myMap.controls.add(mySearchControl);
-    
+
 
     $.ajax({
         url: front_url + "/availableDriversJson"
