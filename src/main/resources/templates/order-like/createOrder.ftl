@@ -55,10 +55,10 @@
     </div>
 
     <div>
-        <input type="text" id="clientFirstName" placeholder="Имя" name="clientFirstName" pattern="[А-Яа-яЁё]{3,}"/>
+        <input type="text" id="clientFirstName" placeholder="Имя" name="clientFirstName" pattern="[А-Яа-яЁё]{3,}" title="Имя содержит русские буквы, минимум 3"/>
     </div>
     <div>
-        <input  type="text" id="clientLastName" placeholder="Фамилия" name="clientLastName" pattern="[А-Яа-яЁё]{3,}" />
+        <input  type="text" id="clientLastName" placeholder="Фамилия" name="clientLastName" pattern="[А-Яа-яЁё]{3,}" title="Фамилия содержит русские буквы, минимум 3"/>
     </div>
     <div>
         <input title="Телефон" type="text" id="clientPhoneNumber" name="clientPhoneNumber" placeholder="8(900)888 8888" />
