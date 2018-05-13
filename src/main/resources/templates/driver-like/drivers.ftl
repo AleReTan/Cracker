@@ -16,13 +16,14 @@
     <meta charset="UTF-8">
     <style>
         #map {
-            width: 70%;
-            height: 30%;
-            position: absolute;
+            width: 50%;
+            height: 50%;
+            padding: 0;
             margin: 0;
-            align-content: center;
-            left: 122px;
-            top: 350px;
+            size: 100px;
+            position: absolute;
+            left: 775px;
+            top: 100px;
         }
     </style>
 </head>
