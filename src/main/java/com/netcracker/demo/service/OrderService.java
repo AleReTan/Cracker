@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service("orderService")
-public class OrderService implements MyService<OrderEntityTO> {
+public class OrderService implements DispatcherService<OrderEntityTO> {
 
     static final String ADDITION_URL = "/orders";
     @Autowired

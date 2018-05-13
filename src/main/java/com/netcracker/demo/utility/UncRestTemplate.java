@@ -26,8 +26,8 @@ public class UncRestTemplate {
     //@Resource
     //private Environment env;
 
-    public static final String BASE_URL = "http://localhost:8082";
-
+    //public static final String BASE_URL = "http://localhost:8082";
+    public static final String BASE_URL = "http://185.246.65.240:8080/app";
     private RestTemplate restTemplate;
 
     public UncRestTemplate() {

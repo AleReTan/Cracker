@@ -25,11 +25,6 @@ public class UserController {
     @Autowired
     RoleService roleService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String admin() {
-        return "/admin";
-    }
-
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String getUsers(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         model.addAttribute("allUsers", userService.findAll(httpServletRequest, httpServletResponse));

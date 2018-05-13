@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service("carService")
-public class CarService implements MyService<CarEntityTO> {
+public class CarService implements DispatcherService<CarEntityTO> {
 
     static final String ADDITION_URL = "/cars";
     @Autowired

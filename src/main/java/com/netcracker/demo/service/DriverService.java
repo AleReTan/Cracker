@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service("driverService")
-public class DriverService implements MyService<DriverEntityTO> {
+public class DriverService implements DispatcherService<DriverEntityTO> {
 
     static final String ADDITION_URL = "/drivers";
     @Autowired

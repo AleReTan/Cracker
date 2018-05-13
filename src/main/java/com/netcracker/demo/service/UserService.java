@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service("UserService")
-public class UserService implements MyService<UserEntityTO> {
+public class UserService implements DispatcherService<UserEntityTO> {
 
     @Autowired
     private UncRestTemplate restTemplate;

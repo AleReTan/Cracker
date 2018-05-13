@@ -42,6 +42,12 @@ function init() {
         myGeocoder.then(function (res) {
             $("#address").val(res.geoObjects.get(0).getAddressLine());//геокодируем координаты в адрес
         });
+
+        var placemark = new ymaps.Placemark(startCoords,{iconContent: "Asdsdsdsf"},{
+            preset:'islands#geolocationIcon',
+            iconColor: '#ff0000'
+        });
+        myMap.geoObjects.add(placemark);
         if (destinationCoords) {
             myMap.geoObjects.remove(multiRoute);
             calculatePrice();
@@ -58,6 +64,7 @@ function init() {
         myMap.geoObjects.remove(multiRoute);
         calculatePrice();
     });
+
     document.getElementById('chooseDriver').onclick = function () {
         // Дождемся ответа от сервера и получим объект, ближайший к точке.
         geoObjects.then(function () {
@@ -82,7 +89,6 @@ function init() {
         })
             .then(function () {
                 $("driverId").val(targetObject.properties.get('driverId'));//ставим водителя на заказ
-                //calculatePrice();
             });
     };
 

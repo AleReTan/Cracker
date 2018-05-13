@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public interface MyService<T> {
+public interface DispatcherService<T> {
     void save(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, T object);
 
     void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,T object);
