@@ -43,7 +43,7 @@
             <option value="ADMIN">ADMIN</option>
             <option value="USER">USER</option>
             <option value="DRIVER">DRIVER</option>
-            <option value="VENDOR">VENDOR</option>
+            <option value="CUSTOMER">CUSTOMER</option>
         </select>
     </div>
     <div>

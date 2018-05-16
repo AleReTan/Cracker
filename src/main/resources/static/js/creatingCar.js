@@ -22,7 +22,7 @@ function createCar() {
         function () {
             console.log("successful car creating");
             showPopUp("succes");
-            hidePopUp(2000);
+            hidePopUp(0);
             window.location.replace(front_url + "/admin");
         }
     ).fail(
@@ -30,7 +30,7 @@ function createCar() {
             console.log("fail");
             console.log(dataIn.responseText);
             showPopUp(dataIn.responseText);
-            hidePopUp(2000);
+            hidePopUp(0);
 
         }
     );

@@ -34,14 +34,14 @@ function createDriver() {
             }).done(
                 function () {
                     showPopUp("succes");
-                    hidePopUp(2000);
+                    hidePopUp(0);
                     window.location.replace(front_url + "/admin");
                 }
             ).fail(function (dataIn) {
                 console.log("fail");
                 console.log(dataIn.responseText);
                 showPopUp(dataIn.responseText);
-                hidePopUp(2000);
+                hidePopUp(0);
                 $.ajax({
                     url: front_url + "/admin/users/" + $('#login').val(),
                     type: 'DELETE'
@@ -53,7 +53,7 @@ function createDriver() {
             console.log("fail");
             console.log(dataIn.responseText);
             showPopUp(dataIn.responseText);
-            hidePopUp(2000);
+            hidePopUp(0);
 
         }
     );

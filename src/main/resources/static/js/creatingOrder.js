@@ -42,16 +42,10 @@ function init() {
         myGeocoder.then(function (res) {
             $("#address").val(res.geoObjects.get(0).getAddressLine());//геокодируем координаты в адрес
         });
-
-        var placemark = new ymaps.Placemark(startCoords,{iconContent: "Asdsdsdsf"},{
-            preset:'islands#geolocationIcon',
-            iconColor: '#ff0000'
-        });
-        myMap.geoObjects.add(placemark);
         if (destinationCoords) {
             myMap.geoObjects.remove(multiRoute);
-            calculatePrice();
         }
+        calculatePrice();
     });
 
 
@@ -133,7 +127,7 @@ function catcher() {
         function () {
             console.log("succes");
             showPopUp("succes");
-            hidePopUp(2000);
+            hidePopUp(0);
             window.location.replace(front_url + "/orders");
         }
     ).fail(
@@ -141,7 +135,7 @@ function catcher() {
             console.log("fail");
             console.log(dataIn.responseText);
             showPopUp(dataIn.responseText);
-            hidePopUp(2000);
+            hidePopUp(0);
 
         }
     );
