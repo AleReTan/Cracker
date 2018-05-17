@@ -25,7 +25,7 @@
             position: absolute;
 
             align-content: center;
-            left: 115px;
+            left: 250px;
             top: 620px;
            margin-bottom: 20px;
         }

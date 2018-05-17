@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/tableMini.css">
+    <link rel="stylesheet" href="css/createOrderButton.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <style>
@@ -69,7 +70,7 @@
 </table>
 
 <#if roles== "ADMIN">
-<input class="form_button" onclick="location.href='/drivers/create';" type="button" value="Добавить водителя"/>
+<input class="button" onclick="location.href='/drivers/create';" type="button" value="Добавить водителя"/>
 </#if>
 <div id="map"></div>
 </body>

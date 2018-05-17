@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/tablecars.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/createOrderButton.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
@@ -49,7 +50,7 @@
 </div>
 
 <#if roles== "ADMIN">
-<input class="form_button" type="button" onclick="location.href='/cars/create';" value="Добавить машину"/>
+<input class="button" type="button" onclick="location.href='/cars/create';" value="Добавить машину"/>
 </#if>
 </body>
 </html>

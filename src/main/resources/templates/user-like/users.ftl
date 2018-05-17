@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/tableMini.css">
     <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/createOrderButton.css">
 </head>
 <body>
 
@@ -49,7 +50,7 @@
 
 </table>
 <#if roles== "ADMIN">
-<input class="form_button" type="button" onclick="location.href='/admin/users/createUser';" value="Добавить пользователя"/>
+<input class="button" type="button" onclick="location.href='/admin/users/createUser';" value="Добавить пользователя"/>
 </#if>
 </body>
 </html>
