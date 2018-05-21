@@ -23,7 +23,7 @@
             margin: 0;
             size: 100px;
             position: absolute;
-            left: 775px;
+            left: 850px;
             top: 100px;
         }
     </style>
@@ -55,6 +55,7 @@
         <th>Имя</th>
         <th>Фамилия</th>
         <th>Машина</th>
+        <th>Статус</th>
     </tr>
 
 <#list drivers as driver>
@@ -65,6 +66,11 @@
         <td><#list cars as car>
             <#if driver.carId == car.id><a href="/cars/${driver.carId}"> ${car.model} ${car.number}</a></#if>
         </#list></td>
+    <#if driver.onShift == "true">
+        <td><b>На смене</b></td>
+    <#elseif driver.onShift == "false">
+     <td><b>Не работает</b></td>
+    </#if>
     </tr>
 </#list>
 </table>
