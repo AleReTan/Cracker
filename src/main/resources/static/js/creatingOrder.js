@@ -42,9 +42,7 @@ function init() {
         myGeocoder.then(function (res) {
             $("#address").val(res.geoObjects.get(0).getAddressLine());//геокодируем координаты в адрес
         });
-        if (destinationCoords) {
-            myMap.geoObjects.remove(multiRoute);
-        }
+        myMap.geoObjects.remove(multiRoute);
         calculatePrice();
     });
 
