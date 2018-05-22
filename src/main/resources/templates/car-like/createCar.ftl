@@ -50,7 +50,11 @@
     <input title="Номер автомобиля (A0001AA(36/136))" placeholder="Номер автомобиля" id="number" type="text" name="number">
     <input type="text" id="model" placeholder="Модель"  pattern="[А-Яа-яЁё-A-Za-Z]{3,}" title="Название содержит русские или латинские символы, минимум 3" name="model">
     <input type="text" id="color" placeholder="Цвет" name="color" pattern="[А-Яа-яЁё]{3,}" title="Цвет содержит русские символы, минимум 3">
-    <input type="text" id="type" placeholder="Тип" name="type" pattern="[А-Яа-яЁё]{3,}" title="Тип машины содержит русские символы, минимум 3">
+    <!--<input type="text" id="type" placeholder="Тип" name="type" pattern="[А-Яа-яЁё]{3,}" title="Тип машины содержит русские символы, минимум 3">-->
+    <select id="type" name = "type">
+        <option value="Легковые">Легковые</option>
+        <option value="Грузовые">Грузовые</option>
+    </select>
     <input class="form_button" type="submit" value="Создать">
 </form>
 
