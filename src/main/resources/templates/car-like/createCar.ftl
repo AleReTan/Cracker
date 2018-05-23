@@ -31,7 +31,7 @@
 
 <div>
     <header class="user__header">
-        <h1 style="color: azure">Добавление автомобиля</h1>
+        <h2 style="color: azure">Добавление автомобиля</h2>
     </header>
 </div>
 <div>

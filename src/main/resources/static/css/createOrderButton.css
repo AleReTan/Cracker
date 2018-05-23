@@ -12,8 +12,8 @@
     text-decoration: none;
     cursor: pointer;
     position: absolute;
-    left: 15px;
-    top: 100px;
+    left: 2%;
+    top:  12%;
 }
 
 .button:hover {opacity: 1}

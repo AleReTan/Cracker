@@ -15,7 +15,7 @@ nav{
     position: fixed;
     top: -25px;
     right: 5px;
-    width: 55%;
+    width: 65%;
     background: #fff;
     box-shadow: 0 3px 10px -2px rgba(0,0,0,.1);
     border: 1px solid rgba(0,0,0,.1);
@@ -29,7 +29,7 @@ nav ul{
     display: inline-table;
 }
 nav ul li{
-    float: left;
+    float: right;
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -44,8 +44,8 @@ nav ul li{
     transition: all .2s ease-in-out;
 }
 nav ul li a{
-    display: block;
-    padding: 30px 30px;
+    display: inline-block;
+    padding: 20px 18px;
     color: #222;
     font-size: .9em;
     letter-spacing: 1px;
@@ -62,7 +62,7 @@ nav ul ul{
 }
 nav ul ul li{float: none; position: relative;}
 nav ul ul li a {
-    padding: 15px 30px;
+    padding: 15px 25px;
     border-bottom: 1px solid rgba(0,0,0,.05);
 }
 nav ul ul ul {

@@ -32,7 +32,7 @@
 </head>
 <body>
 <header class="user__header">
-    <h1 style="color: azure">Создание заказа</h1>
+    <h2 style="color: azure">Создание заказа</h2>
 </header>
 <div>
     <nav role='navigation'>

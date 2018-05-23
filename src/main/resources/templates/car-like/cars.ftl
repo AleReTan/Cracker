@@ -15,7 +15,7 @@
 <body>
 <div>
     <header class="user__header">
-        <h1 style="color: azure">Список машин</h1>
+        <h2 style="color: azure">Список машин</h2>
     </header>
 </div>
 <div>

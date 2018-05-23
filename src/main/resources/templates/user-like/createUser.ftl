@@ -16,7 +16,7 @@
 <body>
 <div>
     <header class="user__header">
-        <h1 style="color: azure">Создание пользователя</h1>
+        <h2 style="color: azure">Создание пользователя</h2>
     </header>
 </div>
 <div>

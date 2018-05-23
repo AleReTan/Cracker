@@ -22,11 +22,11 @@
         #map {
             width: 80%;
             height: 40%;
-            position: absolute;
+            position: relative;
 
-            align-content: center;
-            left: 250px;
-            top: 620px;
+            align-content: inherit;
+            left: 2%;
+            top: 50%;
            margin-bottom: 20px;
         }
     </style>
@@ -34,7 +34,7 @@
 </head>
 <body>
 <header class="user__header">
-    <h1 style="color: azure">Информация по заказу</h1>
+    <h2 style="color: azure">Информация по заказу</h2>
 </header>
 <div>
     <nav role='navigation'>

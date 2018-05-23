@@ -37,7 +37,7 @@ textarea {
 }
 
 form {
-    width:30%;
+    width: 35%;
     height: 30%;
   padding: 37.5px;
   margin: 50px 0;
@@ -129,7 +129,7 @@ select::-ms-expand {
   font-size: 0.700em;
   font-weight: bold;
   outline: none;
-  padding: 20px 35px;
+  padding: 15px 20px;
   text-transform: uppercase;
   -webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
@@ -189,12 +189,12 @@ select::-ms-expand {
 }
 
 #map {
-    width: 50%;
+    width: 60%;
     height: 50%;
     padding: 0;
     margin: 0;
     size: 100px;
     position: absolute;
-    left: 600px;
+    left: 37%;
     top: 100px;
 }

@@ -17,21 +17,21 @@
     <meta charset="UTF-8">
     <style>
         #map {
-            width: 50%;
+            width: 40%;
             height: 50%;
             padding: 0;
             margin: 0;
             size: 100px;
             position: absolute;
-            left: 850px;
-            top: 100px;
+            left: 55%;
+            top: 20%;
         }
     </style>
 </head>
 <body>
 <div>
     <header class="user__header">
-        <h1 style="color: azure">Список водителей</h1>
+        <h2 style="color: azure">Список водителей</h2>
     </header>
 </div>
 <div>

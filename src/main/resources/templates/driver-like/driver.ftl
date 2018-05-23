@@ -18,7 +18,7 @@
 </head>
 <body>
 <header class="user__header">
-    <h1 style="color: azure">Информация по водителю</h1>
+    <h2 style="color: azure">Информация по водителю</h2>
 </header>
 <div>
     <nav role='navigation'>
