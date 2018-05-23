@@ -82,17 +82,12 @@
     <input type="hidden" name="driverGeoData" value="${driver.driverGeoData}">
     <input type="hidden" name="onShift" value="${(driver.onShift)}">
     <input type="hidden" name="login" value="${(driver.login)}">
-    <#if roles = "ADMIN">
     <input class="form_button" type="submit" id="saveButton" value="Сохранить"/>
-    <#elseif roles = "USER">
-        <input class="form_disabled" type="submit" id="saveButton" disabled value="Сохранить"/>
-    </#if>
 </form>
 <#if roles = "ADMIN">
 <form id="deleteDriver" action="/drivers/${driver.id}" method="post">
     <input type="hidden" name="_method" value="delete"/>
     <input class="form_button" type="submit" value="Удалить"/>
-
 </form>
 </#if>
 </body>

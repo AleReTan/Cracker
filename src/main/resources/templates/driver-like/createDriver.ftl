@@ -46,7 +46,7 @@
     </nav>
 </div>
 <form name="driver" action="JavaScript:createDriver()">
-    <input title="Логин содержит латинские символы, минимум 3 " placeholder="Логин" id="login" pattern="[A-Za-z]{3,}" type="text" name="login">
+    <input title="Логин содержит латинские символы и цифры, минимум 3 " placeholder="Логин" id="login" pattern="[A-Za-z0-9]{3,}" type="text" name="login">
     <input title="Пароль должен содержать 6 символов" placeholder="Пароль" id="password"  maxlength="6" minlength="6" pattern="[0-9A-za-zА-Яа-яЁё]{6,}" type="password" name="password" /><br /><br />
 
     <input title="Имя содержит русские символы, минимум 3" type="text" id="firstName" placeholder="Имя" pattern="[А-Яа-яЁё]{3,}" name="firstName">

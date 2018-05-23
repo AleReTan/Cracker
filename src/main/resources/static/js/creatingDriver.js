@@ -35,7 +35,7 @@ function createDriver() {
                 function () {
                     showPopUp("succes");
                     hidePopUp(0);
-                    window.location.replace(front_url + "/admin");
+                    window.location.replace(front_url + "/drivers");
                 }
             ).fail(function (dataIn) {
                 console.log("fail");

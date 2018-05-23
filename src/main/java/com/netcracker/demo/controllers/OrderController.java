@@ -45,7 +45,8 @@ public class OrderController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        return "index";
+        return "redirect:/orders";
+        //return "index";
     }
 
     @RequestMapping(value = "/orders/create", method = RequestMethod.POST)

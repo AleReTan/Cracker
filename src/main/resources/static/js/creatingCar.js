@@ -23,7 +23,7 @@ function createCar() {
             console.log("successful car creating");
             showPopUp("succes");
             hidePopUp(0);
-            window.location.replace(front_url + "/admin");
+            window.location.replace(front_url + "/cars");
         }
     ).fail(
         function (dataIn) {

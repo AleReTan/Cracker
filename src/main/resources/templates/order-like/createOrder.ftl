@@ -68,7 +68,7 @@
     </div>
     <details><br/>
         <div>
-            <input title="Адрес" id="address" placeholder="Адрес" type="text" name="address" readonly>
+            <input title="Адрес" id="address" placeholder="Адрес" type="text" name="address">
         </div>
         <div>
             <input title="Геолокация" id="geoData" type="text"
