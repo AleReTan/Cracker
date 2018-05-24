@@ -26,7 +26,7 @@
 
             align-content: inherit;
             left: 2%;
-            top: 50%;
+            top: 66%;
            margin-bottom: 20px;
         }
     </style>
